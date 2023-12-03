@@ -12,18 +12,17 @@ class Contact
 	void	displayOneLong() const;
 	void	displayOneShort() const;
 	void	add();
+	void	clear();
+	void	addField(std::string field, const std::string out);
 
 	//supprimer un contact
 
 	private:
-	std::string m_firstname;
-	std::string m_lasttname;
-	std::string m_nickname;
-	std::string	m_phonenumber;
-	std::string	m_adress;
-	std::string	m_postcode;
-	std::string	m_town;
-	std::string m_country;
+	std::string m_firstName;
+	std::string m_lasttName;
+	std::string m_nickName;
+	std::string	m_phoneNumber;
+	std::string	m_darkestSecret;
 };
 
 #endif

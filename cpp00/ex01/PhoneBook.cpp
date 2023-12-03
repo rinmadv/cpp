@@ -3,24 +3,30 @@
 
 	//add constructeur
 	//add destructeur
-void	PhoneBook::welcome() const
+
+void	PhoneBook::add()
+{
+	Contact	newContact = this->m_List[this->m_index];
+	newContact.add();
+	this->m_index = (this->m_index + 1) % 8;
+}
+
+void	PhoneBook::welcome()
 {	
 	std::string choice ;
 
-	std::cout << "Bonjour, bienvenu dans votre répertoire" << std::endl;
+	std::cout << "Welcome to your phonebook !" << std::endl;
+	this->m_index = 0;
 	while (1)
 	{
 		displayMenu();
 		std::cin >> choice;
 		std::cout << std::endl;
-
-		if (choice == "1")
-			displayList();
-		// else if (choice == "2")
-		// 	add(); // attention ou 
-		// else if (choice == "3")
-		// 	remove();// attention ou 
-		else if (choice == "x")
+		if (choice == "ADD")
+			add(); // attention ou 
+		else if (choice == "SEARCH")
+			search();
+		else if (choice == "EXIT")
 		{
 			goodBye();
 			return ;
@@ -32,12 +38,11 @@ void	PhoneBook::welcome() const
 
 void	PhoneBook::displayMenu() const
 {	
-	std::cout <<"Que souhaitez vous faire ?" << std::endl;
-	std::cout <<"	[1] Afficher mes contacts" << std::endl;
-	std::cout <<"	[2] Ajouter un nouveau contact" << std::endl;
-	std::cout <<"	[3] Supprimer un contact" << std::endl;
-	std::cout <<"	[x] Quitter le répertoire" << std::endl;
-	std::cout <<"Votre choix : ";
+	std::cout <<"What would you like to do ? ?" << std::endl;
+	std::cout <<"	[ADD] Add a new contact" << std::endl;
+	std::cout <<"	[SEARCH] d" << std::endl;
+	std::cout <<"	[EXIT] d " << std::endl;
+	std::cout <<"Your choice : ";
 }
 
 int	PhoneBook::goodBye() const
@@ -73,7 +78,7 @@ void	PhoneBook::displayOneLong(std::string index) const
 	contact.displayOneLong();
 }
 
-void	PhoneBook::displayListMore() const
+void	PhoneBook::searchMore() const
 {
 	std::string	choice;
 
@@ -100,36 +105,15 @@ void	PhoneBook::displayListMore() const
 	}
 }
 
-void	PhoneBook::displayList() const
+void	PhoneBook::search() const
 {
 	std::string	choice;
 
-	std::cout <<"	Voici la liste de vos contacts" << std::endl;
+	std::cout <<"	Here is the list of your contacts" << std::endl;
 	for (int i = 0; i < 8; i++)
 	{
 		std::cout << "	[" << i << "] ";
 		m_List[i].displayOneShort();
-	}
-	std::cout << "	Que souhaitez vous faire ?" << std::endl;
-	std::cout << "	[x] Retour au menu principal" << std::endl;
-	std::cout << "	[+] Plus d'options" << std::endl;
-	while (1)
-	{
-		std::cout << "	Votre choix : ";
-		std::cin >> choice;
-		std::cout << std::endl;
-		if (choice == "x")
-			return ;
-		else if (choice == "+")
-		{
-			displayListMore();
-			return ;
-		}
-		else
-		{
-			std::cout << std::endl;
-			error();
-		}
 	}
 }
 
