@@ -12,7 +12,6 @@ int	main(int argc, char **argv)
 {
 	int i = 1;
 	std::string str;
-
 	if (argc == 1)
 		std::cout <<  "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
@@ -27,3 +26,5 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+
+//changer, mettre argv[x] en string et utiliser la methode
