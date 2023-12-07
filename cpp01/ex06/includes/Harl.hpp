@@ -23,9 +23,8 @@ class Harl
 		void		info( void );
 		void		warning( void );
 		void		error( void );
-		void		(Harl::*functions[4])();
 		typedef void (Harl::*func)(void);
-		std::string	levels[4];
+		static std::string	levels[];
 };
 
 #endif

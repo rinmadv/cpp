@@ -1,41 +1,37 @@
 #include "../includes/Harl.hpp"
 
+std::string Harl::levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
 Harl::Harl()
 {
-	this->functions[0] = &Harl::debug;
-	this->functions[1] = &Harl::info;
-	this->functions[2] = &Harl::warning; 
-	this->functions[3] = &Harl::error;
-	this->levels[0] = "DEBUG";
-	this->levels[1] = "INFO";
-	this->levels[2] = "WARNING"; 
-	this->levels[3] = "ERROR";
 }
 
 void	Harl::complain(std::string level)
 {
-	int g;
-
+	int j = 4;
+	static void		(Harl::*functions[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->levels[i] == level)
-			g = i;
-		
+		{
+			j = i;
+			break;
+		}
 	}
-
-	switch (4)
+	switch (j)
 	{
 	case 0:
-		this->*functions[i]();
-		break;
+		(this->*functions[0])();
 	case 1:
-		g = 1;
+		(this->*functions[1])();
+	case 2:
+		(this->*functions[2])();
+	case 3:
+		(this->*functions[3])();
 		break;
 	default:
-		break;
+		std::cerr << "Invalid complain level" << std::endl;
 	}
-
-	std::cerr << "Invalid complain level" << std::endl;
 }
 
 void	Harl::debug( void )
