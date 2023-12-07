@@ -2,10 +2,13 @@
 #include <sstream>
 #include <string.h>
 
+
+//truc de local d'abdel
+
 static std::string toUpperStr(std::string str)
 {
 	for (size_t i = 0; i < str.size(); i++)
-		str[i] = std::toupper(str[i]);
+		str[i] = std::toupper(str[i]); //utiliser le toupper de locale
 	return(str);
 }
 int	main(int argc, char **argv)

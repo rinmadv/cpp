@@ -9,14 +9,16 @@
 
 class Contact
 {
-	public:
+public:
+	Contact();
+	~Contact();
 
-	void	displayOneShort() const;
-	void	addField(std::string field, const std::string out);
+	void	displayOneShort();
+	void	addField(std::string &field, const std::string out);
 	void	add();
 	void	display();
 
-	private:
+private:
 	std::string m_firstName;
 	std::string m_lasttName;
 	std::string m_nickName;

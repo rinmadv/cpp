@@ -1,17 +1,20 @@
 #include "../includes/PhoneBook.hpp"
 #include <iostream>
 
+PhoneBook::PhoneBook() : m_index(0){}
+PhoneBook::~PhoneBook(){}
+
 void	PhoneBook::welcome()
 {	
 	std::string choice ;
 
 	std::cout << "Welcome to your phonebook !" << std::endl;
 	this->m_index = 0;
-	while (1)
+	while (std::cin && !std::cin.eof())
 	{
 		displayMenu();
-		getline(std::cin, choice);
-		std::cout << std::endl;
+		std::getline(std::cin, choice);
+		// std::cout << std::endl;
 		if (choice == "ADD")
 			add();
 		else if (choice == "SEARCH")
@@ -28,11 +31,7 @@ void	PhoneBook::welcome()
 
 void	PhoneBook::add()
 {
-	Contact	newContact;
-	std::cout << &newContact << std::endl;
-	m_List[this->m_index] = newContact;
-	std::cout << &newContact << std::endl;
-	newContact.add();
+	this->m_List[this->m_index].add();
 	this->m_index = (this->m_index + 1) % 8;
 }
 
@@ -57,16 +56,16 @@ void	PhoneBook::error() const
 }
 
 
-void	PhoneBook::search() const
+void	PhoneBook::search()
 {
-	Contact contact;
+	Contact *contact;
 
 	std::cout <<"Here is the list of your contacts" << std::endl;
 	std::cout << "     Index |  Firstname |   Lastname |   Nickname" << std::endl;
 	for (int i = 0; i < 8; i++)
 	{
-		contact = this->m_List[i];
+		contact = &this->m_List[i];
 		std::cout << std::right << std::setw(10) << i << " | ";
-		contact.displayOneShort();
+		contact->displayOneShort();
 	}
 }

@@ -1,12 +1,14 @@
 #include "../includes/Contact.hpp"
 
+Contact::Contact(){}
 
+Contact::~Contact(){}
 
-void	Contact::addField(std::string field, const std::string out)
+void	Contact::addField(std::string &field, const std::string out)
 {
 	std::cout << out;
 	
-	getline(std::cin, field);
+	getline(std::cin, field);//a proteger
 	while (field.empty())
 	{
 		std::cout <<"Contact info cannot be empty" << std::endl;
@@ -17,30 +19,15 @@ void	Contact::addField(std::string field, const std::string out)
 
 void	Contact::add()
 {
-	std::cout << m_firstName << std::endl;
 	addField(m_firstName, "first name : ");
-	std::cout << m_firstName << std::endl;
-
-	std::cout << m_lasttName << std::endl;
 	addField(m_lasttName, "last name : ");  
-	std::cout << m_lasttName << std::endl;
-
-	std::cout << m_nickName << std::endl;
 	addField(m_nickName, "nickname : ");
-	std::cout << m_nickName << std::endl;
-
-	std::cout << m_phoneNumber << std::endl;
 	addField(m_phoneNumber, "phone number : ");
-	std::cout << m_phoneNumber << std::endl;
-
-	std::cout << m_darkestSecret << std::endl;
 	addField(m_darkestSecret, "darkest secret : ");
-	std::cout << m_darkestSecret << std::endl;
-
 }
 
 
-void	Contact::displayOneShort() const
+void	Contact::displayOneShort()
 {
 	std::cout << std::right << std::setw(10) << m_firstName << " | ";
 	std::cout << std::right << std::setw(10) << m_lasttName << " | ";

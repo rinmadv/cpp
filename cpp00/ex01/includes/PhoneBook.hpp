@@ -6,16 +6,19 @@
 
 class PhoneBook
 {
-	public:
+public:
+	PhoneBook();
+	~PhoneBook();
+
 	void	welcome();
 	void	display() const;
 	int		goodBye() const;
 	void	error() const;
 	void	displayMenu() const;
-	void	search() const;
+	void	search();
 	void	add();
 
-	private:
+private:
 	int		m_index;
 	Contact	m_List[8];
 };
