@@ -12,25 +12,20 @@
 #define WARNING "!WOUP WOUP!"
 #define ERROR "Outch"
 
-enum Level
-{
-	Debug,
-	Info,
-	Warning, 
-	Error,
-};
-
 class Harl
 {
 	public:
 		Harl();
-		void	complain(std::string level);
+		void	complain(std::string level); //creer des pointeurs sur fonctions
 
 	private:
-		void	debug( void );
-		void	info( void );
-		void	warning( void );
-		void	error( void );
+		void		debug( void );
+		void		info( void );
+		void		warning( void );
+		void		error( void );
+		void		(Harl::*functions[4])();
+		typedef void (Harl::*func)(void);
+		std::string	levels[4];
 };
 
 #endif
