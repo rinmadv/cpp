@@ -1,33 +1,24 @@
 #include <iostream>
-#include <sstream>
 #include <string.h>
+#include <locale>
 
+#define NOISE "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 
-//truc de local d'abdel
-
-static std::string toUpperStr(std::string str)
-{
-	for (size_t i = 0; i < str.size(); i++)
-		str[i] = std::toupper(str[i]); //utiliser le toupper de locale
-	return(str);
-}
 int	main(int argc, char **argv)
 {
-	int i = 1;
+	std::locale loc;
 	std::string str;
+
 	if (argc == 1)
-		std::cout <<  "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-	else
+		return (std::cout << NOISE << std::endl, 0);
+
+	for (int i = 1; i < argc; i++)
 	{
-		while (argv[i])
-		{
-			str = toUpperStr(argv[i]);
-			std::cout << str;
-				i++;
-		}
-		std::cout <<  "\n";
+		str = argv[i];
+		for (size_t j = 0; j < str.length(); j++)
+			std::cout << std::toupper(str.at(j), loc);
 	}
+	std::cout << std::endl;
+
 	return (0);
 }
-
-//changer, mettre argv[x] en string et utiliser la methode
