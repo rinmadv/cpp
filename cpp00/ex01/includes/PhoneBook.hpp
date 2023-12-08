@@ -8,19 +8,22 @@ class PhoneBook
 {
 public:
 	PhoneBook();
+	PhoneBook(std::string name);
 	~PhoneBook();
 
 	void	welcome();
 	void	display() const;
-	int		goodBye() const;
+	void	goodBye() const;
 	void	error() const;
 	void	displayMenu() const;
 	void	search();
 	void	add();
+	void	displayContact(std::string choice);
 
 private:
 	int		m_index;
 	Contact	m_List[8];
+	std::string _name;
 };
 
 #endif

@@ -14,8 +14,8 @@ public:
 	~Contact();
 
 	void	displayOneShort();
-	void	addField(std::string &field, const std::string out);
-	void	add();
+	bool	addField(std::string &field, const std::string out);
+	bool	add();
 	void	display();
 
 private:

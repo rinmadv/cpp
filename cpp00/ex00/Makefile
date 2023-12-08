@@ -1,44 +1,56 @@
-SRCS	= 	megaphone.cpp
+# Project
 
-OBJS = $(SRCS:.c=.o)
+NAME = megaphone
 
-CC    = c++
+# Compiler
 
-CFLAGS  = -Wall -Wextra -Werror -std=c++98 #-g3 
+CPP	= c++
+FLAGS	= -Wall -Werror -Wextra -std=c++98
 
-NAME    = megaphone
+# Paths
 
-DEPS	=	${SRCS:.c=.d}
+SRC_PATH	= ./
+BIN_PATH	= ./bin/
 
-ifeq ($(debug), true)
-	CFLAGS += -fsanitize=address,undefined
-endif
+# Includes
 
-all: ${NAME}
+INCLUDES	= includes/
 
-${NAME}: ${OBJS}
-	echo -n "${BOLD_WHITE}⏳ COMPILING MEGAPHONE ${NC}"
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
-	echo "${GREEN}Done 💅${NC}"
+# Clean
 
-.c.o:
-	${CC} ${CFLAGS} ${CDCFLAGS} -c $< -o ${<:.c=.o}
+RM	= rm -rf
 
+# Files
 
-clean:
-	echo -n "${BOLD_WHITE}🧹 CLEANING OBJECTS\t${NC}"
-	${RM} ${OBJS}
-	${RM} ${DEPS}
-	echo "${GREEN}Done 💅${NC}"
+SRC	= ./megaphone.cpp
 
+OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
-fclean: clean
-	echo -n "${BOLD_WHITE}🧹 CLEANING EXEC\t${NC}"
-	${RM} ${NAME}
-	echo "${GREEN}Done 💅${NC}"
+DEPS		= $(OBJ:.o=.d)
 
-re : fclean
-	${MAKE}
+.c.o :	
+		${CPP} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
 
-.PHONY: re fclean all
-.SILENT:
+$(BIN_PATH)%.o: $(SRC_PATH)%.cpp
+		mkdir -p $(dir $@)
+		@ $(CPP) $(FLAGS) -c $< -o $@
+
+${NAME} :	${OBJ}
+		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		clear
+	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
+	
+all :		${NAME}
+
+clean :
+		${RM} ${OBJ}
+
+fclean :	clean
+		${RM} ${BIN_PATH}
+		${RM} ${NAME}
+
+re :		fclean all
+
+.PHONY :	all clean fclean re
+
+-include ${DEPS}

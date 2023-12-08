@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	size_t len_s1 = s1.size();
 	if (s1 == s2)
 	{
-		while (getline(infile, buffer))
+		while (getline(infile, buffer)) //verifier si je dois
 			outfile << buffer << std::endl;
 	}
 	else

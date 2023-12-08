@@ -4,26 +4,42 @@ Contact::Contact(){}
 
 Contact::~Contact(){}
 
-void	Contact::addField(std::string &field, const std::string out)
+bool	strisprint(std::string const field)
+{
+	size_t len = field.length();
+	for (size_t i = 0; i < len; i++)
+	{
+		if (!isprint(field[i]))
+			return (false);
+	}
+	return (true);
+}
+
+bool	Contact::addField(std::string &field, const std::string out)
 {
 	std::cout << out;
 	
-	getline(std::cin, field);//a proteger
-	while (field.empty())
+	getline(std::cin, field);
+	while (field.empty() || !strisprint(field))
 	{
-		std::cout <<"Contact info cannot be empty" << std::endl;
+		if (std::cin.eof())
+			return (false);
+		std::cout <<"Contact info cannot be empty nor contain any printable characters" << std::endl;
 		std::cout << out;
 		getline(std::cin, field);
 	}
+	return (true);
 }
 
-void	Contact::add()
+bool	Contact::add()
 {
-	addField(m_firstName, "first name : ");
-	addField(m_lasttName, "last name : ");  
-	addField(m_nickName, "nickname : ");
-	addField(m_phoneNumber, "phone number : ");
-	addField(m_darkestSecret, "darkest secret : ");
+	if (!addField(m_firstName, "first name : ")
+		|| !addField(m_lasttName, "last name : ")
+		|| !addField(m_nickName, "nickname : ")
+		|| !addField(m_phoneNumber, "phone number : ")
+		|| !addField(m_darkestSecret, "darkest secret : "))
+			return (std::cout << std::endl, false);
+	return (true);
 }
 
 
