@@ -1,6 +1,6 @@
 # Project
 
-NAME = fixed
+NAME = megaphone
 
 # Compiler
 
