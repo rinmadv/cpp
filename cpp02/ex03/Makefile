@@ -1,6 +1,6 @@
 # Project
 
-NAME = megaphone
+NAME = BSP
 
 # Compiler
 
@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./megaphone.cpp
+SRC	= srcs/main.cpp srcs/Fixed.cpp srcs/Point.cpp srcs/bsp.cpp
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
@@ -38,7 +38,7 @@ $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 ${NAME} :	${OBJ}
 		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
 		clear
-	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
+	       # @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
 all :		${NAME}
 
