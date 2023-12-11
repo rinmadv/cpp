@@ -64,6 +64,6 @@ bool	Point::operator!=(Point const & rhs) const
 
 std::ostream & operator<<( std::ostream & os, Point const & rhs)
 {
-	os << "(" << rhs.getX() << ";" << rhs.getY() << ")";r
+	os << "(" << rhs.getX() << ";" << rhs.getY() << ")";
 	return (os);
 }
