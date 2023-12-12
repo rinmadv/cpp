@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string.h>
-#include <locale>
 
 #define NOISE "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 

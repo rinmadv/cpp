@@ -34,11 +34,11 @@ bool	Contact::addField(std::string &field, const std::string out)
 
 bool	Contact::add()
 {
-	if (!addField(m_firstName, "first name : ")
-		|| !addField(m_lasttName, "last name : ")
-		|| !addField(m_nickName, "nickname : ")
-		|| !addField(m_phoneNumber, "phone number : ")
-		|| !addField(m_darkestSecret, "darkest secret : "))
+	if (!addField(_firstName, "first name : ")
+		|| !addField(_lasttName, "last name : ")
+		|| !addField(_nickName, "nickname : ")
+		|| !addField(_phoneNumber, "phone number : ")
+		|| !addField(_darkestSecret, "darkest secret : "))
 			return (std::cout << std::endl, false);
 	return (true);
 }
@@ -56,28 +56,28 @@ std::string getShort(std::string const & field)
 }
 void	Contact::displayOneShort()
 {
-	if (this->m_firstName.empty())
+	if (this->_firstName.empty())
 	{
 		std::cout << std::left << std::setw(10) << " Empty" << " | ";
 		std::cout << std::left << std::setw(10) << " " << " | ";
 		std::cout << std::left << std::setw(10) << " "  << std::endl;
 		return ;
 	}
-	std::cout << std::right << std::setw(10) << getShort(m_firstName)  << " | ";
-	std::cout << std::right << std::setw(10) << getShort(m_lasttName) << " | ";
-	std::cout << std::right << std::setw(10) << getShort(m_nickName)  << std::endl;
+	std::cout << std::right << std::setw(10) << getShort(_firstName)  << " | ";
+	std::cout << std::right << std::setw(10) << getShort(_lasttName) << " | ";
+	std::cout << std::right << std::setw(10) << getShort(_nickName)  << std::endl;
 }
 
 void	Contact::display()
 {
-	if (this->m_firstName.empty())
+	if (this->_firstName.empty())
 	{
 		std::cout << "This contact is empty" << std::endl << std::endl;
 		return ;
 	}
-	std::cout << "Firstname : " << m_firstName << std::endl;
-	std::cout << "Lastname : " << m_lasttName << std::endl;
-	std::cout << "Nickname : " << m_nickName << std::endl;
-	std::cout << "Phone number : " << m_phoneNumber << std::endl;
-	std::cout << "Darkest secret : " << m_darkestSecret << std::endl << std::endl;
+	std::cout << "Firstname : " << _firstName << std::endl;
+	std::cout << "Lastname : " << _lasttName << std::endl;
+	std::cout << "Nickname : " << _nickName << std::endl;
+	std::cout << "Phone number : " << _phoneNumber << std::endl;
+	std::cout << "Darkest secret : " << _darkestSecret << std::endl << std::endl;
 }

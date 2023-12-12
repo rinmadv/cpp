@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-PhoneBook::PhoneBook() : m_index(0){}
-PhoneBook::PhoneBook(std::string name) : m_index(0), _name(name) {}
+PhoneBook::PhoneBook() : _index(0){}
+PhoneBook::PhoneBook(std::string name) : _index(0), _name(name) {}
 PhoneBook::~PhoneBook(){}
 
 void	PhoneBook::welcome()
@@ -12,7 +12,7 @@ void	PhoneBook::welcome()
 
 	std::cout << STARSLINE << std::endl << std::endl;
 	std::cout << "Welcome to your phonebook " << this->_name << "!" << std::endl;
-	this->m_index = 0;
+	this->_index = 0;
 	while (std::cin)
 	{
 		displayMenu();
@@ -36,8 +36,8 @@ void	PhoneBook::welcome()
 
 void	PhoneBook::add()
 {
-	this->m_List[this->m_index].add();
-	this->m_index = (this->m_index + 1) % SIZE;
+	this->_List[this->_index].add();
+	this->_index = (this->_index + 1) % SIZE;
 }
 
 void	PhoneBook::displayMenu() const
@@ -81,7 +81,7 @@ void	PhoneBook::search()
 	std::cout << "     Index |  Firstname |   Lastname |   Nickname" << std::endl;
 	for (int i = 0; i < SIZE; i++)
 	{
-		contact = &this->m_List[i];
+		contact = &this->_List[i];
 		std::cout << std::right << std::setw(10) << i << " | ";
 		contact->displayOneShort();
 	}
@@ -99,7 +99,7 @@ void	PhoneBook::search()
 			std::cout << "Wrong index" << std::endl;
 			return;
 		}
-		contact = &this->m_List[i];
+		contact = &this->_List[i];
 		contact->display();
 	}
 		

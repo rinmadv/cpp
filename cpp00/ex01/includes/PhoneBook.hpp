@@ -1,7 +1,6 @@
 #ifndef DEF_PHONEBOOK
 #define DEF_PHONEBOOK
 
-#include <string>
 #include "Contact.hpp"
 
 #define SIZE 8
@@ -24,8 +23,8 @@ public:
 	int		getIndex(std::string choice);
 
 private:
-	int		m_index;
-	Contact	m_List[8];
+	int		_index;
+	Contact	_List[8];
 	std::string _name;
 };
 

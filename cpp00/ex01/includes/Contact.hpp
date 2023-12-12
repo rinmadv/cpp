@@ -1,11 +1,8 @@
 #ifndef DEF_CONTACT
 #define DEF_CONTACT
 
-#include <string>
 #include <iostream>
-#include <deque>
 #include <iomanip>
-#include <iostream>
 
 class Contact
 {
@@ -20,11 +17,11 @@ public:
 
 
 private:
-	std::string m_firstName;
-	std::string m_lasttName;
-	std::string m_nickName;
-	std::string	m_phoneNumber;
-	std::string	m_darkestSecret;
+	std::string _firstName;
+	std::string _lasttName;
+	std::string _nickName;
+	std::string	_phoneNumber;
+	std::string	_darkestSecret;
 };
 
 
