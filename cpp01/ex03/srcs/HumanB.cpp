@@ -8,6 +8,8 @@ HumanB::HumanB(std::string name)
 
 void HumanB::attack()const
 {
+	if (!this->weapon)
+		return ;
 	std::string const& weapon = this->weapon->getType();
 	std::cout << this->name << " attacks with their " << weapon << std::endl;
 }

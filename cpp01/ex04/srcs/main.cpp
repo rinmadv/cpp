@@ -29,14 +29,13 @@ int	main(int argc, char **argv)
 		infile.close();
 		return (1);
 	}
-	//copie de if dans of en remplacant s1 par s2
 	std::string buffer;
 	size_t pos;
 	std::string copy;
 	size_t len_s1 = s1.size();
 	if (s1 == s2)
 	{
-		while (getline(infile, buffer)) //verifier si je dois
+		while (getline(infile, buffer))
 			outfile << buffer << std::endl;
 	}
 	else
