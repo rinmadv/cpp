@@ -13,10 +13,11 @@ public:
 	Contact();
 	~Contact();
 
-	void	displayOneShort();
 	bool	addField(std::string &field, const std::string out);
 	bool	add();
+	void	displayOneShort();
 	void	display();
+
 
 private:
 	std::string m_firstName;
@@ -25,5 +26,6 @@ private:
 	std::string	m_phoneNumber;
 	std::string	m_darkestSecret;
 };
+
 
 #endif

@@ -1,4 +1,5 @@
 #include "../includes/Contact.hpp"
+#include <string>
 
 Contact::Contact(){}
 
@@ -42,10 +43,41 @@ bool	Contact::add()
 	return (true);
 }
 
+std::string getShort(std::string const & field)
+{
+	std::string shorten;
 
+	if (field.size() <= 10)
+		return (field);
+	shorten = field.substr();
+	shorten.resize(9);
+	shorten.resize(10, '.');
+	return (shorten);
+}
 void	Contact::displayOneShort()
 {
-	std::cout << std::right << std::setw(10) << m_firstName << " | ";
-	std::cout << std::right << std::setw(10) << m_lasttName << " | ";
-	std::cout << std::right << std::setw(10) << m_nickName<< " | "  << std::endl;
+	if (this->m_firstName.empty())
+	{
+		std::cout << std::left << std::setw(10) << " Empty" << " | ";
+		std::cout << std::left << std::setw(10) << " " << " | ";
+		std::cout << std::left << std::setw(10) << " "  << std::endl;
+		return ;
+	}
+	std::cout << std::right << std::setw(10) << getShort(m_firstName)  << " | ";
+	std::cout << std::right << std::setw(10) << getShort(m_lasttName) << " | ";
+	std::cout << std::right << std::setw(10) << getShort(m_nickName)  << std::endl;
+}
+
+void	Contact::display()
+{
+	if (this->m_firstName.empty())
+	{
+		std::cout << "This contact is empty" << std::endl << std::endl;
+		return ;
+	}
+	std::cout << "Firstname : " << m_firstName << std::endl;
+	std::cout << "Lastname : " << m_lasttName << std::endl;
+	std::cout << "Nickname : " << m_nickName << std::endl;
+	std::cout << "Phone number : " << m_phoneNumber << std::endl;
+	std::cout << "Darkest secret : " << m_darkestSecret << std::endl << std::endl;
 }

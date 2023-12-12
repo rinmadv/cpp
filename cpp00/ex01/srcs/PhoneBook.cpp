@@ -10,6 +10,7 @@ void	PhoneBook::welcome()
 {	
 	std::string choice ;
 
+	std::cout << STARSLINE << std::endl << std::endl;
 	std::cout << "Welcome to your phonebook " << this->_name << "!" << std::endl;
 	this->m_index = 0;
 	while (std::cin)
@@ -36,12 +37,13 @@ void	PhoneBook::welcome()
 void	PhoneBook::add()
 {
 	this->m_List[this->m_index].add();
-	this->m_index = (this->m_index + 1) % 8;
+	this->m_index = (this->m_index + 1) % SIZE;
 }
 
 void	PhoneBook::displayMenu() const
 {	
-	std::cout <<"What would you like to do ? ?" << std::endl;
+	std::cout << std::endl;
+	std::cout <<"What would you like to do ?" << std::endl;
 	std::cout <<"	[ADD] Add a new contact" << std::endl;
 	std::cout <<"	[SEARCH] Display contacts list" << std::endl;
 	std::cout <<"	[EXIT] Exit phonebook " << std::endl;
@@ -51,6 +53,7 @@ void	PhoneBook::displayMenu() const
 void	PhoneBook::goodBye() const
 {	
 	std::cout << "See you soon " << this->_name << "!" << std::endl;
+	std::cout << std::endl << STARSLINE << std::endl;
 	return;
 }
 
@@ -59,10 +62,15 @@ void	PhoneBook::error() const
 	std::cout <<"Invalid entry, please try again" << std::endl << std::endl;
 }
 
-void	PhoneBook::displayContact(std::string choice)
+int	PhoneBook::getIndex(std::string choice)
 {
-	int index = std::stoi(choice);
-	this->m_List[index].display();
+	std::string tab[SIZE] = {"0", "1", "2", "3", "4", "5", "6", "7"};
+	for (int i = 0; i < SIZE; i++)
+	{
+		if (!choice.compare(tab[i]))
+			return (i);
+	}
+	return (-1);
 }
 
 void	PhoneBook::search()
@@ -71,7 +79,7 @@ void	PhoneBook::search()
 	std::string choice;
 	std::cout <<"Here is the list of your contacts" << std::endl;
 	std::cout << "     Index |  Firstname |   Lastname |   Nickname" << std::endl;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < SIZE; i++)
 	{
 		contact = &this->m_List[i];
 		std::cout << std::right << std::setw(10) << i << " | ";
@@ -79,23 +87,20 @@ void	PhoneBook::search()
 	}
 	std::cout << "Which contact do you want to display (Press X to go back to menu): " ;
 	std::getline(std::cin, choice);
-	while (std::cin)
+	if (std::cin.eof())
+		std::cout << std::endl;
+	else if (choice == "X")
+		return ;
+	else
 	{
-		if (std::cin.eof())
+		int i = this->getIndex(choice);
+		if (i < 0)
 		{
-			std::cout << std::endl;
-			break;
+			std::cout << "Wrong index" << std::endl;
+			return;
 		}
-		else if (choice == "X")
-			break ;
-		else if (choice == "0" || choice == "1" || choice == "2" || choice == "3"
-			|| choice == "4" || choice == "5" || choice == "6" || choice == "7")
-		{
-			
-			break;
-		}
-		std::cout << "Wrong index\nWhich contact do you want to display (Press X to go back to menu): ";
-		std::getline(std::cin, choice);
+		contact = &this->m_List[i];
+		contact->display();
 	}
 		
 }

@@ -4,6 +4,8 @@
 #include <string>
 #include "Contact.hpp"
 
+#define SIZE 8
+#define STARSLINE "*****************************************************************"
 class PhoneBook
 {
 public:
@@ -18,7 +20,8 @@ public:
 	void	displayMenu() const;
 	void	search();
 	void	add();
-	void	displayContact(std::string choice);
+	// void	displayContact(std::string choice);
+	int		getIndex(std::string choice);
 
 private:
 	int		m_index;
