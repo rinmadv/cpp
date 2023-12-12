@@ -1,10 +1,6 @@
 #ifndef DEF_ZOMBIE
 #define DEF_ZOMBIE
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
 #include <iostream>
 
 class Zombie

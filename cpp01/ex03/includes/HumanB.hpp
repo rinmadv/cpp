@@ -1,11 +1,6 @@
 #ifndef DEF_HUMANB
 #define DEF_HUMANB
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
-#include <iostream>
 #include "Weapon.hpp"
 
 class HumanB

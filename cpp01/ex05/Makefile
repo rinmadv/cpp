@@ -1,61 +1,56 @@
-SRCS	= 	srcs/nom.cpp
+# Project
 
-OBJS = $(SRCS:.c=.o)
+NAME = harl
 
-CC    = c++
+# Compiler
 
-CFLAGS  = -Wall -Wextra -Werror -std=c++98 #-g3 
+CPP	= c++
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD
 
-NAME    = nom
+# Paths
 
-DEPS	=	${SRCS:.c=.d}
+SRC_PATH	= ./
+BIN_PATH	= ./bin/
 
-ifeq ($(debug), true)
-	CFLAGS += -fsanitize=address,undefined
-endif
+# Includes
 
-#################
-#### DISPLAY ####
-#################
+INCLUDES	= includes/
 
-RED=\033[0;31m
-BOLD_WHITE=\033[1m
-GREEN=\033[1;32m
-ORANGE=\033[0;33m
-YELLOW=\033[1;33m
-BLUE=\033[1;36m
-NC=\033[0m # No Color
+# Clean
 
+RM	= rm -rf
 
-#################
-##### RULES #####
-#################
+# Files
 
-all: ${NAME}
+SRC	= ./srcs/main.cpp ./srcs/Harl.cpp
 
-${NAME}: ${OBJS}
-	echo -n "${BOLD_WHITE}⏳ COMPILING NOM${NC}"
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
-	echo "${GREEN}Done 💅${NC}"
+OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
-.c.o:
-	${CC} ${CFLAGS} ${CDCFLAGS} -c $< -o ${<:.c=.o}
+DEPS		= $(OBJ:.o=.d)
 
+.c.o :	
+		${CPP} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
 
-clean:
-	echo -n "${BOLD_WHITE}🧹 CLEANING OBJECTS\t${NC}"
-	${RM} ${OBJS}
-	${RM} ${DEPS}
-	echo "${GREEN}Done 💅${NC}"
+$(BIN_PATH)%.o: $(SRC_PATH)%.cpp
+		mkdir -p $(dir $@)
+		@ $(CPP) $(FLAGS) -c $< -o $@
 
+${NAME} :	${OBJ}
+		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		clear
+	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
+	
+all :		${NAME}
 
-fclean: clean
-	echo -n "${BOLD_WHITE}🧹 CLEANING EXEC\t${NC}"
-	${RM} ${NAME}
-	echo "${GREEN}Done 💅${NC}"
+clean :
+		${RM} ${OBJ}
 
-re : fclean
-	${MAKE}
+fclean :	clean
+		${RM} ${BIN_PATH}
+		${RM} ${NAME}
 
-.PHONY: re fclean all seed
-.SILENT:
+re :		fclean all
+
+.PHONY :	all clean fclean re
+
+-include ${DEPS}

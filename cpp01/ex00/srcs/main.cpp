@@ -1,6 +1,5 @@
 #include "../includes/../includes/Zombie.hpp"
-#include <iostream>
-#include <string>
+
 
 int	main()
 {

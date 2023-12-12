@@ -1,10 +1,6 @@
 #ifndef DEF_HARL
 #define DEF_HARL
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
 #include <iostream>
 
 #define DEBUG "Debug"

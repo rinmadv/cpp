@@ -1,7 +1,5 @@
 #include "../includes/HumanA.hpp"
 #include "../includes/HumanB.hpp"
-#include <iostream>
-#include <string>
 
 int main()
 {

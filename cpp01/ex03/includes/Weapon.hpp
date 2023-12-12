@@ -1,10 +1,6 @@
 #ifndef DEF_WEAPON
 #define DEF_WEAPON
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
 #include <iostream>
 
 class Weapon

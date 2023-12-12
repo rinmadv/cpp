@@ -1,46 +1,56 @@
-SRCS	= 	srcs/Zombie.cpp srcs/main.cpp srcs/zombieHorde.cpp
+# Project
 
-OBJS = $(SRCS:.c=.o)
+NAME = Horde
 
-CC    = c++
+# Compiler
 
-CFLAGS  = -Wall -Wextra -Werror -std=c++98 #-g3 
+CPP	= c++
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD
 
-NAME    = Horde
+# Paths
 
-DEPS	=	${SRCS:.c=.d}
+SRC_PATH	= ./
+BIN_PATH	= ./bin/
 
-ifeq ($(debug), true)
-	CFLAGS += -fsanitize=address,undefined
-endif
+# Includes
 
-#################
-#### DISPLAY ####
-#################
+INCLUDES	= includes/
 
-RED=\033[0;31m
-BOLD_WHITE=\033[1m
-GREEN=\033[1;32m
-ORANGE=\033[0;33m
-YELLOW=\033[1;33m
-BLUE=\033[1;36m
-NC=\033[0m # No Color
+# Clean
 
+RM	= rm -rf
 
-#################
-##### RULES #####
-#################
+# Files
 
-all: ${NAME}
+SRC	= srcs/Zombie.cpp srcs/main.cpp srcs/zombieHorde.cpp
 
-${NAME}: ${OBJS}
-	echo -n "${BOLD_WHITE}⏳ COMPILING HORDE${NC}"
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
-	echo "${GREEN}Done 💅${NC}"
+OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
-.c.o:
-	${CC} ${CFLAGS} ${CDCFLAGS} -c $< -o ${<:.c=.o}
+DEPS		= $(OBJ:.o=.d)
 
+.c.o :	
+		${CPP} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
 
-.PHONY: re fclean all seed
-.SILENT:
+$(BIN_PATH)%.o: $(SRC_PATH)%.cpp
+		mkdir -p $(dir $@)
+		@ $(CPP) $(FLAGS) -c $< -o $@
+
+${NAME} :	${OBJ}
+		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		clear
+	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
+	
+all :		${NAME}
+
+clean :
+		${RM} ${OBJ}
+
+fclean :	clean
+		${RM} ${BIN_PATH}
+		${RM} ${NAME}
+
+re :		fclean all
+
+.PHONY :	all clean fclean re
+
+-include ${DEPS}

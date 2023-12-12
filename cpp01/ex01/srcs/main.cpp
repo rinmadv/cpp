@@ -1,6 +1,4 @@
 #include "../includes/../includes/Zombie.hpp"
-#include <iostream>
-#include <string>
 #include <limits.h>
 
 #define HORDE_SIZE 5
