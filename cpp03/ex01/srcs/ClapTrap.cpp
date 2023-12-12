@@ -1,7 +1,17 @@
 #include "../includes/ClapTrap.hpp"
 
 ClapTrap::ClapTrap(): _hit(10), _energy(10), _attackDamage(0) {std::cout << "Clap trap default constructor get called" << std::endl;}
-ClapTrap::ClapTrap(std::string name):  _name(name), _hit(100), _energy(50), _attackDamage(20) {std::cout << "Clap trap constructor get called for " << name << std::endl;}
+ClapTrap::ClapTrap(std::string name):  _name(name), _hit(10), _energy(10), _attackDamage(0) {std::cout << "Clap trap constructor get called for " << name << std::endl;}
+ClapTrap::ClapTrap(std::string name, unsigned int type):  _name(name)
+{
+	if (type == 1)
+	{
+		_hit = 100;
+		_energy = 50;
+		_attackDamage = 20;
+		std::cout << "Clap trap constructor get called for " << name << std::endl;
+	}
+}
 ClapTrap::ClapTrap(ClapTrap const & src)
 {
 	*this = src;

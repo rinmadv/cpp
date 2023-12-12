@@ -1,6 +1,6 @@
 #include "../includes/ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {std::cout << "Scav Trap constructor get called for " << name << std::endl;}
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name, SCAVTRAP) {std::cout << "Scav Trap constructor get called for " << name << std::endl;}
 ScavTrap::ScavTrap(ScavTrap const & src)
 {
 	*this = src;

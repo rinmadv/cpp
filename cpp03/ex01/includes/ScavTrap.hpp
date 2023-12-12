@@ -8,6 +8,8 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
+#define SCAVTRAP 1
+
 class ScavTrap : public ClapTrap
 {
 	public:

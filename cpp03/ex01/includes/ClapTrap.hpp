@@ -13,6 +13,7 @@ class ClapTrap
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
+		ClapTrap(std::string name, unsigned int type);
 		ClapTrap(ClapTrap const & src);
 		~ClapTrap();
 
