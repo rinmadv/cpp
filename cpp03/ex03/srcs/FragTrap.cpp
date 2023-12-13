@@ -21,6 +21,5 @@ FragTrap & FragTrap::operator=(FragTrap const & rhs)
 
 void	FragTrap::highFivesGuys(void)
 {
-	std::cout << "Scav trap "<< this->_name << " is requesting positive feedback		Fred.attack("Goliath");
-" << std::endl;
+	std::cout << "Scav trap "<< this->_name << " is requesting positive feedback" << std::endl;
 }

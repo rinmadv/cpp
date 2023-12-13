@@ -1,11 +1,6 @@
 #ifndef DEF_DIAMONDTRAP
 #define DEF_DIAMONDTRAP
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
-#include <iostream>
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 

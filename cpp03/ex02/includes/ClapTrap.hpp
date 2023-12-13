@@ -2,6 +2,7 @@
 #define DEF_CLAPTRAP
 
 #include <iostream>
+#include <limits.h>
 
 class ClapTrap
 {
