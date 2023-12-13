@@ -1,5 +1,4 @@
 #include "../includes/ClapTrap.hpp"
-#include <limits.h>
 
 ClapTrap::ClapTrap(): _hit(10), _energy(10), _attackDamage(0) {std::cout << "Clap trap default constructor get called" << std::endl;}
 ClapTrap::ClapTrap(std::string name):  _name(name), _hit(10), _energy(10), _attackDamage(0) {std::cout << "Clap trap constructor get called for " << name << std::endl;}
@@ -13,7 +12,7 @@ ClapTrap::~ClapTrap(){std::cout << "Clap trap destructor get called" << std::end
 ClapTrap & ClapTrap::operator=(ClapTrap const & rhs)
 {
 	std::cout << "Clap trap assignation operator get called" << std::endl;
-	this->_attackDamage = rhs._attackDamage; //utiliser getters??
+	this->_attackDamage = rhs._attackDamage;
 	this->_energy = rhs._energy;
 	this->_hit = rhs._hit;
 	this->_name = rhs._name;

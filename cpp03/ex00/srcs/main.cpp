@@ -1,6 +1,4 @@
 #include "../includes/ClapTrap.hpp"
-#include <iostream>
-#include <string>
 
 int	main()
 {

@@ -1,6 +1,4 @@
 #include "../includes/ScavTrap.hpp"
-#include <iostream>
-#include <string>
 
 int	main()
 {

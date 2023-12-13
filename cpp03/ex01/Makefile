@@ -1,6 +1,6 @@
 # Project
 
-NAME = ClapTrap
+NAME = ScavTrap
 
 # Compiler
 

@@ -1,12 +1,7 @@
 #ifndef DEF_CLAPTRAP
 #define DEF_CLAPTRAP
 
-#include <string>
 #include <iostream>
-#include <deque>
-#include <iomanip>
-#include <iostream>
-#include <limits.h>
 
 class ClapTrap
 {

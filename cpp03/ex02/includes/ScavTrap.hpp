@@ -1,11 +1,6 @@
 #ifndef DEF_SCAVTRAP
 #define DEF_SCAVTRAP
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
-#include <iostream>
 #include "ClapTrap.hpp"
 
 #define SCAVTRAP 1
