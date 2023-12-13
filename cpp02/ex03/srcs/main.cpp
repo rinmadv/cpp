@@ -1,9 +1,5 @@
 #include "../includes/Point.hpp"
 
-#include <iostream>
-
-
-
 #define RESET "\033[0m"
 
 #define BOLDBLUE "\033[1m\033[34m"

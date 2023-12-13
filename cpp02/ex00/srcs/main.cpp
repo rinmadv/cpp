@@ -1,6 +1,4 @@
 #include "../includes/Fixed.hpp"
-#include <iostream>
-#include <string>
 
 int main( void )
 {

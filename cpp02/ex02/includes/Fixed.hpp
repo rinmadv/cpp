@@ -1,10 +1,6 @@
 #ifndef DEF_FIXED
 #define DEF_FIXED
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
 #include <iostream>
 #include <cmath>
 

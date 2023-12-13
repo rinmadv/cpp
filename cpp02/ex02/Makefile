@@ -1,6 +1,6 @@
 # Project
 
-NAME = Fixed
+NAME = a.out
 
 # Compiler
 
@@ -38,7 +38,7 @@ $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 ${NAME} :	${OBJ}
 		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
 		clear
-	       # @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
+	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
 all :		${NAME}
 

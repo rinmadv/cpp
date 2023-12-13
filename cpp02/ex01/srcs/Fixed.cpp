@@ -2,6 +2,8 @@
 
 float static _floatBits = (float)(1 << FIXED_BITS);
 
+/***************** CONSTRUCTEURS / DESTRUCTEURS ******************/
+
 Fixed::Fixed(void) : _value(0)
 {
 	std::cout << "Default constructor called" << std::endl;
@@ -27,6 +29,10 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
+
+
+/***************** OPERATORS ******************/
+
 Fixed &	Fixed::operator=(Fixed const & rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
@@ -35,15 +41,10 @@ Fixed &	Fixed::operator=(Fixed const & rhs)
 	return (*this);
 }
 
-float	Fixed::toFloat( void ) const
-{
-	return (this->_value / _floatBits);
-}
 
-int	Fixed::toInt( void ) const
-{
-	return (this->_value >> Fixed::_bits);
-}
+
+/***************** GETTERS/SETTERS ******************/
+
 
 int		Fixed::getRawBits(void) const
 {
@@ -56,6 +57,20 @@ void	Fixed::setRawBits(int const raw)
 	std::cout << "setRawBits member function called\n" << std::endl;
 	this->_value = raw;
 }
+
+/***************** CONVERSIONS ******************/
+
+float	Fixed::toFloat( void ) const
+{
+	return (this->_value / _floatBits);
+}
+
+int	Fixed::toInt( void ) const
+{
+	return (this->_value >> Fixed::_bits);
+}
+
+/***************** NON MEMBERS ******************/
 
 std::ostream & operator<<( std::ostream & os, Fixed const & rhs)
 {

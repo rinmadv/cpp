@@ -4,7 +4,6 @@ float static _floatBits = (float)(1 << FIXED_BITS);
 
 /***************** CONSTRUCTEURS / DESTRUCTEURS ******************/
 
-
 Fixed::Fixed(void) : _value(0)
 {
 	// std::cout << "Default constructor called" << std::endl;
@@ -29,6 +28,9 @@ Fixed::~Fixed(void)
 {
 	// std::cout << "Destructor called" << std::endl;
 }
+
+
+
 
 /***************** OPERATORS ******************/
 

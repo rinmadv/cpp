@@ -1,10 +1,6 @@
 #ifndef DEF_FIXED
 #define DEF_FIXED
 
-#include <string>
-#include <iostream>
-#include <deque>
-#include <iomanip>
 #include <iostream>
 
 #define FIXED_BITS 8
@@ -13,11 +9,12 @@ class Fixed
 {
 
 public:
-	Fixed(void); //constructeur par défaut
-	Fixed(Fixed const & src); //constructeur de copie
-	~Fixed(void); //constructeur de copie
+	Fixed(void);
+	Fixed(Fixed const & src);
+	~Fixed(void);
 
-	Fixed &	operator=(Fixed const & rhs);//Surcharge de l'opérateur d'affectation
+	Fixed &	operator=(Fixed const & rhs);
+	
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 
