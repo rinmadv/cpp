@@ -1,4 +1,4 @@
-#include "../includes/ClapTrap.hpp"
+#include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(): _hit(10), _energy(10), _attackDamage(0) {std::cout << "Clap trap default constructor get called" << std::endl;}
 ClapTrap::ClapTrap(std::string name):  _name(name), _hit(10), _energy(10), _attackDamage(0) {std::cout << "Clap trap constructor get called for " << name << std::endl;}
@@ -21,7 +21,7 @@ ClapTrap & ClapTrap::operator=(ClapTrap const & rhs)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->_energy == 0 || this->_hit == 0)
+	if (this->_energy == 0 || this->_hit == 0) // faire deux messages
 	{
 		std::cout << "ClapTrap " << this->_name << " doesnt have enough energy points to attack " << target << std::endl;
 		return ;
@@ -48,7 +48,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	}
 	std::cout << "ClapTrap " << this->_name << " gets repaired " << amount << " hit points!" << ", and loses 1 energy point" << std::endl;
 	this->_energy--;
-	if ((unsigned long int)(this->_hit + amount) > UINT_MAX)
+	if ((unsigned long)(this->_hit + amount) > UINT_MAX)
 		this->_hit = UINT_MAX;
 	else
 		this->_hit += amount;

@@ -33,10 +33,10 @@ DEPS		= $(OBJ:.o=.d)
 
 $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 		mkdir -p $(dir $@)
-		@ $(CPP) $(FLAGS) -c $< -o $@
+		@ $(CPP) $(FLAGS) -c $< -o $@ -I ${INCLUDES}
 
 ${NAME} :	${OBJ}
-		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ}
 		clear
 	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
