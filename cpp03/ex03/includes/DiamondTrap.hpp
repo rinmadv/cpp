@@ -3,8 +3,7 @@
 
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
-
-#define DIAMONDTRAP 3
+#define SCAVTRAP 1
 
 class DiamondTrap : public ScavTrap, public FragTrap
 {

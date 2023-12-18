@@ -12,7 +12,7 @@ class Dog : public Animal
 		~Dog();
 
 		Dog & operator=(Dog const & rhs);
-
+		void makeSound();
 	private:
 		std::string _type;
 };

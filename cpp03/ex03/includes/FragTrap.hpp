@@ -3,9 +3,6 @@
 
 #include "ClapTrap.hpp"
 
-#define SCAVTRAP 1
-#define FRAGTRAP 2
-
 class FragTrap : public ClapTrap
 {
 	public:

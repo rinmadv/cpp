@@ -15,7 +15,7 @@ Cat & Cat::operator=(Cat const & rhs)
 	return (*this);
 }
 
-void	Animal::makeSound(void)
+void	Cat::makeSound(void)
 {
 	std::cout << "Meowwwwwwwww" << std::endl;
 }

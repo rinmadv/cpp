@@ -3,8 +3,6 @@
 
 #include "ClapTrap.hpp"
 
-#define SCAVTRAP 1
-
 class ScavTrap : public ClapTrap
 {
 	public:
@@ -15,6 +13,7 @@ class ScavTrap : public ClapTrap
 
 		ScavTrap & operator=(ScavTrap const & rhs);
 		
+		void attack(const std::string& target);
 		void	guardGate() const;
 
 	private:

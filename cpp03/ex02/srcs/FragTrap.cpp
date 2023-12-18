@@ -1,6 +1,13 @@
 #include "../includes/FragTrap.hpp"
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name, FRAGTRAP) {std::cout << "Frag Trap constructor get called for " << name << std::endl;}
+FragTrap::FragTrap() : ClapTrap() {std::cout << "Frag Trap default constructor get called" << std::endl;}
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
+{
+	std::cout << "Frag Trap constructor get called for " << name << std::endl;
+	this->_hit = 100;
+	this->_energy = 100;
+	this->_attackDamage = 30;	
+}
 FragTrap::FragTrap(FragTrap const & src)
 {
 	*this = src;
@@ -19,7 +26,7 @@ FragTrap & FragTrap::operator=(FragTrap const & rhs)
 	return (*this);
 }
 
-void	FragTrap::highFivesGuys(void)
+void	FragTrap::highFivesGuys(void) const
 {
 	std::cout << "Scav trap "<< this->_name << " is requesting positive feedback" << std::endl;
 }

@@ -23,7 +23,6 @@ RM	= rm -rf
 # Files
 
 SRC	= srcs/main.cpp srcs/ClapTrap.cpp srcs/ScavTrap.cpp
-
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
 DEPS		= $(OBJ:.o=.d)
@@ -33,10 +32,10 @@ DEPS		= $(OBJ:.o=.d)
 
 $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 		mkdir -p $(dir $@)
-		@ $(CPP) $(FLAGS) -c $< -o $@
+		@ $(CPP) $(FLAGS) -c $< -o $@ -I ${INCLUDES}
 
 ${NAME} :	${OBJ}
-		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ}
 		clear
 	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
