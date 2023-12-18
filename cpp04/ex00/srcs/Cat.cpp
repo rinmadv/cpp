@@ -1,7 +1,6 @@
 #include "../includes/Cat.hpp"
 
-Cat::Cat(){std::cout << "Cat default constructor get called" << std::endl;}
-Cat::Cat(std::string type) : _type(type) {std::cout << "Cat constructor get called with type " << type << std::endl;}
+Cat::Cat() : Animal("Cat") {std::cout << "Cat default constructor get called" << std::endl;}
 Cat::Cat(Cat const & src)
 {
 	*this = src;
@@ -11,6 +10,12 @@ Cat::~Cat(){std::cout << "Cat destructor get called" << std::endl;}
 
 Cat & Cat::operator=(Cat const & rhs)
 {
+	this->_type = rhs._type;
 	std::cout << "Cat assignation operator get called" << std::endl;
 	return (*this);
+}
+
+void	Animal::makeSound(void)
+{
+	std::cout << "Meowwwwwwwww" << std::endl;
 }

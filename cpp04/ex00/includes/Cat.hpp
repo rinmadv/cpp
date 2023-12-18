@@ -1,9 +1,9 @@
 #ifndef DEF_CAT
 #define DEF_CAT
 
-#include <Animal.hpp>
+#include "Animal.hpp"
 
-class Cat
+class Cat : public Animal
 {
 	public:
 		Cat();
