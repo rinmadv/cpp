@@ -14,9 +14,9 @@ class Animal
 		Animal & operator=(Animal const & rhs);
 
 		std::string const & getType() const;
-		virtual void makeSound() = 0;
+		virtual void makeSound() const;
 
-	private:
+	protected:
 		std::string _type;
 };
 
