@@ -2,7 +2,7 @@
 #include "../includes/WrongCat.hpp"
 #include "../includes/Dog.hpp"
 
-#define FARMSIZE 8
+#define FARMSIZE 4
 #define RESET "\033[0m"
 #define BOLDBLUE "\033[1m\033[34m"
 

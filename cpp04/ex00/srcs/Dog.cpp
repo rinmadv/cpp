@@ -3,8 +3,8 @@
 Dog::Dog() : Animal("Dog") {std::cout << "Dog default constructor get called" << std::endl;}
 Dog::Dog(Dog const & src)
 {
-	*this = src;
 	std::cout << "Dog copy constructor get called" << std::endl;
+	*this = src;
 }
 Dog::~Dog(){std::cout << "Dog destructor get called" << std::endl;}
 

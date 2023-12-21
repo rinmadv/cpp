@@ -1,6 +1,6 @@
 # Project
 
-NAME = brained_animals
+NAME = abstractAnimal
 
 # Compiler
 
