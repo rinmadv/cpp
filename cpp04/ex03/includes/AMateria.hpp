@@ -2,6 +2,9 @@
 #define DEF_AMATERIA
 
 #include <iostream>
+#include "Character.hpp"
+
+#define INVENTORYSIZE 4
 
 class AMateria
 {
@@ -9,6 +12,7 @@ class AMateria
 		std::string	_type;
 
 	public:
+		AMateria();
 		AMateria(std::string const & type);
 		AMateria(AMateria const & src);
 		virtual ~AMateria();
@@ -18,6 +22,6 @@ class AMateria
 		std::string const & getType() const; //Returns the materia type
 		virtual AMateria* clone() const = 0;
 		virtual void use(ICharacter& target);
-	};
+};
 
 #endif

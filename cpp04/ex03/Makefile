@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./srcs/AMateria.cpp
+SRC	= ./srcs/AMateria.cppr's soul recemment ?  J'ai l'impression que je devrais l'avoir mais il y a pas de barre de progression pour checker...
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
