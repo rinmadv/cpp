@@ -33,12 +33,17 @@ MateriaSource::~MateriaSource()
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
 		if (this->_inventory[i])
+		{
 			delete this->_inventory[i];
+			this->_inventory[i] = NULL;
+		}
 	}
 }
 
 void MateriaSource::learnMateria(AMateria* src)
 {
+	if (!src)
+		return;
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
 		if (!this->_inventory[i])
@@ -57,7 +62,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 {
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
-		if (this->_inventory[i]->getType() == type)
+		if (this->_inventory[i] && this->_inventory[i]->getType() == type)
 		{
 			AMateria *newClone = this->_inventory[i]->clone();
 			std::cout << "Materia " << type << " learned" << std::endl;

@@ -1,17 +1,27 @@
 #include "../includes/Character.hpp"
 
-Character::Character(std::string const & name) : _name(name)
+Character::Character()
 {
-	std::cout << "Default constructor called for character :" << name << std::endl;
+	std::cout << "Default constructor called for character with no name" << std::endl;
 	for (int i = 0; i < INVENTORYSIZE; i++)
 		this->_inventory[i] = NULL;
 	this->collector = NULL;
 }
+
+Character::Character(std::string const & name) : _name(name)
+{
+	std::cout << "Default constructor called for character : " << name << std::endl;
+	for (int i = 0; i < INVENTORYSIZE; i++)
+		this->_inventory[i] = NULL;
+	this->collector = NULL;
+}
+
 Character::Character(Character const & src)
 {
 	std::cout << "Character copy constructor get called" << std::endl;
 	*this = src;
 }
+
 Character & Character::operator=(Character const & rhs)
 {
 	std::cout << "Character affectation operator get called" << std::endl;
@@ -19,7 +29,7 @@ Character & Character::operator=(Character const & rhs)
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
 		delete this->_inventory[i];
-		if (this->_inventory[i])
+		if (rhs._inventory[i])
 			this->_inventory[i] = rhs._inventory[i]->clone();
 		else
 			this->_inventory[i] = NULL;
@@ -29,12 +39,16 @@ Character & Character::operator=(Character const & rhs)
 
 Character::~Character()
 {
-	std::cout << "Character destructor called" << std::endl;
+	std::cout << "Character destructor called for " << this->_name << std::endl;
 	garbage *tmp;
 	while (this->collector)
 	{
 		tmp = this->collector->next;
-		delete this->collector->Item;
+		if (this->collector->Item)
+		{
+			delete this->collector->Item;
+			this->collector->Item = NULL;
+		}
 		delete this->collector;
 		this->collector = tmp;
 	}
@@ -43,7 +57,10 @@ Character::~Character()
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
 		if (this->_inventory[i])
+		{
 			delete this->_inventory[i];
+			this->_inventory[i] = NULL;
+		}
 	}
 }
 
@@ -64,7 +81,7 @@ void Character::equip(AMateria* m)
 	{
 		if (this->_inventory[i] && this->_inventory[i] == m)
 		{
-			std::cout << this->_name << " already equipied with this " << m->getType();
+			std::cout << this->_name << " already equipied with this " << m->getType() << std::endl;
 			return;
 		}
 		if (!this->_inventory[i])
@@ -97,6 +114,7 @@ void Character::unequip(int idx)
 			tmp = new garbage();
 			tmp->Item = this->_inventory[idx];
 			tmp->next = NULL;
+			this->collector->next = tmp;
 		}
 		this->_inventory[idx] = NULL;
 		return;
@@ -105,6 +123,10 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (idx >= 0 && idx < INVENTORYSIZE && this->_inventory[idx])
+	if (idx < 0 || idx > INVENTORYSIZE)
+		std::cout << "Index " << idx << " out of range" << std::endl;
+	else if (!this->_inventory[idx])
+		std::cout << "Index " << idx << " is empty in inventory" << std::endl;
+	else
 		this->_inventory[idx]->use(target);
 }

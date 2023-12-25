@@ -13,12 +13,13 @@ typedef struct AMateria_garbage
 
 class Character : public ICharacter
 {
-	private:
+	protected:
 		std::string	_name;
 		AMateria	*_inventory[INVENTORYSIZE];
 		garbage		*collector;
 
 	public:
+		Character();
 		Character(std::string const & name);
 		Character(Character const & src);
 		~Character();
