@@ -1,7 +1,9 @@
-#ifndef DEF_ICharacter
-#define DEF_ICharacter
+#ifndef DEF_ICHARACTER
+#define DEF_ICHARACTER
 
 #include <iostream>
+
+class AMateria;
 
 class ICharacter
 {

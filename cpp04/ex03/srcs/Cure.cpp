@@ -38,5 +38,6 @@ void Cure::use(ICharacter& target)
 Cure* Cure::clone() const
 {
 	Cure *newClone = new Cure(*this);
+	std::cout << "Cure cloned" << std::endl;
 	return (newClone);
 }

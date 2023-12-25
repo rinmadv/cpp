@@ -2,7 +2,7 @@
 #define DEF_AMATERIA
 
 #include <iostream>
-#include "Character.hpp"
+#include "ICharacter.hpp"
 
 #define INVENTORYSIZE 4
 

@@ -3,6 +3,8 @@
 MateriaSource::MateriaSource()
 {
 	std::cout << "Default constructor called for MateriaSource" << std::endl;
+	for (int i = 0; i < INVENTORYSIZE; i++)
+		this->_inventory[i] = NULL;
 }
 
 MateriaSource::MateriaSource(MateriaSource const & src)
@@ -14,27 +16,32 @@ MateriaSource::MateriaSource(MateriaSource const & src)
 MateriaSource & MateriaSource::operator=(MateriaSource const & rhs)
 {
 	std::cout << "MateriaSource affectation operator get called" << std::endl;
-	if (!rhs._inventory)
-		this->_inventory = NULL;
-	else
+	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
-		for (int i = 0; i < INVENTORYSIZE; i++)
-		{
-			// si pas empty, le delete puis
-			this->_inventory[i] = rhs._inventory[i]; // non on va utiliser les setters et getters pour copier le contenu et pas juste les adresses
-		}
+		delete this->_inventory[i];
+		if (rhs._inventory[i])
+			this->_inventory[i] = rhs._inventory[i]->clone();
+		else
+			this->_inventory[i] = NULL;
 	}
 	return (*this);
 }
 
 MateriaSource::~MateriaSource(){std::cout << "MateriaSource destructor called" << std::endl;}
 
-void MateriaSource::learnMateria(AMateria*)
+void MateriaSource::learnMateria(AMateria* src)
 {
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
-		this->_inventory[i] = rhs._inventory[i]; // non on va utiliser les setters et getters pour copier le contenu et pas juste les adresses
+		if (!this->_inventory[i])
+		{
+			this->_inventory[i] = src;
+			std::cout << "Materia " << src->getType() << " learned" << std::endl;
+			return;
+		}
 	}
+	std::cout << "No storage left,  " << src->getType() << " added to the floor" << std::endl;
+	//sinon on met au floor ????
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
@@ -44,8 +51,10 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 		if (this->_inventory[i]->getType() == type)
 		{
 			AMateria *newClone = this->_inventory[i]->clone();
+			std::cout << "Materia " << type << " learned" << std::endl;
 			return (newClone);
 		}
 	}
+	std::cout << type << " not found, nothing has been cloned" << std::endl;
 	return (NULL);
 }

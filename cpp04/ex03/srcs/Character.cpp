@@ -39,11 +39,12 @@ std::string const & Character::getName()const
 
 void Character::equip(AMateria* m)
 {
-	//jai oublie de verifie sils etaient uniques ou pas
+	//je dois verifier si elles sont uniques ?
 	for (int i = 0; i < INVENTORYSIZE; i++)
 	{
 		if (!this->_inventory[i])
 		{
+			std::cout << this->_name << " equiped with " << m->getType() << std::endl;
 			this->_inventory[i] = m;
 			return;
 		}
@@ -55,7 +56,9 @@ void Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < INVENTORYSIZE && this->_inventory[idx])
 	{
-		// mettre au floor et le pointeur a null
+		std::cout << this->_name << " removed " << this->_inventory[idx]->getType() << " from equipment" << std::endl;
+		// mettre au floor
+		this->_inventory[idx] = NULL;
 		return;
 	}
 }
