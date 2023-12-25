@@ -1,5 +1,7 @@
 #include "../includes/Brain.hpp"
 
+/*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
+
 Brain::Brain()
 {
 	std::cout << "Brain default constructor get called" << std::endl;
@@ -25,6 +27,8 @@ Brain & Brain::operator=(Brain const & rhs)
 	std::cout << "Brain assignation operator get called" << std::endl;
 	return (*this);
 }
+
+/*********** SETTER / GETTER ***********/
 
 std::string const& Brain::getIdea(const int id) const
 {

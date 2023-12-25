@@ -1,5 +1,7 @@
 #include "../includes/Cat.hpp"
 
+/*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
+
 Cat::Cat() : Animal("Cat") {std::cout << "Cat default constructor get called" << std::endl;}
 Cat::Cat(Cat const & src)
 {
@@ -14,6 +16,8 @@ Cat & Cat::operator=(Cat const & rhs)
 	std::cout << "Cat assignation operator get called" << std::endl;
 	return (*this);
 }
+
+/*********** MEMBER FUNCTION ***********/
 
 void	Cat::makeSound(void) const
 {

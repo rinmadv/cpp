@@ -1,5 +1,7 @@
 #include "../includes/Dog.hpp"
 
+/*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
+
 Dog::Dog() : Animal("Dog")
 {
 	std::cout << "Dog default constructor get called" << std::endl;
@@ -26,10 +28,7 @@ Dog & Dog::operator=(Dog const & rhs)
 	return (*this);
 }
 
-void	Dog::makeSound(void) const
-{
-	std::cout << this->_type <<  ": \"Wouuaf\"" << std::endl;
-}
+/*********** SETTER / GETTER ***********/
 
 std::string const & Dog::getIdea(const int id) const
 {
@@ -39,4 +38,11 @@ std::string const & Dog::getIdea(const int id) const
 void Dog::setIdea(const int id, const std::string& idea)
 {
 	this->_brain->setIdea(id, idea);
+}
+
+/*********** MEMBER FUNCTION ***********/
+
+void	Dog::makeSound(void) const
+{
+	std::cout << this->_type <<  ": \"Wouuaf\"" << std::endl;
 }

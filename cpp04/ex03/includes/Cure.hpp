@@ -6,7 +6,7 @@
 
 class Cure : public AMateria
 {
-	protected:
+	private:
 
 	public:
 		Cure();

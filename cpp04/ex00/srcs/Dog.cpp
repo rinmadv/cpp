@@ -1,5 +1,7 @@
 #include "../includes/Dog.hpp"
 
+/*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
+
 Dog::Dog() : Animal("Dog") {std::cout << "Dog default constructor get called" << std::endl;}
 Dog::Dog(Dog const & src)
 {
@@ -14,6 +16,8 @@ Dog & Dog::operator=(Dog const & rhs)
 	std::cout << "Dog assignation operator get called" << std::endl;
 	return (*this);
 }
+
+/*********** MEMBER FUNCTION ***********/
 
 void	Dog::makeSound(void) const
 {

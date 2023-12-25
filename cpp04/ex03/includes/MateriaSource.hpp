@@ -6,7 +6,7 @@
 
 class MateriaSource : public IMateriaSource
 {
-	protected:// ou private ?
+	private:
 		AMateria	*_inventory[INVENTORYSIZE];
 
 	public:

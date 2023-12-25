@@ -1,4 +1,5 @@
 #include "../includes/Cat.hpp"
+/*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
 
 Cat::Cat() : Animal("Cat")
 {
@@ -25,6 +26,7 @@ Cat & Cat::operator=(Cat const & rhs)
 	return (*this);
 }
 
+/*********** MEMBER FUNCTION ***********/
 void	Cat::makeSound(void) const
 {
 	std::cout << this->_type <<  ": \"Meowwwwwwwww\"" << std::endl;

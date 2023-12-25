@@ -1,5 +1,7 @@
 #include "../includes/WrongAnimal.hpp"
 
+/*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
+
 WrongAnimal::WrongAnimal() : _type("Basic wrong animal") {std::cout << "WrongAnimal default constructor get called" << std::endl;}
 WrongAnimal::WrongAnimal(std::string type) : _type(type) {std::cout << "WrongAnimal constructor get called with type " << type << std::endl;}
 WrongAnimal::WrongAnimal(WrongAnimal const & src)
@@ -16,10 +18,14 @@ WrongAnimal & WrongAnimal::operator=(WrongAnimal const & rhs)
 	return (*this);
 }
 
+/*********** SETTER / GETTER ***********/
+
 std::string const & WrongAnimal::getType() const
 {
 	return(this->_type);
 }
+
+/*********** MEMBER FUNCTION ***********/
 
 void WrongAnimal::makeSound() const
 {

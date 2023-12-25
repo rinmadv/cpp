@@ -6,7 +6,7 @@
 
 class Ice : public AMateria
 {
-	protected:
+	private:
 
 	public:
 		Ice();
