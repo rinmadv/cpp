@@ -5,11 +5,18 @@
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 
+typedef struct AMateria_garbage
+{
+	AMateria				*Item;
+	struct AMateria_garbage	*next;
+} garbage;
+
 class Character : public ICharacter
 {
 	private:
 		std::string	_name;
 		AMateria	*_inventory[INVENTORYSIZE];
+		garbage		*collector;
 
 	public:
 		Character(std::string const & name);

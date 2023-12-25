@@ -27,7 +27,15 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & rhs)
 	return (*this);
 }
 
-MateriaSource::~MateriaSource(){std::cout << "MateriaSource destructor called" << std::endl;}
+MateriaSource::~MateriaSource()
+{
+	std::cout << "MateriaSource destructor called" << std::endl;
+	for (int i = 0; i < INVENTORYSIZE; i++)
+	{
+		if (this->_inventory[i])
+			delete this->_inventory[i];
+	}
+}
 
 void MateriaSource::learnMateria(AMateria* src)
 {
@@ -40,8 +48,9 @@ void MateriaSource::learnMateria(AMateria* src)
 			return;
 		}
 	}
-	std::cout << "No storage left,  " << src->getType() << " added to the floor" << std::endl;
-	//sinon on met au floor ????
+	std::cout << "No storage left,  " << src->getType() << " deleted" << std::endl;
+	delete (src);
+	src = NULL;
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
