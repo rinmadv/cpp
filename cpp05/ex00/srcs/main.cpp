@@ -1,0 +1,116 @@
+#include "../includes/Bureaucrat.hpp"
+#include <limits.h>
+
+
+int	main()
+{
+	std::cout << std::endl << _BOLD _BLINK "************************ WELCOME TO BUREAUCRATCORP ************************"  _END << std::endl << std::endl;
+
+	std::cout << _BOLD _PINK "Creation of the bureaucrats" _END << std::endl << std::endl;
+	Bureaucrat JeanMichel("Jean-Michel", 1);
+	Bureaucrat Josiane("Josiane", 147);
+	Bureaucrat Claude("Claude");
+	Bureaucrat Karen("Karen");
+	Bureaucrat MarieJo("Marie-Jo");
+	Bureaucrat Robert("Robert");
+	std::cout << std::endl;
+
+	std::cout << _BOLD _PINK "Setters and exception tests" _END << std::endl << std::endl;
+	try
+	{
+		JeanMichel.setGrade(150);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Claude.setGrade(0);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Karen.setGrade(151);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		MarieJo.setGrade(-10);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Robert.setGrade(INT_MAX);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << std::endl;
+
+	std::cout << _BOLD _PINK "Getters" _END << std::endl << std::endl;
+	std::cout << JeanMichel << std::endl;
+	std::cout << Josiane << std::endl;
+	std::cout << Claude << std::endl;
+	std::cout << Karen << std::endl;
+	std::cout << MarieJo << std::endl;
+	std::cout << Robert << std::endl;
+	std::cout << std::endl;
+	
+	std::cout << _BOLD _PINK "Incrementation and decrementations tests" _END << std::endl << std::endl;
+	try
+	{
+		JeanMichel.increment();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << JeanMichel.getName() << ": " << e.what() << '\n';
+	}
+	try
+	{
+		Josiane.decrement();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << Josiane.getName() << ": " << e.what() << '\n';
+	}
+	try
+	{
+		Josiane.decrement();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << Josiane.getName() << ": " << e.what() << '\n';
+	}
+	try
+	{
+		Karen.decrement();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << Karen.getName() << ": " << e.what() << '\n';
+	}
+	std::cout << std::endl;
+
+	std::cout << _BOLD _PINK "Getters (agaiiin)" _END << std::endl << std::endl;
+	std::cout << JeanMichel << std::endl;
+	std::cout << Josiane << std::endl;
+	std::cout << Claude << std::endl;
+	std::cout << Karen << std::endl;
+	std::cout << MarieJo << std::endl;
+	std::cout << Robert << std::endl;
+	std::cout << std::endl;
+
+	std::cout << _BOLD _BLINK "************************ THANKS FOR VISITING BUREAUCRATCORP ************************"  _END << std::endl << std::endl;
+
+}
