@@ -7,6 +7,16 @@ int	main()
 	std::cout << std::endl << _BOLD _BLINK "************************ WELCOME TO BUREAUCRATCORP ************************"  _END << std::endl << std::endl;
 
 	std::cout << _BOLD _PINK "Creation of the bureaucrats" _END << std::endl << std::endl;
+	try
+	{
+		Bureaucrat Frank("Frank", 156);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+
 	Bureaucrat JeanMichel("Jean-Michel", 1);
 	Bureaucrat Josiane("Josiane", 147);
 	Bureaucrat Claude("Claude");
@@ -70,35 +80,35 @@ int	main()
 	std::cout << _BOLD _PINK "Incrementation and decrementations tests" _END << std::endl << std::endl;
 	try
 	{
-		JeanMichel.increment();
+		JeanMichel.incrementGrade();
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << JeanMichel.getName() << ": " << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 	}
 	try
 	{
-		Josiane.decrement();
+		Josiane.decrementGrade();
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << Josiane.getName() << ": " << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 	}
 	try
 	{
-		Josiane.decrement();
+		Josiane.decrementGrade();
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << Josiane.getName() << ": " << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 	}
 	try
 	{
-		Karen.decrement();
+		Karen.decrementGrade();
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << Karen.getName() << ": " << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 	}
 	std::cout << std::endl;
 

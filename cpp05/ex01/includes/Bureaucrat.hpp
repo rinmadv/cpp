@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "Format.hpp"
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -17,11 +20,12 @@ class Bureaucrat
 
 		std::string const & getName() const;
 		int const & getGrade() const;
-		void setGrade(const int& grade);
 
-		void incrementGrade();
-		void decrementGrade();
-		
+		void	incrementGrade();
+		void	decrementGrade();
+
+		void	signForm(Form *form) const;
+
 		class GradeTooHighException : public std::exception
 		{
 			public:
