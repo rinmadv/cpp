@@ -1,6 +1,6 @@
-#include "../includes/nom.hpp"
+#include "../includes/Class0.hpp"
 
 int	main()
 {
-	return 0;
+	
 }

@@ -1,6 +1,6 @@
 # Project
 
-NAME = animals
+NAME = Bureaucrat
 
 # Compiler
 
@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./srcs/main.cpp ./srcs/Animal.cpp ./srcs/Dog.cpp ./srcs/Cat.cpp ./srcs/WrongAnimal.cpp ./srcs/WrongCat.cpp
+SRC	= ./srcs/main.cpp ./srcs/Bureaucrat.cpp ./srcs/Form.cpp ./srcs/ShrubberyCreationForm.cpp
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
