@@ -3,13 +3,13 @@
 
 #include <iostream>
 #include "Format.hpp"
-#include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
 class Bureaucrat;
 class AForm;
 
-class ShrubberyCreationForm : Public AForm
+class ShrubberyCreationForm : public AForm
 {
 	public:
 		ShrubberyCreationForm();
