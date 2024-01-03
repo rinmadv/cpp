@@ -1,22 +1,21 @@
 #include "../includes/Form.hpp"
+#include <iomanip>
 
 /*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
 
 Form::Form() : _name("Untitled"), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 Form " << this->_name << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 Form::Form(std::string name) : _name(name), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 Form " << this->_name << " gets created " << _GREY _BOLD _ITALIC " (Parametric constructor, name but default grades)" _END << std::endl;}
-Form::Form(std::string name, int requiredGradeSign, int requiredGradeExec) : _name(name)
+Form::Form(std::string name, int requiredGradeSign, int requiredGradeExec) : _name(name), _requiredGradeSign(requiredGradeSign), _requiredGradeExec(requiredGradeExec)
 {
 	std::cout << "📋 Form "  << this->_name << " tries to get created with required signing grade " << requiredGradeSign << " and " << requiredGradeExec << _GREY _BOLD _ITALIC " (Parametric constructor)" _END  << std::endl;
 	if (requiredGradeSign > 150 || requiredGradeExec > 150)
 		throw Form::GradeTooLowException();
-	else if (requiredGradeSign < 1 || requiredGradeExec < 1)
+	if (requiredGradeSign < 1 || requiredGradeExec < 1)
 		throw Form::GradeTooHighException();
-	this->_requiredGradeSign = requiredGradeSign;
-	this->_requiredGradeExec = requiredGradeExec;
 	std::cout << "📋 Form "  << this->_name << " gets created with required signing grade " << requiredGradeSign << " and " << requiredGradeExec << _GREY _BOLD _ITALIC " (Parametric constructor)" _END  << std::endl;
 }
 
-Form::Form(Form const & src) : _name(src._name)
+Form::Form(Form const & src) : _name(src._name), _requiredGradeSign(src._requiredGradeSign), _requiredGradeExec(src._requiredGradeExec)
 {
 	std::cout << _GREY _BOLD _ITALIC "Form copy constructor get called, calling assignation operator" _END << std::endl;
 	*this = src;
@@ -26,8 +25,8 @@ Form::~Form(){std::cout << "🚮 Form " << this->_name << " got deleted oupsi " 
 
 Form & Form::operator=(Form const & rhs)
 {
-	this->_requiredGradeSign = rhs._requiredGradeSign;
-	this->_requiredGradeExec = rhs._requiredGradeExec;
+	// this->_requiredGradeSign = rhs._requiredGradeSign;
+	// this->_requiredGradeExec = rhs._requiredGradeExec;
 	this->_signed = rhs._signed;
 	std::cout << "📋 Form "  << this->_name << " gets created with required signing grade " << _requiredGradeSign << " and " << _requiredGradeExec << _GREY _BOLD _ITALIC " (Assignation operator)" _END  << std::endl;
 	return (*this);
@@ -74,6 +73,6 @@ std::ostream & operator<<( std::ostream & os, Form const & rhs)
 	os << "\n\tName : " << rhs.getName();
 	os << "\n\tGrade required to sign : " << rhs.getRequiredGradeSign();
 	os << "\n\tGrade required to execute : " << rhs.getRequiredGradeExec();
-	os << "\n\tForm Signed : " << rhs.getSignedBool() << std::endl; //normalement je peux changer un truc pour traduire le bool
+	os << "\n\tForm Signed : " << std::boolalpha << rhs.getSignedBool() << std::endl; //normalement je peux changer un truc pour traduire le bool
 	return (os);
 }

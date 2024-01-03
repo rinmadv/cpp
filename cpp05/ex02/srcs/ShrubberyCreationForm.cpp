@@ -2,7 +2,10 @@
 
 /*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
 
-ShrubberyCreationForm::ShrubberyCreationForm() : _name("Untitled"), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 ShrubberyCreationForm " << this->_name << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
+ShrubberyCreationForm::ShrubberyCreationForm() :  AForm("Untitled", 145, 137) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
+
+
+ShrubberyCreationForm::ShrubberyCreationForm() :  name("Untitled"), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 ShrubberyCreationForm " << this->_name << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 ShrubberyCreationForm::ShrubberyCreationForm(std::string name) : _name(name), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 ShrubberyCreationForm " << this->_name << " gets created " << _GREY _BOLD _ITALIC " (Parametric constructor, name but default grades)" _END << std::endl;}
 ShrubberyCreationForm::ShrubberyCreationForm(std::string name, int requiredGradeSign, int requiredGradeExec) : _name(name)
 {

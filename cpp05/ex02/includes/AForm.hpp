@@ -18,12 +18,12 @@ class AForm
 
 		AForm & operator=(AForm const & rhs);
 
-		std::string const & getName() const = 0;
-		int			const & getRequiredGradeSign() const = 0;
-		int			const & getRequiredGradeExec() const = 0;
-		bool		const & getSignedBool() const = 0;
+		std::string const & getName() const;
+		int			const & getRequiredGradeSign() const;
+		int			const & getRequiredGradeExec() const;
+		bool		const & getSignedBool() const;
 
-		void beSigned(Bureaucrat const &employee) = 0;
+		void beSigned(Bureaucrat const &employee);
 
 		class GradeTooHighException : public std::exception
 		{

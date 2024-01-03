@@ -14,7 +14,7 @@ class Form
 		Form(std::string name);
 		Form(std::string name, int requiredGradeSign, int requiredGradeExec);
 		Form(Form const & src);
-		virtual ~Form();
+		~Form();
 
 		Form & operator=(Form const & rhs);
 
@@ -45,8 +45,8 @@ class Form
 
 	private:
 		std::string const	_name;
-		int					_requiredGradeSign;
-		int					_requiredGradeExec;
+		int const			_requiredGradeSign;
+		int	const			_requiredGradeExec;
 		bool				_signed;
 
 };

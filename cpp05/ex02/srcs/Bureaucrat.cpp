@@ -61,7 +61,7 @@ void Bureaucrat::decrementGrade()
 	std::cout << "📉 "  << this->_name << " grade's got decremented by 1 unit" << std::endl;
 }
 
-void	Bureaucrat::signForm(Form *form) const
+void	Bureaucrat::signForm(AForm *form) const
 {
 	try
 	{
