@@ -26,6 +26,7 @@ int	main()
 	std::cout << std::endl;
 
 	std::cout << _BOLD _PINK "Setters and exception tests" _END << std::endl << std::endl;
+	std::cout << JeanMichel << std::endl;
 	try
 	{
 		JeanMichel.setGrade(150);
@@ -34,6 +35,10 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << JeanMichel << std::endl;
+	std::cout << std::endl;
+
+	std::cout << Claude << std::endl;
 	try
 	{
 		Claude.setGrade(0);
@@ -42,6 +47,10 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << Claude << std::endl;
+	std::cout << std::endl;
+	
+	std::cout << Karen << std::endl;
 	try
 	{
 		Karen.setGrade(151);
@@ -50,6 +59,10 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << Karen << std::endl;
+	std::cout << std::endl;
+
+	std::cout << MarieJo << std::endl;
 	try
 	{
 		MarieJo.setGrade(-10);
@@ -58,6 +71,10 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << MarieJo << std::endl;
+	std::cout << std::endl;
+
+	std::cout << Robert << std::endl;
 	try
 	{
 		Robert.setGrade(INT_MAX);
@@ -66,6 +83,20 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << Robert << std::endl;
+	std::cout << std::endl;
+
+		std::cout << Robert << std::endl;
+	try
+	{
+		Robert.setGrade((int)'d');
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << Robert << std::endl;
+	std::cout << std::endl;
 	std::cout << std::endl;
 
 	std::cout << _BOLD _PINK "Getters" _END << std::endl << std::endl;

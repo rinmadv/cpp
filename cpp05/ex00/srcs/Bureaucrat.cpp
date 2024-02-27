@@ -56,20 +56,20 @@ void Bureaucrat::setGrade(const int& grade)
 
 void Bureaucrat::incrementGrade()
 {
-	std::cout << "📈 "  << "Trying to increment " << this->_name << "\'s grade by 1 unit" << std::endl;
+	std::cout << "📈 "  << "Trying to retrograde " << this->_name << "by incrementing their grade by 1 unit" << std::endl;
 	if (this->_grade - 1 <= 0)
 		throw Bureaucrat::GradeTooHighException();
 	this->_grade--;
-	std::cout << "📈 "  << this->_name << " grade's got incremented by 1 unit" << std::endl;
+	std::cout << "📈 "  << this->_name << " got retrograded with incrementation of their grade by 1 unit" << std::endl;
 }
 
 void Bureaucrat::decrementGrade()
 {
-	std::cout << "📉 "  << "Trying to decrement " << this->_name << "\'s grade by 1 unit" << std::endl;
+	std::cout << "📉 "  << "Trying to promote " << this->_name << " by decrementing their grade by 1 unit" << std::endl;
 	if (this->_grade + 1 >= 151)
 		throw Bureaucrat::GradeTooLowException();
 	this->_grade++;
-	std::cout << "📉 "  << this->_name << " grade's got decremented by 1 unit" << std::endl;
+	std::cout << "📉 "  << this->_name << " got promoted with decrementation of their grade by 1 unit" << std::endl;
 }
 
 /***************** NON MEMBERS ******************/
