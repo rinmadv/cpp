@@ -35,25 +35,25 @@ AForm & AForm::operator=(AForm const & rhs)
 
 /*********** SETTER / GETTER ***********/
 
-// std::string const & AForm::getName() const
-// {
-// 	return(this->_name);
-// }
+std::string const & AForm::getName() const
+{
+	return(this->_name);
+}
 
-// int const & AForm::getRequiredGradeSign() const
-// {
-// 	return(this->_requiredGradeSign);
-// }
+int const & AForm::getRequiredGradeSign() const
+{
+	return(this->_requiredGradeSign);
+}
 
-// int const & AForm::getRequiredGradeExec() const
-// {
-// 	return(this->_requiredGradeExec);
-// }
+int const & AForm::getRequiredGradeExec() const
+{
+	return(this->_requiredGradeExec);
+}
 
-// bool const & AForm::getSignedBool() const
-// {
-// 	return(this->_signed);
-// }
+bool const & AForm::getSignedBool() const
+{
+	return(this->_signed);
+}
 
 /*********** MEMBER FUNCTION ***********/
 

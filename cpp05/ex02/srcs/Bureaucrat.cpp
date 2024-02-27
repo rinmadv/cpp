@@ -61,21 +61,21 @@ void Bureaucrat::decrementGrade()
 	std::cout << "📉 "  << this->_name << " grade's got decremented by 1 unit" << std::endl;
 }
 
-void	Bureaucrat::signForm(AForm *form) const
-{
-	try
-	{
-		form->beSigned(*this);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << this->_name << " couldn’t sign " << form->getName() << " because " << e.what() << '\n';
-		return ;
-	}
-	std::cout << this->_name << " signed " << form->getName() << '\n';
-//pas bon !!
+// void	Bureaucrat::signForm(AForm *form) const
+// {
+// 	try
+// 	{
+// 		form->beSigned(*this);
+// 	}
+// 	catch(const std::exception& e)
+// 	{
+// 		std::cerr << this->_name << " couldn’t sign " << form->getName() << " because " << e.what() << '\n';
+// 		return ;
+// 	}
+// 	std::cout << this->_name << " signed " << form->getName() << '\n';
+// //pas bon !!
 	
-}
+// }
 
 /***************** NON MEMBERS ******************/
 
