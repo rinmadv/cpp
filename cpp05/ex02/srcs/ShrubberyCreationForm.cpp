@@ -2,40 +2,31 @@
 
 /*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
 
-ShrubberyCreationForm::ShrubberyCreationForm() :  AForm("Untitled", 145, 137) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name) : AForm(name, 1, 1) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created " << _GREY _BOLD _ITALIC " (Parametric constructor, name but default grades)" _END << std::endl;}
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, int requiredGradeSign, int requiredGradeExec) : AForm(name, requiredGradeSign, requiredGradeExec)
-{
-	std::cout << "📋 ShrubberyCreationForm "  << this->getName() << " tries to get created with required signing grade " << requiredGradeSign << " and " << requiredGradeExec << _GREY _BOLD _ITALIC " (Parametric constructor)" _END  << std::endl;
-	std::cout << "📋 ShrubberyCreationForm "  << this->getName() << " gets created with required signing grade " << requiredGradeSign << " and " << requiredGradeExec << _GREY _BOLD _ITALIC " (Parametric constructor)" _END  << std::endl;
-}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target) :  AForm("Untitled", 145, 137), _target(target) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & src) : AForm()
-{
-	std::cout << _GREY _BOLD _ITALIC "ShrubberyCreationForm copy constructor get called, calling assignation operator" _END << std::endl;
-	*this = src;
-}
+
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){std::cout << "🚮 ShrubberyCreationForm " << this->getName() << " got deleted oupsi " <<  _GREY _BOLD _ITALIC "(Destructor)" _END << std::endl;}
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const & rhs)
-{
-	(void) rhs;
-	std::cout << "📋 ShrubberyCreationForm "  << this->getName() << " gets created with required signing grade " << this->getRequiredGradeSign() << " and " << this->getRequiredGradeExec() << _GREY _BOLD _ITALIC " (Assignation operator)" _END  << std::endl;
-	return (*this);
-}
 
 
 /*********** MEMBER FUNCTION ***********/
 
-// void ShrubberyCreationForm::beSigned(Bureaucrat const &employee)
-// {
-// 	std::cout << "✍️ " << employee.getName() << " tries to sign ShrubberyCreationForm " << this->_name << std::endl;
-// 	if (employee.getGrade() > this->getRequiredGradeSign())
-// 		throw GradeTooLowException();
-// 	this->_signed = true;
-// 	std::cout << "✅ ShrubberyCreationForm" << this->_name << " signed by " << employee.getName() << std::endl;
-// }
+void ShrubberyCreationForm::execute(Bureaucrat const & executor ) const
+{
+	std::cout << "📋 Form "  << this->getName() << " tries to get executed by " << executor.getName() << std::endl;
+	if (!this->getSignedBool())
+		throw ShrubberyCreationForm::FormNotSignedException();
+	
+	if (executor.getGrade() > this->getRequiredGradeExec())
+		throw ShrubberyCreationForm::ExecGradeTooLowException();
+	std::cout << "📋 Execution" << std::endl;
+	std::string outfileName = _target + "_shrubbery";
+	std::ofstream outfile(outfileName.c_str());
+	if (!outfile.is_open())
+		std::cerr << "Error : cannot open or create " << outfileName << std::endl;
+	outfile << "               ,@@@@@@@," << std::endl << "       ,,,.   ,@@@@@@/@@,  .oo8888o." << std::endl << "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o" << std::endl << "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88/'" << std::endl << "   %&&%&%&/%&&%@@/@@/ /@@@88888\\88888'" << std::endl << "   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'" << std::endl << "   `&%\\ ` /%&'    |.|        \\ '|8\'" << std::endl << "       |o|        | |         | |" << std::endl << "       |.|        | |         | |" << std::endl << "    \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_" << std::endl;
+}
 
 /***************** NON MEMBERS ******************/
 

@@ -1,6 +1,9 @@
 #include "../includes/Bureaucrat.hpp"
-#include <limits.h>
 #include "../includes/Format.hpp"
+#include "../includes/ShrubberyCreationForm.hpp"
+#include "../includes/RobotomyRequestForm.hpp"
+#include "../includes/PresidentialPardonForm.hpp"
+#include <limits.h>
 #include <iostream>
 #include <string>
 
@@ -18,14 +21,14 @@ int	main()
 
 	std::cout << _BOLD _PINK "Creation of the bureaucrats" _END << std::endl << std::endl;
 	Bureaucrat JeanMichel("Jean-Michel", 1);
-	Bureaucrat Josiane("Josiane", 147);
+	Bureaucrat Josiane("Josiane", 5);
 	
 	std::cout << std::endl;
 
 	std::cout << _BOLD _PINK "Creation of forms" _END << std::endl << std::endl;
 	try
 	{
-		AForm Cerfa612F("CERFA 612F", 12, 2);
+		ShrubberyCreationForm Cerfa612F("kk");
 	}
 	catch(const std::exception& e)
 	{
@@ -33,7 +36,7 @@ int	main()
 	}
 	try
 	{
-		AForm Cerfa615G("CERFA 615G", 154, 56);
+		RobotomyRequestForm Cerfa612F("kk");
 	}
 	catch(const std::exception& e)
 	{
@@ -41,22 +44,48 @@ int	main()
 	}
 	try
 	{
-		AForm Cerfa76526B("CERFA 76526B", 2, -6);
+		ShrubberyCreationForm Cerfa612F("ptdr");
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	AForm Cerfa123A("CERFA 123A", 2, 16);
-	AForm Cerfa126A("CERFA 126A", 150, 150);
-	AForm Template("Template");
-	AForm Unknown;
+	ShrubberyCreationForm Cerfa123A("CERFA 123A");
+	RobotomyRequestForm Cerfa126A("ohhhh");
+	PresidentialPardonForm Cerfa127C("Josie");
+	ShrubberyCreationForm Template("Template");
 	std::cout << std::endl;
+	
+	try
+	{
+		Cerfa126A.execute(JeanMichel);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Cerfa127C.beSigned(Josiane);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}	
+	try
+	{
+		Cerfa127C.execute(Josiane);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
+	Bureaucrat Michelle("Michelle", 2);
+	Michelle.executeForm(Cerfa127C);
 	std::cout << _BOLD _PINK "Getters" _END << std::endl << std::endl;
 	std::cout << Cerfa123A << std::endl;
 	std::cout << Template << std::endl;
-	std::cout << Unknown << std::endl;
 	std::cout << std::endl;
 
 	// std::cout << _BOLD _PINK "Signing form tests" _END << std::endl << std::endl;
@@ -81,7 +110,6 @@ int	main()
 	std::cout << _BOLD _PINK "Getters (agaiiin)" _END << std::endl << std::endl;
 	std::cout << Cerfa123A << std::endl;
 	std::cout << Template << std::endl;
-	std::cout << Unknown << std::endl;
 	std::cout << std::endl;
 
 	std::cout << _BOLD _BLINK "************************ THANKS FOR VISITING BUREAUCRATCORP ************************"  _END << std::endl << std::endl;

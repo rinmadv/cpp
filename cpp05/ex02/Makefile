@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./srcs/main.cpp ./srcs/Bureaucrat.cpp ./srcs/AForm.cpp ./srcs/ShrubberyCreationForm.cpp
+SRC	= ./srcs/main.cpp ./srcs/Bureaucrat.cpp ./srcs/AForm.cpp ./srcs/ShrubberyCreationForm.cpp ./srcs/RobotomyRequestForm.cpp ./srcs/PresidentialPardonForm.cpp
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

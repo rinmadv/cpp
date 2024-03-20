@@ -1,18 +1,20 @@
-#ifndef DEF_SHRUBBERYCREATIONFORM
-#define DEF_SHRUBBERYCREATIONFORM
+#ifndef DEF_RobotomyRequestForm
+#define DEF_RobotomyRequestForm
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "Format.hpp"
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 class AForm;
 
-class ShrubberyCreationForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 	public:
-		ShrubberyCreationForm(std::string const & target);
-		~ShrubberyCreationForm();
+		RobotomyRequestForm(std::string const & target);
+		~RobotomyRequestForm();
 
 		void execute(Bureaucrat const & executor ) const;
 
@@ -24,7 +26,6 @@ class ShrubberyCreationForm : public AForm
 					return(_BOLD _YELLOW "⚠️ Executor grade is to low to execute form" _END);
 				}
 		};
-		
 		class FormNotSignedException : public std::exception
 		{
 			public:
@@ -37,6 +38,6 @@ class ShrubberyCreationForm : public AForm
 		std::string _target;
 };
 
-std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & rhs);
+std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & rhs);
 
 #endif

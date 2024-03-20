@@ -1,5 +1,5 @@
-#ifndef DEF_SHRUBBERYCREATIONFORM
-#define DEF_SHRUBBERYCREATIONFORM
+#ifndef DEF_PresidentialPardonForm
+#define DEF_PresidentialPardonForm
 
 #include <iostream>
 #include "Format.hpp"
@@ -8,11 +8,11 @@
 class Bureaucrat;
 class AForm;
 
-class ShrubberyCreationForm : public AForm
+class PresidentialPardonForm : public AForm
 {
 	public:
-		ShrubberyCreationForm(std::string const & target);
-		~ShrubberyCreationForm();
+		PresidentialPardonForm(std::string const & target);
+		~PresidentialPardonForm();
 
 		void execute(Bureaucrat const & executor ) const;
 
@@ -24,7 +24,7 @@ class ShrubberyCreationForm : public AForm
 					return(_BOLD _YELLOW "⚠️ Executor grade is to low to execute form" _END);
 				}
 		};
-		
+
 		class FormNotSignedException : public std::exception
 		{
 			public:
@@ -37,6 +37,6 @@ class ShrubberyCreationForm : public AForm
 		std::string _target;
 };
 
-std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & rhs);
+std::ostream & operator<<( std::ostream & os, PresidentialPardonForm const & rhs);
 
 #endif

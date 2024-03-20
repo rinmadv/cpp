@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Format.hpp"
 #include "Bureaucrat.hpp"
+#include <fstream>
 
 class Bureaucrat;
 
@@ -26,8 +27,8 @@ class AForm
 		void 		setRequiredGradeExec(const int& grade);
 		void 		setSignedBool(const bool& boolean);
 
-		// void beSigned(Bureaucrat const &employee);
-
+		void beSigned(Bureaucrat const &employee);
+		virtual void execute(Bureaucrat const & executor ) const = 0;
 		class GradeTooHighException : public std::exception
 		{
 			public:

@@ -57,14 +57,14 @@ bool const & AForm::getSignedBool() const
 
 /*********** MEMBER FUNCTION ***********/
 
-// void AForm::beSigned(Bureaucrat const &employee)
-// {
-// 	std::cout << "✍️ " << employee.getName() << " tries to sign Aform " << this->_name << std::endl;
-// 	if (employee.getGrade() > this->getRequiredGradeSign())
-// 		throw GradeTooLowException();
-// 	this->_signed = true;
-// 	std::cout << "✅ AForm" << this->_name << " signed by " << employee.getName() << std::endl;
-// }
+void AForm::beSigned(Bureaucrat const &employee)
+{
+	std::cout << "✍️ " << employee.getName() << " tries to sign Aform " << this->_name << std::endl;
+	if (employee.getGrade() > this->getRequiredGradeSign())
+		throw GradeTooLowException();
+	this->_signed = true;
+	std::cout << "✅ AForm" << this->_name << " signed by " << employee.getName() << std::endl;
+}
 
 /***************** NON MEMBERS ******************/
 
