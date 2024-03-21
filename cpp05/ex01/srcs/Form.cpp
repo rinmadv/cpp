@@ -24,10 +24,13 @@ Form::Form(Form const & src) : _name(src._name), _requiredGradeSign(src._require
 Form::~Form(){std::cout << "🚮 Form " << this->_name << " got deleted oupsi " <<  _GREY _BOLD _ITALIC "(Destructor)" _END << std::endl;}
 
 Form & Form::operator=(Form const & rhs)
-{
-	// this->_requiredGradeSign = rhs._requiredGradeSign;
-	// this->_requiredGradeExec = rhs._requiredGradeExec;
-	this->_signed = rhs._signed;
+{	if (this != &rhs)
+	{
+		*const_cast<std::string*>(&this->_name) = rhs._name;
+		*const_cast<int*>(&this->_requiredGradeSign) = rhs._requiredGradeSign;
+		*const_cast<int*>(&this->_requiredGradeExec) = rhs._requiredGradeExec;
+		this->_signed = rhs._signed;
+	}
 	std::cout << "📋 Form "  << this->_name << " gets created with required signing grade " << _requiredGradeSign << " and " << _requiredGradeExec << _GREY _BOLD _ITALIC " (Assignation operator)" _END  << std::endl;
 	return (*this);
 }
@@ -53,6 +56,7 @@ bool const & Form::getSignedBool() const
 {
 	return(this->_signed);
 }
+
 
 /*********** MEMBER FUNCTION ***********/
 

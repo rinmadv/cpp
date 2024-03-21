@@ -1,8 +1,9 @@
 #include "../includes/ShrubberyCreationForm.hpp"
 
 /*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
+ShrubberyCreationForm::ShrubberyCreationForm() :  AForm("ShrubberyForm", 145, 137) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target) :  AForm("Untitled", 145, 137), _target(target) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target) :  AForm("ShrubberyForm", 145, 137), _target(target) {std::cout << "📋 ShrubberyCreationForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 
 
 
@@ -32,7 +33,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor ) const
 
 std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & rhs)
 {
-	os << _CYAN _BOLD "ℹ️  ShrubberyCreationForm InShrubberyCreationFormations : " _END;
+	os << _CYAN _BOLD "ℹ️  ShrubberyCreationForm Informations : " _END;
 	os << "\n\tName : " << rhs.getName();
 	os << "\n\tGrade required to sign : " << rhs.getRequiredGradeSign();
 	os << "\n\tGrade required to execute : " << rhs.getRequiredGradeExec();

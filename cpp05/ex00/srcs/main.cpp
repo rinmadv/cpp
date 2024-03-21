@@ -15,7 +15,14 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-
+	try
+	{
+		Bureaucrat JeanLouis("JL", 12);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 	Bureaucrat JeanMichel("Jean-Michel", 1);
 	Bureaucrat Josiane("Josiane", 147);
@@ -117,6 +124,7 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << JeanMichel << std::endl;
 	try
 	{
 		Josiane.decrementGrade();
@@ -133,6 +141,7 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << Josiane << std::endl;
 	try
 	{
 		Karen.decrementGrade();
@@ -141,15 +150,7 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	std::cout << std::endl;
-
-	std::cout << _BOLD _PINK "Getters (agaiiin)" _END << std::endl << std::endl;
-	std::cout << JeanMichel << std::endl;
-	std::cout << Josiane << std::endl;
-	std::cout << Claude << std::endl;
 	std::cout << Karen << std::endl;
-	std::cout << MarieJo << std::endl;
-	std::cout << Robert << std::endl;
 	std::cout << std::endl;
 
 	std::cout << _BOLD _BLINK "************************ THANKS FOR VISITING BUREAUCRATCORP ************************"  _END << std::endl << std::endl;

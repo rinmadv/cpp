@@ -23,9 +23,6 @@ class AForm
 		int			const & getRequiredGradeSign() const;
 		int			const & getRequiredGradeExec() const;
 		bool		const & getSignedBool() const;
-		void 		setRequiredGradeSign(const int& grade);
-		void 		setRequiredGradeExec(const int& grade);
-		void 		setSignedBool(const bool& boolean);
 
 		void beSigned(Bureaucrat const &employee);
 		virtual void execute(Bureaucrat const & executor ) const = 0;

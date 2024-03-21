@@ -66,6 +66,14 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	try
+	{
+		Cerfa123A.beSigned(Josiane);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	std::cout << std::endl;
 
 	std::cout << _BOLD _PINK "Getters (agaiiin)" _END << std::endl << std::endl;

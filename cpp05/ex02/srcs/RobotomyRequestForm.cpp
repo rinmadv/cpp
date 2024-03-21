@@ -2,9 +2,9 @@
 
 /*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const & target) :  AForm("Untitled", 72, 45), _target(target) {std::cout << "📋 RobotomyRequestForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
+RobotomyRequestForm::RobotomyRequestForm() :  AForm("RobotomyRequestForm", 72, 45) {std::cout << "📋 RobotomyRequestForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 
-
+RobotomyRequestForm::RobotomyRequestForm(std::string const & target) :  AForm("RobotomyRequestForm", 72, 45), _target(target) {std::cout << "📋 RobotomyRequestForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (parametrical constructor)" _END << std::endl;}
 
 RobotomyRequestForm::~RobotomyRequestForm(){std::cout << "🚮 RobotomyRequestForm " << this->getName() << " got deleted oupsi " <<  _GREY _BOLD _ITALIC "(Destructor)" _END << std::endl;}
 
@@ -37,7 +37,7 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor ) const
 
 std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & rhs)
 {
-	os << _CYAN _BOLD "ℹ️  RobotomyRequestForm InRobotomyRequestFormations : " _END;
+	os << _CYAN _BOLD "ℹ️  RobotomyRequestForm Information : " _END;
 	os << "\n\tName : " << rhs.getName();
 	os << "\n\tGrade required to sign : " << rhs.getRequiredGradeSign();
 	os << "\n\tGrade required to execute : " << rhs.getRequiredGradeExec();

@@ -2,8 +2,9 @@
 
 /*********** CONSTRUCTORS, DESTRUCTORS AND AFFECTATION OPERATOR ***********/
 
-PresidentialPardonForm::PresidentialPardonForm(std::string const & target) :  AForm("Untitled", 25, 5), _target(target) {std::cout << "📋 PresidentialPardonForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
+PresidentialPardonForm::PresidentialPardonForm() :  AForm("PresidentialPardonForm", 25, 5) {std::cout << "📋 PresidentialPardonForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 
+PresidentialPardonForm::PresidentialPardonForm(std::string const & target) :  AForm("PresidentialPardonForm", 25, 5), _target(target) {std::cout << "📋 PresidentialPardonForm " << this->getName() << " gets created"  << _GREY _BOLD _ITALIC " (parametrical constructor)" _END << std::endl;}
 
 
 PresidentialPardonForm::~PresidentialPardonForm(){std::cout << "🚮 PresidentialPardonForm " << this->getName() << " got deleted oupsi " <<  _GREY _BOLD _ITALIC "(Destructor)" _END << std::endl;}
@@ -27,7 +28,7 @@ void PresidentialPardonForm::execute(Bureaucrat const & executor ) const
 
 std::ostream & operator<<( std::ostream & os, PresidentialPardonForm const & rhs)
 {
-	os << _CYAN _BOLD "ℹ️  PresidentialPardonForm InPresidentialPardonFormations : " _END;
+	os << _CYAN _BOLD "ℹ️  PresidentialPardonForm Information : " _END;
 	os << "\n\tName : " << rhs.getName();
 	os << "\n\tGrade required to sign : " << rhs.getRequiredGradeSign();
 	os << "\n\tGrade required to execute : " << rhs.getRequiredGradeExec();

@@ -13,6 +13,7 @@ class AForm;
 class RobotomyRequestForm : public AForm
 {
 	public:
+		RobotomyRequestForm();
 		RobotomyRequestForm(std::string const & target);
 		~RobotomyRequestForm();
 

@@ -26,9 +26,13 @@ AForm::~AForm(){std::cout << "🚮 AForm " << this->_name << " got deleted oupsi
 
 AForm & AForm::operator=(AForm const & rhs)
 {
-	this->_requiredGradeSign = rhs._requiredGradeSign;
-	this->_requiredGradeExec = rhs._requiredGradeExec;
-	this->_signed = rhs._signed;
+	if (this != &rhs)
+	{
+		*const_cast<std::string*>(&this->_name) = rhs._name;
+		*const_cast<int*>(&this->_requiredGradeSign) = rhs._requiredGradeSign;
+		*const_cast<int*>(&this->_requiredGradeExec) = rhs._requiredGradeExec;
+		this->_signed = rhs._signed;
+	}
 	std::cout << "📋 AForm "  << this->_name << " gets created with required signing grade " << _requiredGradeSign << " and " << _requiredGradeExec << _GREY _BOLD _ITALIC " (Assignation operator)" _END  << std::endl;
 	return (*this);
 }
@@ -63,17 +67,17 @@ void AForm::beSigned(Bureaucrat const &employee)
 	if (employee.getGrade() > this->getRequiredGradeSign())
 		throw GradeTooLowException();
 	this->_signed = true;
-	std::cout << "✅ AForm" << this->_name << " signed by " << employee.getName() << std::endl;
+	std::cout << "✅ Form" << this->_name << " signed by " << employee.getName() << std::endl;
 }
 
 /***************** NON MEMBERS ******************/
 
 std::ostream & operator<<( std::ostream & os, AForm const & rhs)
 {
-	os << _CYAN _BOLD "ℹ️  AForm InAformations : " _END;
+	os << _CYAN _BOLD "ℹ️  AForm Informations : " _END;
 	os << "\n\tName : " << rhs.getName();
 	os << "\n\tGrade required to sign : " << rhs.getRequiredGradeSign();
 	os << "\n\tGrade required to execute : " << rhs.getRequiredGradeExec();
-	os << "\n\tAForm Signed : " << rhs.getSignedBool() << std::endl; //normalement je peux changer un truc pour traduire le bool
+	os << "\n\tAForm Signed : " << rhs.getSignedBool() << std::endl;
 	return (os);
 }

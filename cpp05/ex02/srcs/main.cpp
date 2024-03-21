@@ -7,14 +7,6 @@
 #include <iostream>
 #include <string>
 
-// int main(void)
-// {
-	
-
-	// std::cout << _TREE;
-// 	return 0;
-// }
-
 int	main()
 {
 	std::cout << std::endl << _BOLD _BLINK "************************ WELCOME TO BUREAUCRATCORP ************************"  _END << std::endl << std::endl;
@@ -28,7 +20,7 @@ int	main()
 	std::cout << _BOLD _PINK "Creation of forms" _END << std::endl << std::endl;
 	try
 	{
-		ShrubberyCreationForm Cerfa612F("kk");
+		ShrubberyCreationForm Cerfa612F("Cerfa612F");
 	}
 	catch(const std::exception& e)
 	{
@@ -36,7 +28,7 @@ int	main()
 	}
 	try
 	{
-		RobotomyRequestForm Cerfa612F("kk");
+		RobotomyRequestForm Cerfa615F("Cerfa615F");
 	}
 	catch(const std::exception& e)
 	{
@@ -54,8 +46,28 @@ int	main()
 	RobotomyRequestForm Cerfa126A("ohhhh");
 	PresidentialPardonForm Cerfa127C("Josie");
 	ShrubberyCreationForm Template("Template");
+	ShrubberyCreationForm Mdr = Template;
+	std::cout << Mdr << std::endl;
+	std::cout << Template << std::endl;
 	std::cout << std::endl;
-	
+
+	std::cout << _BOLD _PINK "Signing & execution tests" _END << std::endl << std::endl;
+	try
+	{
+		JeanMichel.signForm(&Cerfa126A);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Josiane.signForm(&Cerfa123A);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	try
 	{
 		Cerfa126A.execute(JeanMichel);
@@ -87,24 +99,6 @@ int	main()
 	std::cout << Cerfa123A << std::endl;
 	std::cout << Template << std::endl;
 	std::cout << std::endl;
-
-	// std::cout << _BOLD _PINK "Signing form tests" _END << std::endl << std::endl;
-	// try
-	// {
-	// 	JeanMichel.signForm(&Cerfa126A);
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	// try
-	// {
-	// 	Josiane.signForm(&Cerfa123A);
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
 	std::cout << std::endl;
 
 	std::cout << _BOLD _PINK "Getters (agaiiin)" _END << std::endl << std::endl;
