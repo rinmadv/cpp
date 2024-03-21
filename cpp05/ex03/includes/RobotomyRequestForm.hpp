@@ -17,7 +17,7 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm(std::string const & target);
 		~RobotomyRequestForm();
 
-		void execute(Bureaucrat const & executor ) const;
+		virtual void execute(Bureaucrat const & executor ) const;
 
 		class ExecGradeTooLowException : public std::exception
 		{

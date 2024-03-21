@@ -16,7 +16,7 @@ class PresidentialPardonForm : public AForm
 		~PresidentialPardonForm();
 
 
-		void execute(Bureaucrat const & executor ) const;
+		virtual void execute(Bureaucrat const & executor ) const;
 
 		class ExecGradeTooLowException : public std::exception
 		{

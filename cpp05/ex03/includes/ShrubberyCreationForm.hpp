@@ -15,7 +15,7 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(std::string const & target);
 		~ShrubberyCreationForm();
 
-		void execute(Bureaucrat const & executor ) const;
+		virtual void execute(Bureaucrat const & executor ) const;
 
 		class ExecGradeTooLowException : public std::exception
 		{
