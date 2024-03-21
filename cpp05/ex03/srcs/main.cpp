@@ -26,21 +26,25 @@ int	main()
 		AForm *SCF;
 		SCF = Steve.makeForm("ShrubberyCreationForm", "target");
 		std::cout << *SCF << std::endl;
+		delete SCF;
 		std::cout << std::endl;
 		
 		AForm *RRF;
 		RRF = Steve.makeForm("RobotomyRequestForm", "home");
 		std::cout << *RRF << std::endl;
+		delete RRF;
 		std::cout << std::endl;
 
 		PresidentialPardonForm *PPF;
 		PPF = (PresidentialPardonForm*)Steve.makeForm("PresidentialPardonForm", "Jon");
 		std::cout << *PPF << std::endl;
+		delete PPF;
 		std::cout << std::endl;
 		
 		AForm *INVALID;
 		INVALID = Steve.makeForm("kldsgnlz", "random_target");
 		std::cout << *INVALID << std::endl;
+		delete INVALID;
 		std::cout << std::endl;
 	}
 	catch(const std::exception& e)
@@ -53,13 +57,17 @@ int	main()
 	std::cout << *newPPF << std::endl;
 	newPPF->beSigned(Josiane);
 	newPPF->execute(Josiane);
+	delete newPPF;
 	std::cout << std::endl;
 
 	AForm *newSCF;
 	newSCF = (ShrubberyCreationForm*)Steve.makeForm("ShrubberyCreationForm", "Place");
+	Bureaucrat	Meryl("Meryl", 5);
+	
 	std::cout << *newSCF << std::endl;
 	newSCF->beSigned(Josiane);
 	newSCF->execute(Josiane);
+	delete newSCF;
 	std::cout << std::endl;
 
 	AForm *newRRF;
@@ -68,7 +76,7 @@ int	main()
 	newRRF->beSigned(Josiane);
 	newRRF->execute(Josiane);
 	std::cout << std::endl;
-
+	delete newRRF;
 	std::cout << _BOLD _BLINK "************************ THANKS FOR VISITING BUREAUCRATCORP ************************"  _END << std::endl << std::endl;
 
 }

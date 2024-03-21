@@ -5,7 +5,7 @@ NAME = Bureaucrat
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD -g3
 
 # Paths
 

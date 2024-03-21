@@ -63,6 +63,7 @@ int	main()
 	try
 	{
 		Josiane.signForm(&Cerfa123A);
+		Cerfa123A.beSigned(Josiane);
 	}
 	catch(const std::exception& e)
 	{
@@ -92,7 +93,15 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-
+	try
+	{
+		Template.beSigned(Josiane);
+		Template.execute(Josiane);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	Bureaucrat Michelle("Michelle", 2);
 	Michelle.executeForm(Cerfa127C);
 	std::cout << _BOLD _PINK "Getters" _END << std::endl << std::endl;

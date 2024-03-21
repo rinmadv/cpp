@@ -5,7 +5,7 @@
 
 Form::Form() : _name("Untitled"), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 Form " << this->_name << " gets created"  << _GREY _BOLD _ITALIC " (default constructor)" _END << std::endl;}
 Form::Form(std::string name) : _name(name), _requiredGradeSign(1), _requiredGradeExec(1), _signed(false) {std::cout << "📋 Form " << this->_name << " gets created " << _GREY _BOLD _ITALIC " (Parametric constructor, name but default grades)" _END << std::endl;}
-Form::Form(std::string name, int requiredGradeSign, int requiredGradeExec) : _name(name), _requiredGradeSign(requiredGradeSign), _requiredGradeExec(requiredGradeExec)
+Form::Form(std::string name, int requiredGradeSign, int requiredGradeExec) : _name(name), _requiredGradeSign(requiredGradeSign), _requiredGradeExec(requiredGradeExec), _signed(false)
 {
 	std::cout << "📋 Form "  << this->_name << " tries to get created with required signing grade " << requiredGradeSign << " and execution grade " << requiredGradeExec << _GREY _BOLD _ITALIC " (Parametric constructor)" _END  << std::endl;
 	if (requiredGradeSign > 150 || requiredGradeExec > 150)

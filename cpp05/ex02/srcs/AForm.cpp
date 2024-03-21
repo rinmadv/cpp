@@ -13,6 +13,7 @@ AForm::AForm(std::string name, int requiredGradeSign, int requiredGradeExec) : _
 		throw AForm::GradeTooHighException();
 	this->_requiredGradeSign = requiredGradeSign;
 	this->_requiredGradeExec = requiredGradeExec;
+	this->_signed = false;
 	std::cout << "📋 AForm "  << this->_name << " gets created with required signing grade " << requiredGradeSign << " and " << requiredGradeExec << _GREY _BOLD _ITALIC " (Parametric constructor)" _END  << std::endl;
 }
 
