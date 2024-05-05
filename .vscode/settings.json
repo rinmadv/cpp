@@ -75,6 +75,7 @@
 		"numbers": "cpp",
 		"ranges": "cpp",
 		"span": "cpp",
-		"filesystem": "cpp"
+		"filesystem": "cpp",
+		"list": "cpp"
 	}
 }
