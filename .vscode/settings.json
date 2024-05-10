@@ -76,6 +76,8 @@
 		"ranges": "cpp",
 		"span": "cpp",
 		"filesystem": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"__tree": "cpp",
+		"set": "cpp"
 	}
 }
