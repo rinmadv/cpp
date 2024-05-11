@@ -1,97 +1,88 @@
-#include "../includes/span.hpp"
+#include "../includes/Span.hpp"
 #include "../includes/Format.hpp"
 
 #include <vector>
-#include <deque>
-#include <list>
+#include <limits.h>
 
-int main() {
-	std::cout << _BOLD _AQUAMARINE "⏳ TESTS ON VECTORS... ⌛" _END << std::endl;
+static void displayTitle(std::string str)
+{
+	std::cout << std::endl << _BOLD _AQUAMARINE << "⏳ " << str << "... ⌛" << _END << std::endl;
+}
 
-	std::vector<int> vec;
-	vec.push_back(1);
-	vec.push_back(2);
-	vec.push_back(3);
-	vec.push_back(4);
-	vec.push_back(5);
+int main()
+{
+	displayTitle("TESTS ON SMALL CONTAINORS");
+	Span sp = Span(5);
+	sp.addNumber(6);
+	sp.addNumber(3);
+	sp.addNumber(17);
+	sp.addNumber(9);
+	sp.addNumber(11);
+	try
+	{
+		sp.addNumber(12);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
 
-	std::cout << std::endl;
+	displayTitle("TESTS WITH NO SPAN");
+	Span spa = Span(0);
+	try
+	{
+		std::cout << spa.shortestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-	int value;
-	std::pair<std::vector<int>, int> pair_vec;
-	
-	value = 3;
-	std::cout << _BOLD _GREY "🔍 Looking for " << value << " in array ..." _END << std::endl;
-	pair_vec = std::make_pair(vec, value);
-	std::cout << pair_vec << std::endl;
-	std::cout << std::endl;
+	Span span = Span(1);
+	span.addNumber(6);
+	try
+	{
+		std::cout << span.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-	value = 6;
-	std::cout << _BOLD _GREY "🔍 Looking for " << value << " in array ..." _END << std::endl;
-	pair_vec = std::make_pair(vec, value);
-	std::cout << pair_vec << std::endl;
-	std::cout << std::endl;
 
-	value = 'a';
-	std::cout << _BOLD _GREY "🔍 Looking for " << value << " in array ..." _END << std::endl;
-	pair_vec = std::make_pair(vec, value);
-	std::cout << pair_vec << std::endl;
-	std::cout << std::endl;
+	Span spann = Span(3);
+	spann.addNumber(6);
+	spann.addNumber(3);
+	try
+	{
+		std::cout << spann.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-	vec.push_back('a');
-	value = 'a';
-	std::cout << _BOLD _GREY "🔍 Looking for " << value << " in array ..." _END << std::endl;
-	pair_vec = std::make_pair(vec, value);
-	std::cout << pair_vec << std::endl;
-	std::cout << std::endl;
+	Span spannn = Span(3);
+	try
+	{
+		std::cout << spannn.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-	std::cout << _BOLD _AQUAMARINE "⏳ TESTS ON DEQUES... ⌛" _END << std::endl;
+	displayTitle("TESTS WITH ITERATORS");
+	int size = 100000;
 
-	std::deque<int> deq;
-	deq.push_back(1);
-	deq.push_back(2);
-	deq.push_back(3);
-	deq.push_back(4);
-	deq.push_back(5);
-	std::cout << std::endl;
+	std::vector<int> numbers;
+	for (int i = 0; i < size; i++)
+		numbers.push_back(i);
 
-	std::pair<std::deque<int>, int> pair_deq;
-
-	value = 3;
-	std::cout << "🔍 Looking for " << value << " in deque ..." << std::endl;
-	pair_deq = std::make_pair(deq, value);
-	std::cout << pair_deq << std::endl;
-	std::cout << std::endl;
-
-	value = 6;
-	std::cout << "🔍 Looking for " << value << " in deque ..." << std::endl;
-	pair_deq = std::make_pair(deq, value);
-	std::cout << pair_deq << std::endl;
-	std::cout << std::endl;
-
-	std::cout << _BOLD _AQUAMARINE "⏳ TESTS ON LISTS... ⌛" _END << std::endl;
-
-	std::list<int> lst;
-	lst.push_back(1);
-	lst.push_back(2);
-	lst.push_back(3);
-	lst.push_back(4);
-	lst.push_back(5);
-	std::cout << std::endl;
-
-	std::pair<std::list<int>, int> pair_lst;
-
-	value = 3;
-	std::cout << "🔍 Looking for " << value << " in list ..." << std::endl;
-	pair_lst = std::make_pair(lst, value);
-    std::cout << pair_lst << std::endl;
-    std::cout << std::endl;
-
-    value = 6;
-    std::cout << "🔍 Looking for " << value << " in list ..." << std::endl;
-    pair_lst = std::make_pair(lst, value);
-    std::cout << pair_lst << std::endl;
-    std::cout << std::endl;
+	Span spannnn = Span(size);
+	spannnn.addNumbers(numbers.begin(), numbers.end() - 99900);
 
 	return 0;
 }
