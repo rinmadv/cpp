@@ -48,38 +48,23 @@ void	Span::addNumber(int n)
 
 void Span::addNumbers(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end)
 {
+	size_t distance = std::distance(begin, end);
+	if (distance > (_numbers.capacity() - _numbers.size()))
+		throw std::out_of_range("Not enough capacity to fill span with the entire given span");
 	if (DEBUG)
-	{
-		try
-		{
-			displaySpan();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << e.what() << '\n';
-		} 
-	}
+		std::cout << _GREY << "Trying to fill span..." << _END << std::endl;
 	while (begin != end)
 	{
 		addNumber(*begin);
 		++begin;
-	}
-	if (DEBUG)
-	{
-		try
-		{
-			displaySpan();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << e.what() << '\n';
-		} 
 	}
 }
 
 //Span
 int		Span::shortestSpan()
 {
+	if (DEBUG)
+		std::cout << _GREY << "Trying to compute shortest span..." << _END << std::endl;
 	if (_numbers.size() <= 1)
 		throw std::logic_error("No distance found");
 
@@ -97,6 +82,8 @@ int		Span::shortestSpan()
 
 int		Span::longestSpan() 
 {
+	if (DEBUG)
+		std::cout << _GREY << "Trying to compute longest span..." << _END << std::endl;
 	if (_numbers.size() <= 1)
 		throw std::logic_error("No distance found");
 	return *std::max_element(_numbers.begin(), _numbers.end()) - *std::min_element(_numbers.begin(), _numbers.end());
@@ -106,6 +93,8 @@ int		Span::longestSpan()
 
 void	Span::displaySpan() const
 {
+	if (DEBUG)
+		std::cout << _GREY << "Trying to display span..." << _END << std::endl;
 	if (_numbers.empty())
 		throw std::out_of_range("Nothing to display");
 	for (unsigned int i = 0; i < _numbers.size(); i++)

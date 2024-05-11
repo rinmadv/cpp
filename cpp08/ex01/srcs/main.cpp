@@ -4,14 +4,19 @@
 #include <vector>
 #include <limits.h>
 
-static void displayTitle(std::string str)
+static void displayTitle1(std::string str)
 {
 	std::cout << std::endl << _BOLD _AQUAMARINE << "⏳ " << str << "... ⌛" << _END << std::endl;
 }
 
+static void displayTitle2(std::string str)
+{
+	std::cout << std::endl << _ITALIC _MAGENTA << "✨ " << str << "... ✨" << _END << std::endl;
+}
+
 int main()
 {
-	displayTitle("TESTS ON SMALL CONTAINORS");
+	displayTitle1("TESTS ON SMALL CONTAINORS");
 	Span sp = Span(5);
 	sp.addNumber(6);
 	sp.addNumber(3);
@@ -29,7 +34,7 @@ int main()
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
 
-	displayTitle("TESTS WITH NO SPAN");
+	displayTitle1("TESTS WITH NO SPAN");
 	Span spa = Span(0);
 	try
 	{
@@ -74,15 +79,79 @@ int main()
 		std::cerr << e.what() << '\n';
 	}
 
-	displayTitle("TESTS WITH ITERATORS");
-	int size = 100000;
+	displayTitle1("TESTS WITH ITERATORS");
 
+	int size = 100000;
 	std::vector<int> numbers;
 	for (int i = 0; i < size; i++)
 		numbers.push_back(i);
 
-	Span spannnn = Span(size);
-	spannnn.addNumbers(numbers.begin(), numbers.end() - 99900);
+	displayTitle2("TEST WITH ENOUGH CAPACITY");
 
+	Span spannnn = Span(size);
+	if (DEBUG)
+	{
+		try
+		{
+			spannnn.displaySpan();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		} 
+	}
+	try
+	{
+		spannnn.addNumbers(numbers.begin(), numbers.end() - 99900);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	if (DEBUG)
+	{
+		try
+		{
+			spannnn.displaySpan();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		} 
+	}
+	displayTitle2("TEST WITH NOT ENOUGH CAPACITY");
+	size = 2;
+	Span spannnnn = Span(size);
+	if (DEBUG)
+	{
+		try
+		{
+			spannnnn.displaySpan();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		} 
+	}
+	try
+	{
+		spannnnn.addNumbers(numbers.begin(), numbers.end() - 99900);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	if (DEBUG)
+	{
+		try
+		{
+			spannnnn.displaySpan();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		} 
+	}
+	displayTitle1("CALLING DESTRUCTORS");
 	return 0;
 }
