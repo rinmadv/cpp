@@ -36,3 +36,5 @@
 **min_elements** : returns the smallest element in a range
 
 # **Ex 02**
+
+*std stack*
