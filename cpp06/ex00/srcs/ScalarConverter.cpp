@@ -9,12 +9,12 @@ ScalarConverter & ScalarConverter::operator=(ScalarConverter const & rhs){ (void
 
 /*********** MEMBER FUNCTION ***********/
 
-bool	isInt(std::string input)
+void	convertImpossible()
 {
-	for (size_t i = 0; i < input.size(); i++)
-		if (!isdigit(input[i]))
-			return false;
-	return true; 
+	std::cout << "char:\timpossible"<< std::endl;
+	std::cout << "int:\timpossible"<< std::endl;
+	std::cout << "float:\timpossible"<< std::endl;
+	std::cout << "double:\timpossible"<< std::endl;
 }
 
 void	convertNan()
@@ -41,11 +41,125 @@ void	convertMInf()
 	std::cout << "float:\t-inff"<< std::endl;
 	std::cout << "double:\t-inf"<< std::endl;
 }
+
+
+
+bool	isChar(std::string literal)
+{
+	if (literal.size() == 1 && !isdigit(literal[0]))
+	{
+		std::cout << "C'est un char" << std::endl;
+		return (true);
+ 	}
+	return (false);
+}
+
+bool	isDigit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (true);
+	return (false);
+}
+
+bool	isFloat(std::string literal)
+{
+	// std::cout << literal << std::endl;
+	size_t	size = literal.size();
+	size_t	countMantisse = 0;
+	if (!literal.compare("-inff") || !literal.compare("inff") || !literal.compare("nanf"))
+	{
+		std::cout << "C'est un float\n";
+		return (true);
+	}
+	if (literal[size - 1] == 'f')
+	{
+		for (size_t i = 0; i < size - 1; i++)
+		{
+			if (literal[i] == '.' && countMantisse == 0)
+				countMantisse++;
+			else if ((literal[i] == '.' && countMantisse > 0 ) || !isDigit(literal[i]))
+				return (false);
+		}
+		std::cout << "C'est un float\n";
+		return (true);
+	}
+	return (false);
+}
+
+bool	isInt(std::string literal)
+{
+	size_t	i = 0;
+	long	nb = 0;
+	int		sign = 1;
+
+	while (literal[i] != '\0')
+	{
+		while (literal[i] == 32 || (literal[i] >= 9 && literal[i] <= 13))
+			i++;
+		if ((literal[i] == '-') || (literal[i] == '+'))
+		{
+			if (literal[i] == '-')
+				sign = sign * -1;
+			i++;
+		}
+		while (literal[i])
+		{
+			if (!isdigit(literal[i]))
+				return (false);
+			nb = nb * 10 + literal[i] - '0';
+			i++;
+		}
+		nb *= sign;
+		if (nb < INT_MIN || nb > INT_MAX)
+			return (false);
+		std::cout << "C'est un int" << std::endl;
+		return (true);
+	}
+	return (false);
+}
+
+
+bool	isString(std::string literal)
+{
+	size_t size = literal.size();
+	for (size_t i = 0; i < size; i++)
+	{
+		if (!isdigit(literal[i]))
+		{
+			std::cout << "C'est une string\n";
+			return (true);
+		}
+	}
+	return (false);
+}
+
+bool	isDouble(std::string literal)
+{
+	std::cout << literal << std::endl;
+	size_t	size = literal.size();
+	size_t	countMantisse = 0;
+	if (!literal.compare("-inf") || !literal.compare("inf") || !literal.compare("nan"))
+	{
+		std::cout << "C'est un double\n";
+		return (true);
+	}
+	for (size_t i = 0; i < size; i++)
+	{
+		if (literal[i] == '.' && countMantisse == 0 && literal[i + 1])
+			countMantisse++;
+		else if ((literal[i] == '.' && countMantisse > 0 ) || !isDigit(literal[i]))
+			return (false);
+	}
+	std::cout << "C'est un double\n";
+	return (true);
+}
+
 void	ScalarConverter::convert(std::string input)
 {
 	// Check if input is empty
 	if (input.empty())
 		return ;
+
 
 	// Convert string into double and keeping the possible end string value
 	char	*inputTail = NULL;
@@ -53,19 +167,50 @@ void	ScalarConverter::convert(std::string input)
 	std::string stringPart(inputTail);
 	(void) nb;
 
+	std::cout << "int min = " << INT_MIN << " int max = " << INT_MAX << std::endl; 
+	
+	if (isChar(input))
+		return ;
+	else if (isFloat(input))
+		return ;
+	else if (isInt(input))
+		return ;
+	else if (isDouble(input))
+		return ;
+	else if (isString(input))
+		return ;
+
+
 	// // Checking type of the input
-	if (!input.compare("nan"))
-		convertNan();
-	else if (!input.compare("-inf"))
-		convertMInf();
-	else if (!input.compare("inf"))
-		convertInf();
-	else if (input.size() == 1 && !isdigit(input[0]))
-		convertChar(input[0]);
-	else if (stringPart.empty() && atol(input.c_str()) <= INT_MAX && atol(input.c_str()) >= INT_MIN)
-		convertInt(atoi(input.c_str()));
-	else if (!stringPart.compare("f"))
-		convertFloat(strtof(input.c_str(), &inputTail));
+	// if (stringPart.size() > 1)
+	// 	std::cout << "C'est une string";
+	// else if (input.size() == 1 && !isdigit(input[0]))
+	// 	// convertChar(input[0]);
+	// 	std::cout << "C'est un char";
+	// else if (!input.compare("-inff") || !input.compare("inff") || !input.compare("nanf") || !stringPart.compare("f")) // et une autre conditions
+	// 	std::cout << "C'est un float";
+	// else if (!input.compare("-inf") || !input.compare("inf") || !input.compare("nan")) // et une autre conditions
+	// 	std::cout << "C'est un double";
+	// else
+	// 	std::cout << "C'est un int";
+	
+
+
+
+	// if (!input.compare("nan") || !input.compare("nanf"))
+	// 	convertNan();
+	// else if (!input.compare("-inf"))
+	// 	convertMInf();
+	// else if (!input.compare("inf"))
+	// 	convertInf();
+	// else if (input.size() == 1 && !isdigit(input[0]))
+	// 	convertChar(input[0]);
+	// else if (stringPart.empty() && atol(input.c_str()) <= INT_MAX && atol(input.c_str()) >= INT_MIN)
+	// 	convertInt(atoi(input.c_str()));
+	// else if (!stringPart.compare("f"))
+	// 	convertFloat(strtof(input.c_str(), &inputTail));
+	// else if (!stringPart.empty())
+	// 	convertImpossible();
 	// else if (atof(input.c_str()))
 
 
@@ -144,11 +289,11 @@ void ScalarConverter::convertFloat(float f)
 	int		i = static_cast<int>(f);
 	double	d = static_cast<double>(f);
 	
-	int precision = 7;
-	while (/* condition */)
-	{
-		/* code */
-	}
+	// int precision = 7;
+	// while (/* condition */)
+	// {
+	// 	/* code */
+	// }
 	
 	if (c < 0 || c > 127)
 		std::cout << "char:\tImpossible" << std::endl;
