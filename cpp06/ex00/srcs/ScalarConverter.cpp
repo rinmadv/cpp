@@ -9,6 +9,12 @@ ScalarConverter & ScalarConverter::operator=(ScalarConverter const & rhs){ (void
 
 /*********** MEMBER FUNCTION ***********/
 
+
+//verifs float, grandeur
+//voir comment convert double et float sans perte de precision...
+
+/*********** CONVERT ***********/
+
 void	convertImpossible()
 {
 	std::cout << "char:\timpossible"<< std::endl;
@@ -24,7 +30,6 @@ void	convertNan()
 	std::cout << "float:\tnanf"<< std::endl;
 	std::cout << "double:\tnan"<< std::endl;
 }
-
 
 void	convertInf()
 {
@@ -42,13 +47,33 @@ void	convertMInf()
 	std::cout << "double:\t-inf"<< std::endl;
 }
 
+void	convertChar(char c)
+{
+	std::cout << "char:\t"<< c << std::endl;
+	std::cout << "int:\t"<< static_cast<int>(c) << std::endl;
+	std::cout << "float:\t" << static_cast<float>(c) << ".0f" << std::endl;
+	std::cout << "double:\t" << static_cast<double>(c) << ".0 " << std::endl;
+}
 
+void	convertInt(int i)
+{
+	if (i >= 32 && i <= 126)
+		std::cout << "char:\t"<< static_cast<char>(i) << std::endl;
+	else
+		std::cout << "char:\tNon displayable" << std::endl;
+	std::cout << "int:\t"<< i << std::endl;
+	std::cout << "float:\t" << static_cast<float>(i) << ".0f" << std::endl;
+	std::cout << "double:\t" << static_cast<double>(i) << ".0 " << std::endl;
+}
+
+/*********** IDENTIFY TYPE ***********/
 
 bool	isChar(std::string literal)
 {
 	if (literal.size() == 1 && !isdigit(literal[0]))
 	{
 		std::cout << "C'est un char" << std::endl;
+		convertChar(literal[0]);
 		return (true);
  	}
 	return (false);
@@ -66,9 +91,19 @@ bool	isFloat(std::string literal)
 	// std::cout << literal << std::endl;
 	size_t	size = literal.size();
 	size_t	countMantisse = 0;
-	if (!literal.compare("-inff") || !literal.compare("inff") || !literal.compare("nanf"))
+	if (!literal.compare("-inff"))
 	{
-		std::cout << "C'est un float\n";
+		convertMInf();
+		return (true);
+	}
+	else if (!literal.compare("inff"))
+	{
+		convertInf();
+		return (true);
+	}
+	else if (!literal.compare("nanf"))
+	{
+		convertNan();
 		return (true);
 	}
 	if (literal[size - 1] == 'f')
@@ -113,6 +148,7 @@ bool	isInt(std::string literal)
 		if (nb < INT_MIN || nb > INT_MAX)
 			return (false);
 		std::cout << "C'est un int" << std::endl;
+		convertInt(static_cast<int>(nb));
 		return (true);
 	}
 	return (false);
@@ -127,6 +163,7 @@ bool	isString(std::string literal)
 		if (!isdigit(literal[i]))
 		{
 			std::cout << "C'est une string\n";
+			convertImpossible();
 			return (true);
 		}
 	}
@@ -138,9 +175,19 @@ bool	isDouble(std::string literal)
 	std::cout << literal << std::endl;
 	size_t	size = literal.size();
 	size_t	countMantisse = 0;
-	if (!literal.compare("-inf") || !literal.compare("inf") || !literal.compare("nan"))
+	if (!literal.compare("-inf"))
 	{
-		std::cout << "C'est un double\n";
+		convertMInf();
+		return (true);
+	}
+	else if (!literal.compare("inf"))
+	{
+		convertInf();
+		return (true);
+	}
+	else if (!literal.compare("nan"))
+	{
+		convertNan();
 		return (true);
 	}
 	for (size_t i = 0; i < size; i++)
@@ -150,7 +197,7 @@ bool	isDouble(std::string literal)
 		else if ((literal[i] == '.' && countMantisse > 0 ) || !isDigit(literal[i]))
 			return (false);
 	}
-	std::cout << "C'est un double\n";
+	// convertDouble();
 	return (true);
 }
 
