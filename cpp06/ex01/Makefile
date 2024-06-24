@@ -1,11 +1,11 @@
 # Project
 
-NAME = convert
+NAME = Serializer
 
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD # -Wconversion 
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD
 
 # Paths
 
@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./srcs/main.cpp ./srcs/ScalarConverter.cpp 
+SRC	= ./srcs/main.cpp ./srcs/Serializer.cpp 
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
