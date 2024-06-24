@@ -7,12 +7,6 @@ ScalarConverter::ScalarConverter(ScalarConverter const & src){*this = src;}
 ScalarConverter::~ScalarConverter(){}
 ScalarConverter & ScalarConverter::operator=(ScalarConverter const & rhs){ (void) rhs; return (*this);}
 
-/*********** MEMBER FUNCTION ***********/
-
-
-//verifs float, grandeur
-//voir comment convert double et float sans perte de precision...
-
 /*********** CONVERT ***********/
 
 bool	convertImpossible()
@@ -204,7 +198,6 @@ bool	isDouble(std::string literal)
 
 void	ScalarConverter::convert(std::string input)
 {
-	// Check if input is empty
 	if (input.empty())
 		return ;
 	else if (isChar(input))
