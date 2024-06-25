@@ -5,46 +5,71 @@
 #include "Format.hpp"
 
 template <typename T>
+
 class Array {
 
 	public:
 		Array() {_elements = NULL; _size = 0;}
 
-		Array(unsigned int n) {_elements = new T[n]; _size = n;}
+		Array(unsigned int n)
+		{
+			try
+			{
+				_elements = new T[n]; _size = n;
+			}
+			catch(const std::exception& e)
+			{
+        		throw std::runtime_error("Cannot allocate array");
+			}
+			
+			for (size_t i = 0 ; i < _size ; i++){
+				this->_elements[i] = T();
+			}
+		}
 		
 		Array(Array const &src) {*this = src;};
 
 		~Array(){
 			if (_elements)
+			{
 				delete[] _elements;
+				_elements = NULL;		
+			}
 		}
 
 		Array & operator=(Array const &src)
 		{
-			Array copy(src.size());
-			for (size_t i = 0; i < src.size(); i ++)
-				copy._elements[i] = src._elements[i];
-			return (copy);
+	       if (this != &src) {
+	           delete[] _elements;}
+
+			this->_size = src.size();
+
+			this->_elements = new T[this->_size];
+			for (size_t i = 0; i < _size; i++)
+				this->_elements[i] = src._elements[i];
+			return (*this);
 		}
 
 		T &operator[](unsigned int index) {
 			if (index >= _size)
+			{
 				throw OutBoundIndexException();
+			}
 			return _elements[index];
 		}
 
 		size_t const & size() const {return (_size);}
 		
-		T		*_elements;
-	
-	private:
-		size_t	_size;
-
+		size_t	getSize(){return (this->size());};
 
 	class OutBoundIndexException: public std::exception {
 		public:
 			virtual const char* what() const throw()
 			{return _RED "Out of bound index" _END;} };
+		T		*_elements; 
+
+	private:
+		size_t	_size;
 
 };
 
@@ -72,7 +97,7 @@ original array or its copy after copying musn’t affect the other array.
 [x]You MUST use the operator new[] to allocate memory. Preventive allocation (al-
 locating memory in advance) is forbidden. Your program must never access non-
 allocated memory.
-[]Elements can be accessed through the subscript operator: [ ].
+[     ]Elements can be accessed through the subscript operator: [ ].
 [x]When accessing an element with the [ ] operator, if its index is out of bounds, an
 std::exception is thrown.
 [x]A member function size() that returns the number of elements in the array. This

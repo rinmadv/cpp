@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Format.hpp"
+#include <limits.h>
 
 template< typename T >
 
