@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Format.hpp"
 
-#define DEBUG true
+#define DEBUG false
 
 class Base
 {

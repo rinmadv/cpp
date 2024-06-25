@@ -5,7 +5,6 @@
 #include "Format.hpp"
 #include "Base.hpp"
 
-#define DEBUG true
 
 class B : public Base
 {

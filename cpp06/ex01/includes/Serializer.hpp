@@ -4,8 +4,9 @@
 #include <iostream>
 #include "Format.hpp"
 #include "data.h"
+# include <stdint.h>
 
-#define DEBUG true
+#define DEBUG false
 
 class Serializer
 {

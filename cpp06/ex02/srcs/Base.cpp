@@ -4,5 +4,3 @@
 
 Base::Base() {}
 Base::~Base(){}
-
-/*********** MEMBER FUNCTION ***********/

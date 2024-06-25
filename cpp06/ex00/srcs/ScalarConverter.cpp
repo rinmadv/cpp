@@ -54,6 +54,7 @@ bool	convertFloat(float f)
 		std::cout << "char:\tNon displayable" << std::endl;
 	else
 		std::cout << "char:\t'" << c << "'" << std::endl;
+
 	if (static_cast<long>(f) > INT_MAX || static_cast<long>(f) < INT_MIN)
 		std::cout << "int:\tImpossible" << std::endl;
 	else

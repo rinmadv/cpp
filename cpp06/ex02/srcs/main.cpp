@@ -2,7 +2,8 @@
 #include "../includes/A.hpp"
 #include "../includes/B.hpp"
 #include "../includes/C.hpp"
-#include <random>
+#include <ctime>
+#include <cstdlib>
 
 class Base;
 class A;
@@ -11,11 +12,9 @@ class C;
 
 Base * generate(void)
 {
-    std::random_device rd; 
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(1, 3);
 
-    int random_number = distrib(gen);
+	int random_number = std::rand() % 3;
+
 	if (DEBUG)
     	std::cout << "Random number between 1 and 3: " << random_number << std::endl;
 	if (random_number == 1)
@@ -82,13 +81,11 @@ int	main(void)
 		identify(mystere);
 		identify(*mystere);
 		std::cout << std::endl;
+		delete mystere;
+		mystere = NULL;
 	}
 	std::cout << _BOLD _MAGENTA "Test with unknown type" << _END << std::endl;
 	identify(NULL);
-
-	Base *base;
-	identify(base);
-	identify(*base);
 
 	return (0);
 }
