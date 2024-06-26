@@ -66,8 +66,9 @@ class Array {
 		public:
 			virtual const char* what() const throw()
 			{return _RED "Out of bound index" _END;} };
-		T		*_elements; 
 
+		T		*_elements;
+		 
 	private:
 		size_t	_size;
 
