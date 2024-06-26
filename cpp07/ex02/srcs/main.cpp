@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../includes/Array.hpp"
 #include "../includes/Format.hpp"
+#include <cstdlib>
 
 
 void	displayTitle0(std::string text)
@@ -42,7 +43,7 @@ int main( void )
 		essai[1] = 1;
 		essai[2] = 2;
 		essai[3] = 3;
-		for (size_t i = 0; i < essai.getSize(); i++)
+		for (size_t i = 0; i < essai.size(); i++)
 		{
 			std::cout << "[" << "i" << "] " << essai[i] << std::endl;
 		}
@@ -51,7 +52,7 @@ int main( void )
 		displayTitle2("Displaying new array (copy)");
 		Array<int> copy;
 		copy = essai;
-		for (size_t i = 0; i < copy.getSize(); i++)
+		for (size_t i = 0; i < copy.size(); i++)
 		{
 			std::cout << "[" << "i" << "] " << copy[i] << std::endl;
 		}
@@ -59,14 +60,14 @@ int main( void )
 
 		displayTitle2("Displaying copy with modified values:\t");
 		copy[0] = 12;
-		for (size_t i = 0; i < copy.getSize(); i++)
+		for (size_t i = 0; i < copy.size(); i++)
 		{
 			std::cout << "[" << "i" << "] " << copy[i] << std::endl;
 		}
 		std::cout << std::endl;
 	
 		displayTitle2("Displaying essai to make sure its value stay unchanged:\t");
-		for (size_t i = 0; i < essai.getSize(); i++)
+		for (size_t i = 0; i < essai.size(); i++)
 		{
 			std::cout << "[" << "i" << "] " << essai[i] << std::endl;
 		}
@@ -107,3 +108,54 @@ int main( void )
 
 	return 0;
 }
+
+// #define MAX_VAL 750
+// int main(int, char**)
+// {
+//     Array<int> numbers(MAX_VAL);
+//     int* mirror = new int[MAX_VAL];
+//     srand(time(NULL));
+//     for (int i = 0; i < MAX_VAL; i++)
+//     {
+//         const int value = rand();
+//         numbers[i] = value;
+//         mirror[i] = value;
+//     }
+//     //SCOPE
+//     {
+//         Array<int> tmp = numbers;
+//         Array<int> test(tmp);
+//     }
+
+//     for (int i = 0; i < MAX_VAL; i++)
+//     {
+//         if (mirror[i] != numbers[i])
+//         {
+//             std::cerr << "didn't save the same value!!" << std::endl;
+//             return 1;
+//         }
+//     }
+//     try
+//     {
+//         numbers[-2] = 0;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+//     try
+//     {
+//         numbers[MAX_VAL] = 0;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+
+//     for (int i = 0; i < MAX_VAL; i++)
+//     {
+//         numbers[i] = rand();
+//     }
+//     delete [] mirror;//
+//     return 0;
+// }

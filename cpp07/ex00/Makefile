@@ -5,7 +5,7 @@ NAME = whatever
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD -g3
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD #-g3
 
 # Paths
 

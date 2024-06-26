@@ -9,7 +9,8 @@ template <typename T>
 class Array {
 
 	public:
-		Array() {_elements = NULL; _size = 0;}
+
+		Array() {_elements = NULL; _size = 0; std::cout<<_BLUE"basic constructor called\n"_END;}
 
 		Array(unsigned int n)
 		{
@@ -27,7 +28,7 @@ class Array {
 			}
 		}
 		
-		Array(Array const &src) {*this = src;};
+		Array(Array const &src) : _elements(NULL), _size(0) {*this = src;};
 
 		~Array(){
 			if (_elements)
@@ -39,12 +40,21 @@ class Array {
 
 		Array & operator=(Array const &src)
 		{
-	       if (this != &src) {
-	           delete[] _elements;}
-
+			if (this == &src)
+				return (*this);
+			try
+			{
+				delete[] _elements;
+				_elements = NULL;
+			}
+			catch(const std::exception& e)
+			{
+			}
 			this->_size = src.size();
-
+			if (!_size)
+				return (*this) ;
 			this->_elements = new T[this->_size];
+			
 			for (size_t i = 0; i < _size; i++)
 				this->_elements[i] = src._elements[i];
 			return (*this);
@@ -59,53 +69,27 @@ class Array {
 		}
 
 		size_t const & size() const {return (_size);}
-		
-		size_t	getSize(){return (this->size());};
 
-	class OutBoundIndexException: public std::exception {
-		public:
-			virtual const char* what() const throw()
-			{return _RED "Out of bound index" _END;} };
-
-		T		*_elements;
+		class OutBoundIndexException: public std::exception {
+			public:
+				virtual const char* what() const throw()
+				{return _RED "Out of bound index" _END;} };
 		 
 	private:
+		T		*_elements;
 		size_t	_size;
 
 };
 
 template <typename T>
-std::ostream & operator<<( std::ostream & os, Array<T> const & rhs)
+std::ostream & operator<<( std::ostream & os, Array<T> & rhs)
 {
 	os << "[ ";
 	for (size_t i = 0; i < rhs.size(); ++i) {
-		os << rhs._elements[i] << " ";
+		os << (rhs[i]) << " ";
 	}
 	os << "]";
 	return os;
 }
-
-
-/*
-Develop a class template Array that contains elements of type T and that implements
-the following behavior and functions:
-[x]Construction with no parameter: Creates an empty array.
-[x]Construction with an unsigned int n as a parameter: Creates an array of n elements
-initialized by default.
-Tip: Try to compile int * a = new int(); then display *a.
-[x]Construction by copy and assignment operator. In both cases, modifying either the
-original array or its copy after copying musn’t affect the other array.
-[x]You MUST use the operator new[] to allocate memory. Preventive allocation (al-
-locating memory in advance) is forbidden. Your program must never access non-
-allocated memory.
-[     ]Elements can be accessed through the subscript operator: [ ].
-[x]When accessing an element with the [ ] operator, if its index is out of bounds, an
-std::exception is thrown.
-[x]A member function size() that returns the number of elements in the array. This
-member function takes no parameter and musn’t modify the current instance.
-
-As usual, ensure everything works as expected and turn in a main.cpp file that con-
-tains your tests.
-*/
 
 #endif
