@@ -56,7 +56,6 @@ int main()
 		std::cerr << e.what() << '\n';
 	}
 
-
 	Span spann = Span(3);
 	spann.addNumber(6);
 	spann.addNumber(3);
@@ -100,6 +99,7 @@ int main()
 			std::cerr << e.what() << '\n';
 		} 
 	}
+
 	try
 	{
 		spannnn.addNumbers(numbers.begin(), numbers.end() - 99900);
@@ -119,6 +119,7 @@ int main()
 			std::cerr << e.what() << '\n';
 		} 
 	}
+
 	displayTitle2("TEST WITH NOT ENOUGH CAPACITY");
 	size = 2;
 	Span spannnnn = Span(size);
@@ -135,7 +136,7 @@ int main()
 	}
 	try
 	{
-		spannnnn.addNumbers(numbers.begin(), numbers.end() - 99900);
+		spannnnn.addNumbers(numbers.begin(), numbers.end());
 	}
 	catch(const std::exception& e)
 	{
@@ -152,6 +153,37 @@ int main()
 			std::cerr << e.what() << '\n';
 		} 
 	}
+
+displayTitle1("TEST WITH RANDOM NUMBERS");
+    std::srand(std::time(nullptr));
+    Span randomSpan = Span(10000);
+    for (int i = 0; i < 10000; ++i)
+    {
+        randomSpan.addNumber(std::rand() % 100000);
+    }
+    std::cout << "Shortest span: " << randomSpan.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << randomSpan.longestSpan() << std::endl;
+
+    displayTitle1("TEST WITH MIXED NUMBERS");
+    Span mixedSpan = Span(6);
+    mixedSpan.addNumber(-10);
+    mixedSpan.addNumber(-5);
+    mixedSpan.addNumber(0);
+    mixedSpan.addNumber(5);
+    mixedSpan.addNumber(10);
+    mixedSpan.addNumber(15);
+    std::cout << "Shortest span: " << mixedSpan.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << mixedSpan.longestSpan() << std::endl;
+
+    displayTitle1("TEST WITH EXTREME VALUES");
+    Span extremeSpan = Span(3);
+    extremeSpan.addNumber(INT_MIN);
+    extremeSpan.addNumber(0);
+    extremeSpan.addNumber(INT_MAX);
+    std::cout << "Shortest span: " << extremeSpan.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << extremeSpan.longestSpan() << std::endl;
+
+
 	displayTitle1("CALLING DESTRUCTORS");
 	return 0;
 }

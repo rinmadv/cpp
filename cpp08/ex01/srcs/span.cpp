@@ -1,11 +1,10 @@
 #include "../includes/Span.hpp"
 
 // Constructors and destructor
-Span::Span()
+Span::Span() : _numbers(0)
 {
 	if (DEBUG)
 		std::cout << "Default constructor called\n"; 
-	_numbers.reserve(0);
 }
 
 Span::Span(unsigned int n)
@@ -53,11 +52,7 @@ void Span::addNumbers(std::vector<int>::const_iterator begin, std::vector<int>::
 		throw std::out_of_range("Not enough capacity to fill span with the entire given span");
 	if (DEBUG)
 		std::cout << _GREY << "Trying to fill span..." << _END << std::endl;
-	while (begin != end)
-	{
-		addNumber(*begin);
-		++begin;
-	}
+	_numbers.insert(_numbers.end(), begin, end);
 }
 
 //Span
@@ -70,13 +65,13 @@ int		Span::shortestSpan()
 
 	std::sort(_numbers.begin(), _numbers.end());
 
-	int shortest = std::abs(_numbers[1] - _numbers[0]);
-	for (size_t i = 1; i < _numbers.size() - 1; ++i) {
-		int span = std::abs(_numbers[i + 1] - _numbers[i]);
-		if (span < shortest) {
-			shortest = span;
-		}
-	}
+    int shortest = std::numeric_limits<int>::max();
+    for (size_t i = 0; i < _numbers.size() - 1; ++i) {
+        int span = std::abs(_numbers[i + 1] - _numbers[i]);
+        if (span < shortest) {
+            shortest = span;
+        }
+    }
 	return shortest;
 }
 
@@ -99,4 +94,10 @@ void	Span::displaySpan() const
 		throw std::out_of_range("Nothing to display");
 	for (unsigned int i = 0; i < _numbers.size(); i++)
 		std::cout << "[" << i << "] : " << _numbers[i] << std::endl;
+}
+
+std::ostream & operator<<(std::ostream & os, Span const & rhs)
+{
+    rhs.displaySpan();
+    return os;
 }
