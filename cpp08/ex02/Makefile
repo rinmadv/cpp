@@ -1,6 +1,6 @@
 # Project
 
-NAME = span
+NAME = MutantStack
 
 # Compiler
 
