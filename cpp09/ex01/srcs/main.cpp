@@ -35,9 +35,8 @@ int main(int argc, char **argv)
 		}
 		else if (isOperator(c))
 		{
-			if (!stack.empty() && stack.size() < 2)
+			if (stack.empty() || (!stack.empty() && stack.size() < 2))
                 return displayError("Wrong arguments");
-			
 			int a =  stack.top();
 			stack.pop();
 			int b = stack.top();
