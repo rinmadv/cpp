@@ -1,6 +1,6 @@
 # Project
 
-NAME = easy_find
+NAME = btc
 
 # Compiler
 
