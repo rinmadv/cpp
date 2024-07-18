@@ -1,4 +1,5 @@
-#include "../includes/Span.hpp"
+#include "../includes/span.hpp"
+#include <limits>
 
 // Constructors and destructor
 Span::Span() : _numbers(0)

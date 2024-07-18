@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./srcs/main.cpp ./srcs/Span.cpp
+SRC	= ./srcs/main.cpp ./srcs/span.cpp
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

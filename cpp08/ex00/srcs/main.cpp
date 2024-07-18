@@ -4,6 +4,7 @@
 #include <vector>
 #include <deque>
 #include <list>
+#include <limits>
 
 int main() {
 	std::cout << _BOLD _AQUAMARINE "⏳ TESTS ON VECTORS... ⌛" _END << std::endl;
@@ -191,3 +192,4 @@ int main() {
     std::cout << std::endl;
 	return 0;
 }
+

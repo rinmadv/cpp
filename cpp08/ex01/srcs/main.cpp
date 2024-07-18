@@ -1,8 +1,8 @@
-#include "../includes/Span.hpp"
+#include "../includes/span.hpp"
 #include "../includes/Format.hpp"
 
 #include <vector>
-#include <limits.h>
+#include <limits>
 
 static void displayTitle1(std::string str)
 {
@@ -155,7 +155,7 @@ int main()
 	}
 
 displayTitle1("TEST WITH RANDOM NUMBERS");
-    std::srand(std::time(nullptr));
+    std::srand(time(NULL));
     Span randomSpan = Span(10000);
     for (int i = 0; i < 10000; ++i)
     {
@@ -177,9 +177,9 @@ displayTitle1("TEST WITH RANDOM NUMBERS");
 
     displayTitle1("TEST WITH EXTREME VALUES");
     Span extremeSpan = Span(3);
-    extremeSpan.addNumber(INT_MIN);
+    extremeSpan.addNumber(std::numeric_limits<int>::min());
     extremeSpan.addNumber(0);
-    extremeSpan.addNumber(INT_MAX);
+    extremeSpan.addNumber(std::numeric_limits<int>::max());
     std::cout << "Shortest span: " << extremeSpan.shortestSpan() << std::endl;
     std::cout << "Longest span: " << extremeSpan.longestSpan() << std::endl;
 
