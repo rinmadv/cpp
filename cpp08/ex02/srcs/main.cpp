@@ -10,16 +10,6 @@ static void displayTitle1(std::string str)
 	std::cout << std::endl << _BOLD _AQUAMARINE << "⏳ " << str << "... ⌛" << _END << std::endl;
 }
 
-// static void displayTitle2(std::string str)
-// {
-// 	std::cout << std::endl << _ITALIC _MAGENTA << "✨ " << str << "... ✨" << _END << std::endl;
-// }
-
-// static void displayTitle3(std::string str)
-// {
-// 	std::cout << std::endl << _GREY << str << _END << std::endl;
-// }
-
 int main()
 {
 	displayTitle1("Test sur stack");
