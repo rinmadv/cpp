@@ -1,6 +1,6 @@
 # Project
 
-NAME = RPN
+NAME = PmergeMe
 
 # Compiler
 

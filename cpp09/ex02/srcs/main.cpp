@@ -1,103 +1,107 @@
-#include "../includes/MutantStack.hpp"
 #include "../includes/Format.hpp"
+#include "../includes/PMergeMe.hpp"
 
 #include <vector>
-#include <list>
+#include <deque>
 #include <limits.h>
+#include <iostream>
+#include <stdlib.h>
 
-static void displayTitle1(std::string str)
+//vector
+//deque
+
+//check arguments : pas encore faite : ex 800e (a faire plus tard) + only UI
+//check si sort ou pas
+//error
+//time
+
+void	insertVec1(std::vector<int> &vector)
 {
-	std::cout << std::endl << _BOLD _AQUAMARINE << "⏳ " << str << "... ⌛" << _END << std::endl;
+	int temp;
+	for (size_t i = 0; i <= vector.size() - 1; i+=4) //utiliser les puissances de 2
+	{
+		if (!vector[i + 1] || !vector[i + 2] || !vector[i + 3])
+			break;
+		std::cout << "vector [" << i << "] " << vector[i] << " " << "vector [" << i + 1 << "] " << vector[i+1] << " vector [" << i+2 << "] " << vector[i+2] << " " << "vector [" << i + 3 << "] " << vector[i+3] << " --> ";
+		if (vector[i] > vector[i + 2])
+		{
+			temp = vector[i];
+			vector[i] = vector[i + 2];
+			vector[i + 2] = temp;
+		}
+		std::cout << vector[i] << " " << vector[i+1] << " " << vector[i+2] << " " << vector[i+3] <<std::endl;
+	}
+		std::cout << _MAGENTA _BOLD "Sorted sequence1 : " _END;
+		for (size_t i = 0; i < vector.size(); i++)
+			std::cout << vector[i] << " ";
+		std::cout << std::endl;
 }
 
-// static void displayTitle2(std::string str)
-// {
-// 	std::cout << std::endl << _ITALIC _MAGENTA << "✨ " << str << "... ✨" << _END << std::endl;
-// }
-
-// static void displayTitle3(std::string str)
-// {
-// 	std::cout << std::endl << _GREY << str << _END << std::endl;
-// }
-
-int main()
+void	insertVec0(std::vector<int> &vector)
 {
-	displayTitle1("Test sur stack");
+	int temp;
+	for (size_t i = 0; i <= vector.size() - 1; i+=2)
 	{
-		std::stack<int> stack;
-		stack.push(5);
-		stack.push(17);
-		std::cout << stack.top() << std::endl;
-		stack.pop();
-		std::cout << stack.size() << std::endl;
-		stack.push(3);
-		stack.push(5);
-		stack.push(737);
-		stack.push(0);
-		// std::stack<int>::iterator it = stack.begin();
-		// std::stack<int>::iterator ite = stack.end();
-		// ++it;
-		// --it;
-		// while (it != ite)
-		// {
-		// std::cout << *it << std::endl;
-		// ++it;
-		// }
-		std::stack<int> s(stack);
-	}
-
-	displayTitle1("Test sur mutant stack");
-	{
-		MutantStack<int> mstack;
-		mstack.push(5);
-		mstack.push(17);
-		std::cout << mstack.top() << std::endl;
-		mstack.pop();
-		std::cout << mstack.size() << std::endl;
-		mstack.push(3);
-		mstack.push(5);
-		mstack.push(737);
-		mstack.push(0);
-		MutantStack<int>::iterator it = mstack.begin();
-		MutantStack<int>::iterator ite = mstack.end();
-		++it;
-		--it;
-		while (it != ite)
+		if (!vector[i + 1])
+			break;
+		std::cout << "vector [" << i << "] " << vector[i] << " " << "vector [" << i + 1 << "] " << vector[i+1] << " --> ";
+		if (vector[i] > vector[i + 1])
 		{
-		std::cout << *it << std::endl;
-		++it;
+			temp = vector[i];
+			vector[i] = vector[i + 1];
+			vector[i + 1] = temp;
 		}
-		std::stack<int> s(mstack);
+		std::cout << vector[i] << " " << vector[i+1] << std::endl;
 	}
+		std::cout << _MAGENTA _BOLD "Sorted sequence0 : " _END;
+		for (size_t i = 0; i < vector.size(); i++)
+			std::cout << vector[i] << " ";
+		std::cout << std::endl;
+}
 
-	displayTitle1("Test sur list");
-	std::list<int> myList;
+// void	PMergeMeVector(std::vector<int> vector)
+// {
 
-    myList.push_back(5);
-    myList.push_back(17);
+// }
 
-    std::cout << myList.back() << std::endl;
 
-    myList.pop_back();
+int main(int argc, char **argv)
+{
+	if (argc < 2)
+		return (std::cout << "Error : no input" << std::endl, 1);
+	std::vector<int> vec;
+	std::deque<int> deque;
 
-    std::cout << myList.size() << std::endl;
-
-    myList.push_back(3);
-    myList.push_back(5);
-    myList.push_back(737);
-    myList.push_back(0);
-
-    std::list<int>::iterator it = myList.begin();
-    std::list<int>::iterator ite = myList.end();
-    ++it;
-    --it;
-
-    while (it != ite) {
-        std::cout << *it << std::endl;
-        ++it;
-    }
-
-    std::list<int> s(myList);
-
+	int nb;
+	for (int i = 1; i < argc; i++)
+	{
+		nb = atoi(argv[i]);
+		vec.push_back(nb);
+		deque.push_back(nb);
+		if (i == argc - 1 && DEBUG)
+			std::cout << _FOREST_GREEN _BOLD "i = " << i << std::endl;
+	}
+	if (DEBUG)
+	{
+		std::cout << _MAGENTA _BOLD "Unsorted sequence : " _END;
+		for (size_t i = 0; i < vec.size() || i < deque.size(); i++)
+		{
+			std::cout << vec[i] << " ";
+			if (vec[i] != deque[i])
+			{
+				std::cout << "error" << std::endl;
+				break;
+			}
+			if (i == vec.size() - 1 && i == deque.size() - 1)
+				// std::cout << _FOREST_GREEN _BOLD "i = " << i << std::endl;
+				std::cout << std::endl;
+		}
+	}
+	insertVec0(vec);
+	insertVec1(vec);
+	std::cout << _MAGENTA _BOLD "Time to sort vector : " _END << std::endl;
+	std::cout << _MAGENTA _BOLD "Time to sort deque : " _END << std::endl;
 	return 0;
 }
+
+// https://github.com/PunkChameleon/ford-johnson-merge-insertion-sort
