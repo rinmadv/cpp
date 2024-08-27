@@ -4,6 +4,8 @@
 // #include <utility>
 
 # define _CYAN "\1\033[36m"
+# define _FOREST_GREEN "\1\033[32m\2"
+# define _BOLD "\1\033[1m\2"
 # define _END "\1\033[0m\2"
 
 int    displayMessage(std::string message)
@@ -11,43 +13,32 @@ int    displayMessage(std::string message)
 	std::cout << message << _END << std::endl;
 	return (0);
 }
+
+
+int puissanceDeDeux(int exponent) {
+    int result = 1;
+    for (int i = 0; i < exponent; ++i) {
+        result *= 2;
+    }
+    return result;
+}
+
 template<typename T>
-int tri(std::vector<T> vector)
+int    displayVector(std::vector<T> vector, int level = 0)
 {
-	//pair
-	displayMessage(_CYAN"Pairer");
-	std::cout << "Taille vecteur : " << vector.size() << std::endl;
-	
-	std::vector<std::pair<T, T>> pairs;
-	for (size_t i = 0; i < vector.size() - 1; i+=2)
-		pairs.push_back(std::make_pair(vector[i], vector[i + 1]));
-
-	for (size_t i = 0; i < pairs.size(); i++)
+	int iter = puissanceDeDeux(level);
+	std::cout << _BOLD _CYAN << "Level " << level  << " (incrementation = " << iter << ")" << _END << std::endl;
+	for (size_t i = 0; i < vector.size(); i++)
 	{
-		std::ostringstream message;
-		message <<"Paire " << i << "--> first = " << pairs[i].first << ", second = " << pairs[i].second;
-		displayMessage(message.str());
+		if (!vector[i])
+			break;
+		std::cout << vector[i];
+		if (!(i % iter))
+			std::cout << " ";
+		else
+			std::cout << "\n";
 	}
-
-	//compare
-	displayMessage(_CYAN"\nComparer");
-	std::vector<std::pair<T, T>> merged;
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		if(pairs[i].first > pairs[i].second)
-			merged.push_back(  )
-	}
-	if (pairs.size() <= 1)
-		return 0;
-	
-	for (size_t i = 0; i < pairs.size() - 1; i += 2)
-		merged.push_back(std::make_pair(pairs[i].first, pairs[i].second));
-	// //recursion tri si taille != 1
-	if (pairs.size() > 2)
-		tri(merged);
-	std::cout << "ciao" << std::endl;
-	//insersion
-	return (0);
+	std::cout << std::endl;	return (0);
 }
 
 int main(int argc, char **argv)
@@ -55,13 +46,15 @@ int main(int argc, char **argv)
 	if (argc == 1)
 		return (displayMessage("No number"));
 
-	// std::vector<std::pair<int, int>> vec;
 	std::vector<int> vec;
 	for (int i = 1; i < argc; i++)
 	{
 		// displayMessage(argv[i]);
 		vec.push_back(atoi(argv[i]));
 	}
-	tri(vec);
+	for (int expolevel = 0; expolevel < 5; expolevel++)
+	displayVector(vec, expolevel);
+	// tri(vec);
+	// displayVector(vec);
 	return (0);
 }
