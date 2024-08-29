@@ -15,10 +15,8 @@ int    displayMessage(std::string message)
 }
 
 
-int puissanceDeDeux(int exponent) {
-    int result = 1;
-	if (exponent < 0)
-	return (0);
+size_t puissanceDeDeux(int exponent) {
+    size_t result = 1;
     for (int i = 0; i < exponent; ++i) {
         result *= 2;
     }
@@ -27,10 +25,13 @@ int puissanceDeDeux(int exponent) {
 
 void	tri(std::vector<int> &vec, int exp)
 {
-	if (vec.size() <= 1)
-		return;
-	
 	std::cout << std::endl << _BOLD _CYAN << "Recursion level " << exp << _END << std::endl;
+	if (puissanceDeDeux(exp + 1) > vec.size())
+	{
+		std::cout << "eh bah non" << std::endl;
+		return;
+	}
+	
 	std::cout << "size = " << vec.size() << std::endl;
 	// std::cout << "exp = " << exp << std::endl << std::endl;
 	// int pas = puissanceDeDeux(exp);
@@ -38,7 +39,7 @@ void	tri(std::vector<int> &vec, int exp)
 	std::vector<int> rest;
 	for (size_t i = 0; i < vec.size(); i += puissanceDeDeux(exp + 1))
 	{
-		if (i + puissanceDeDeux(exp) >= vec.size())
+		if (i + puissanceDeDeux(exp + 1) -1  >= vec.size()) //a checker
 		{
 			while (i < vec.size())
 			{
@@ -48,13 +49,25 @@ void	tri(std::vector<int> &vec, int exp)
 			}
 			break;
 		}
+
 		std::cout << "i =" << i << std::endl;
-		std::cout << _FOREST_GREEN << "indice a = " << i + puissanceDeDeux(exp) - 1 << "\tvec [a] = " << vec[i + puissanceDeDeux(exp) -1] << _END << std::endl;
-		if (i + exp < vec.size())
+		size_t indice_a = i + puissanceDeDeux(exp) - 1;
+		size_t indice_b = i + puissanceDeDeux(exp + 1) -1;
+
+		std::cout << _FOREST_GREEN << "comp a : vec[" << indice_a << "] = " << vec[indice_a] << _END << std::endl;
+		if (indice_b < vec.size())
 		{
-			std::cout << _FOREST_GREEN << "indice b = " << i + puissanceDeDeux(exp + 1) - 1 << "\tvec [b] = " << vec[i + puissanceDeDeux(exp + 1) - 1] <<_END << std::endl;
-			if (vec[puissanceDeDeux(exp - 1)] > vec[puissanceDeDeux(exp)])// exp bon
-				std::swap(vec[puissanceDeDeux(exp - 1)], vec[puissanceDeDeux(exp)]); //attention aussi a ceux davant
+			std::cout << _FOREST_GREEN << "comp b : vec[" << indice_b << "] = " << vec[indice_b] <<_END << std::endl;
+			if (vec[i + puissanceDeDeux(exp) -1] > vec[i + puissanceDeDeux(exp + 1) - 1])// exp bon
+			{
+				std::cout << "On doit les swap" << std::endl;
+				for (size_t k = 0; k <= puissanceDeDeux(exp) - 1; k++)
+				{
+					std::cout << "swap vec[" << indice_a - k << "] avec vec[" << indice_b - k << "]" << std::endl;
+					std::swap(vec[indice_a - k], vec[indice_b - k]); //attention aussi a ceux davant
+				}
+			}
+
 		}
 	}
 	std::cout << _BOLD _CYAN "Envoye dans recursion" << _END << std::endl;
@@ -73,12 +86,18 @@ void	tri(std::vector<int> &vec, int exp)
 	std::cout << std::endl;
 	//phase de recursion
 	tri(vec, exp + 1);
-	// for (size_t i = 0; i < rest.size(); i++)
-	// {
-	// 	vec.push_back(rest[i]);
-	// }
-	//ajouter la partie qui reste
-		//rest.size et ensuite insertion avec la suite de jacobstal dans le vecteur
+	std::cout << _BOLD"Back to recursion level " << exp << _END << std::endl;
+	std::string color;
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		if (i % (puissanceDeDeux(exp)) == puissanceDeDeux(exp) - 1)
+			color = _BOLD _CYAN;
+		else
+			color = _END;
+		std::cout << color << vec[i] << " " << _END;
+	}
+	std::cout << std::endl;
+	//inserer les 
 }
 
 int main(int argc, char **argv)
