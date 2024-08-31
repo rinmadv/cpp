@@ -36,19 +36,19 @@ void	tri(std::vector<int> &vec, int exp)
 	// std::cout << "exp = " << exp << std::endl << std::endl;
 	// int pas = puissanceDeDeux(exp);
 	// std::cout << "pas = " << pas << std::endl << std::endl;
-	std::vector<int> rest;
+	// std::vector<int> rest;
 	for (size_t i = 0; i < vec.size(); i += puissanceDeDeux(exp + 1))
 	{
-		if (i + puissanceDeDeux(exp + 1) -1  >= vec.size()) //a checker
-		{
-			while (i < vec.size())
-			{
-				std::cout << "On stock vec[" << i << "] :" << vec[i] << std::endl;
-				rest.push_back(vec[i]);
-				vec.erase(vec.begin() + i);
-			}
-			break;
-		}
+		// if (i + puissanceDeDeux(exp + 1) -1  >= vec.size()) //a checker
+		// {
+		// 	while (i < vec.size())
+		// 	{
+		// 		std::cout << "On stock vec[" << i << "] :" << vec[i] << std::endl;
+		// 		rest.push_back(vec[i]);
+		// 		vec.erase(vec.begin() + i);
+		// 	}
+		// 	break;
+		// }
 
 		std::cout << "i =" << i << std::endl;
 		size_t indice_a = i + puissanceDeDeux(exp) - 1;
@@ -78,15 +78,15 @@ void	tri(std::vector<int> &vec, int exp)
 	std::cout << std::endl;
 	std::cout << std::endl;
 
-	std::cout << _BOLD _CYAN "Rest" << _END << std::endl;
-	for (size_t i = 0; i < rest.size(); i++)
-	{
-		std::cout << rest[i] << " ";
-	}
-	std::cout << std::endl;
+	// std::cout << _BOLD _CYAN "Rest" << _END << std::endl;
+	// for (size_t i = 0; i < rest.size(); i++)
+	// {
+	// 	std::cout << rest[i] << " ";
+	// }
+	// std::cout << std::endl;
 	//phase de recursion
 	tri(vec, exp + 1);
-	std::cout << _BOLD"Back to recursion level " << exp << _END << std::endl;
+	std::cout << _BOLD"Back to recursion level " << exp << " (elements de taille " << puissanceDeDeux(exp) << ")" <<_END << std::endl;
 	std::string color;
 	for (size_t i = 0; i < vec.size(); i++)
 	{
@@ -96,8 +96,43 @@ void	tri(std::vector<int> &vec, int exp)
 			color = _END;
 		std::cout << color << vec[i] << " " << _END;
 	}
-	std::cout << std::endl;
-	//inserer les 
+	std::cout << std::endl << _BOLD _CYAN "Rest" << _END << std::endl;
+
+	if (exp == 3)
+	{
+		if (vec.size() / puissanceDeDeux(exp) == 2)
+			std::cout << "on laisse\n" << std::endl;
+		else
+		{
+			std::cout << "on insere " << vec[puissanceDeDeux(exp)*3-1]  << "\n" << std::endl;
+			if (vec[puissanceDeDeux(exp)*3-1] < vec[2*puissanceDeDeux(exp)/2-1])
+			{
+				std::cout << vec[puissanceDeDeux(exp)*3-1] << " < " << vec[2*puissanceDeDeux(exp)/2-1] << std::endl;
+			}
+			else
+			{//go le simplifier avec des iterateurs
+				std::cout << vec[puissanceDeDeux(exp)*3-1] << " > " << vec[2*puissanceDeDeux(exp)/2-1] << std::endl;
+				vec.insert(vec.begin() + 2*puissanceDeDeux(exp)/2, vec.begin() + puissanceDeDeux(exp) * 2,  vec.begin() + puissanceDeDeux(exp)*3);
+				vec.erase(vec.begin() + puissanceDeDeux(exp) * 3, vec.begin() + puissanceDeDeux(exp) * 4);
+			}
+
+		}
+		//est ce que jai un reste ? --> size / taille == impaire
+		// if ((vec.size() / puissanceDeDeux(exp)) % 2)
+		// 	std::cout << "impair : reste\n" << std::endl;
+		// else
+		// 	std::cout << "pair : pas rest\n" << std::endl;
+	}
+	// for (size_t i = 0; i < rest.size(); i++)
+	// {
+	// 	if (i % (puissanceDeDeux(exp)) == puissanceDeDeux(exp) - 1)
+	// 		color = _BOLD _CYAN;
+	// 	else
+	// 		color = _END;
+	// 	std::cout << color << rest[i] << " " << _END;
+	// }
+	// std::cout << std::endl << std::endl;
+
 }
 
 int main(int argc, char **argv)
