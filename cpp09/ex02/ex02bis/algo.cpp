@@ -25,6 +25,8 @@ size_t puissanceDeDeux(int exponent) {
 
 void	tri(std::vector<int> &vec, int exp)
 {
+	//checker si le truc nest pas deja trie
+
 	std::cout << std::endl << _BOLD _CYAN << "Recursion level " << exp << _END << std::endl;
 	if (puissanceDeDeux(exp + 1) > vec.size())
 	{
@@ -98,31 +100,87 @@ void	tri(std::vector<int> &vec, int exp)
 	}
 	std::cout << std::endl << _BOLD _CYAN "Rest" << _END << std::endl;
 
-	if (exp == 3)
-	{
-		if (vec.size() / puissanceDeDeux(exp) == 2)
-			std::cout << "on laisse\n" << std::endl;
-		else
+	// if (vec.size() / puissanceDeDeux(exp) == 2)
+	// 		std::cout << "on laisse\n" << std::endl;
+	std::cout << "Insertion" << std::endl;
+	
+	
+		for (size_t index = 3 * puissanceDeDeux(exp) - 1; index < vec.size(); index += puissanceDeDeux(exp)) // a checker
 		{
-			std::cout << "on insere " << vec[puissanceDeDeux(exp)*3-1]  << "\n" << std::endl;
-			if (vec[puissanceDeDeux(exp)*3-1] < vec[2*puissanceDeDeux(exp)/2-1])
+			std::cout << "index = " << index << ", " << vec[index] << std::endl;
+			size_t size = (index) / puissanceDeDeux(exp) ;
+			size_t begin = 0;
+			while (size != 0)
 			{
-				std::cout << vec[puissanceDeDeux(exp)*3-1] << " < " << vec[2*puissanceDeDeux(exp)/2-1] << std::endl;
+				std::cout << "taille vec a inserer " << size << std::endl;
+				size_t comp2 = begin + (size +1)/ 2 * puissanceDeDeux(exp) - 1;
+				std::cout << "2nd comp = " << vec[comp2]  << " (index " << comp2 <<  ")" << std::endl;
+				if (index - puissanceDeDeux(exp) + 1 == begin - 1)
+				{
+					std::cout << "deja a la bonne place !" << std::endl;
+					std::cout << "\t";
+						for (size_t i = 0; i < vec.size(); i++)
+						{
+							std::cout << vec[i] << " ";
+						}
+						std::cout << std::endl;
+					break;
+				}
+				else if (vec[index] < vec[comp2])
+				{
+					begin += 0;
+					std::cout << vec[index] << " < " << vec[comp2] << " begin = " << begin << std::endl;
+				}
+				else
+				{
+					begin += comp2 + 1;
+					std::cout << vec[index] << " > " << vec[comp2] << " begin = " << begin << std::endl;
+				}
+				size /= 2;
+				if (!size)
+				{
+					std::cout << "On insere la range " << vec[index - puissanceDeDeux(exp) + 1] << " (" << "index = " << index - puissanceDeDeux(exp) + 1 << ")" << " a " << vec[index] << " (" << "index = " << index << "), a partir de " << vec[begin]  << "(index = " << begin << ")" << std::endl; 
+							vec.insert(vec.begin() + begin, vec.begin() + index - puissanceDeDeux(exp) + 1 ,  vec.begin() + index + 1);
+							vec.erase(vec.begin() + index - puissanceDeDeux(exp) + 1 + puissanceDeDeux(exp),  vec.begin() + index + 1 + puissanceDeDeux(exp));					
+						
+						std::cout << "\t";
+						for (size_t i = 0; i < vec.size(); i++)
+						{
+							std::cout << vec[i] << " ";
+						}
+						std::cout << std::endl;
+					break;
+				}
+					
 			}
-			else
-			{//go le simplifier avec des iterateurs
-				std::cout << vec[puissanceDeDeux(exp)*3-1] << " > " << vec[2*puissanceDeDeux(exp)/2-1] << std::endl;
-				vec.insert(vec.begin() + 2*puissanceDeDeux(exp)/2, vec.begin() + puissanceDeDeux(exp) * 2,  vec.begin() + puissanceDeDeux(exp)*3);
-				vec.erase(vec.begin() + puissanceDeDeux(exp) * 3, vec.begin() + puissanceDeDeux(exp) * 4);
-			}
-
+			
 		}
+	
+	// if (exp == 3)
+	// {
+	// 	if (vec.size() / puissanceDeDeux(exp) == 2)
+	// 		std::cout << "on laisse\n" << std::endl;
+	// 	else
+	// 	{
+	// 		std::cout << "on insere " << vec[puissanceDeDeux(exp)*3-1]  << "\n" << std::endl;
+	// 		if (vec[puissanceDeDeux(exp)*3-1] < vec[2*puissanceDeDeux(exp)/2-1])
+	// 		{
+	// 			std::cout << vec[puissanceDeDeux(exp)*3-1] << " < " << vec[2*puissanceDeDeux(exp)/2-1] << std::endl;
+	// 		}
+	// 		else
+	// 		{//go le simplifier avec des iterateurs
+	// 			std::cout << vec[puissanceDeDeux(exp)*3-1] << " > " << vec[2*puissanceDeDeux(exp)/2-1] << std::endl;
+	// 			vec.insert(vec.begin() + 2*puissanceDeDeux(exp)/2, vec.begin() + puissanceDeDeux(exp) * 2,  vec.begin() + puissanceDeDeux(exp)*3);
+	// 			vec.erase(vec.begin() + puissanceDeDeux(exp) * 3, vec.begin() + puissanceDeDeux(exp) * 4);
+	// 		}
+
+	// 	}
 		//est ce que jai un reste ? --> size / taille == impaire
 		// if ((vec.size() / puissanceDeDeux(exp)) % 2)
 		// 	std::cout << "impair : reste\n" << std::endl;
 		// else
 		// 	std::cout << "pair : pas rest\n" << std::endl;
-	}
+	// }
 	// for (size_t i = 0; i < rest.size(); i++)
 	// {
 	// 	if (i % (puissanceDeDeux(exp)) == puissanceDeDeux(exp) - 1)
