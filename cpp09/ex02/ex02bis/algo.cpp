@@ -54,7 +54,6 @@ size_t powerTwo(int exponent)
     return result;
 }
 
-/*************************************************** ALGO ****************************************************/
 
 void	swapPairs(std::vector<int> & vec, const size_t & size, const size_t & step, const size_t & nextStep)
 {
