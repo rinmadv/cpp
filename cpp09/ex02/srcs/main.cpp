@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #define DEBUG true
+#define FIRST_GROUP_TO_BE_INSERTED 3
 int comp_merge = 0;
 int comp_insert = 0;
 
@@ -50,31 +51,18 @@ size_t powerTwo(int exponent)
 
 /*************************************************** ALGO ****************************************************/
 
-void	swapPairs(std::vector<int> & vec, const size_t & size, const size_t & step, const size_t & nextStep)
+void	swapPairs(std::vector<int> & vec, const size_t & step, const size_t & nextStep)
 {
-
-	// std::cout << "espace entre deux chiffres compares : " << step << std::endl;
-	// std::cout << "incrementation entre deux series: " << nextStep << std::endl;
-
-	(void) size;
-	(void) vec;
-	(void) step;
-	(void) nextStep;
-
 	std::vector<int>::iterator left = vec.begin() + step - 1;
 	std::vector<int>::iterator right = vec.begin() + nextStep - 1;
-	// size_t indice_a;
-	// size_t indice_b;
-
-	std::cout << _BOLD _CYAN " Recursion level " << step / 2 << std::endl << _END;
 
 	while (left < vec.end() && right < vec.end())
 	{
-		std::cout << *left << " vs " << *right << " " << std::endl;
+		std::vector<int>::iterator tempLeft = left;
+		std::vector<int>::iterator tempRight = right;
 		if (*left > *right)
 		{
-			std::cout << "on swap !" << std::endl;
-			for (size_t i = 0; i < nextStep - 1; i++)
+			for (size_t i = 0; i < step; i++)
 			{
 				std::swap(*left, *right);
 				left--;
@@ -82,22 +70,26 @@ void	swapPairs(std::vector<int> & vec, const size_t & size, const size_t & step,
 			}
 			comp_merge++;
 		}
-		left += nextStep;
-		right += nextStep;
+		left = tempLeft  + nextStep;
+		right = tempRight  + nextStep;
 	}
-	
-	// for (size_t i = 0; i < size; i += nextStep)
-	// {
-	// 	indice_a = i + step - 1;
-	// 	indice_b = i + nextStep - 1;
+}
 
-	// 	if (indice_b < size && vec[indice_a] > vec[indice_b])
-	// 	{
-	// 		for (size_t k = 0; k < step; k++)
-	// 			std::swap(vec[indice_a - k], vec[indice_b - k]);
-	// 	}
-	// 	comp_merge++;
-	// }
+void	removeB(std::vector<int> &vec, std::vector<int> &bChain, size_t size, size_t groupsize)
+{
+	(void) vec;
+	(void) bChain;
+	(void) size;
+	size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
+	// if (offset > size - 1)
+	// 	return;
+	std::vector<int>::iterator start = vec.begin() + offset;
+	if (start + groupsize + 1 > vec.end())
+		return;
+	std::cout << "premiere val a remove = " << *start << std::endl;
+	// std::cout << *start << std::endl;
+	(void) start;
+	//verif
 }
 
 void	ford_johnson(std::vector<int> &vec, int exp)
@@ -111,10 +103,15 @@ void	ford_johnson(std::vector<int> &vec, int exp)
 	/*If we only have one element, comparisirion is not possible and thus, this element is considered as sorted and recursion stops*/
 	if (nextStep > size)
 		return;
-	swapPairs(vec, size, step, nextStep);
+	std::cout << _BOLD _CYAN "Recursion level " << exp << std::endl << _END;
+	swapPairs(vec, step, nextStep);
 	displayVector(vec);
 	ford_johnson(vec, exp + 1);
-
+	std::vector<int> bChain;
+	std::cout << _BOLD _CYAN "Back to recursion level " << exp << std::endl << _END;
+	displayVector(vec);
+	removeB(vec, bChain, size, step);
+	//removeLeftovers
 
 }
 
@@ -138,7 +135,7 @@ int main(int argc, char **argv)
 	// std::cout << _BOLD _CYAN "After sorting" << _END << std::endl;
 	displayVector(vec);
 
-	// if (DEBUG)
-	// 	std::cout << _CYAN << "NB comp merge: " << comp_merge << " NB comp insert: " << comp_insert  << _END << std::endl;
+	if (DEBUG)
+		std::cout << _CYAN << "NB comp merge: " << comp_merge << " NB comp insert: " << comp_insert  << _END << std::endl;
 	return (0);
 }
