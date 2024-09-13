@@ -123,21 +123,32 @@ void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t 
 	size_t leftoversInsertionsNb = bChain.size() % groupsize;
 	
 	std::cout << _FOREST_GREEN <<  "Il y a " << bInsertionsNb << " groupes de " << groupsize << " elements a inserer et " << leftoversInsertionsNb << " elements restant a inserer a la fin" << std::endl << _END;
-	// std::vector<int>::iterator bChainSart = bChain.begin();
-	// std::vector<int>::iterator bChainEnd = bChainSart + groupsize;
+	std::vector<int>::iterator bChainSart = bChain.begin();
+	//maybe faut checker quelque chose entre les deux 
+	std::vector<int>::iterator bChainEnd = bChainSart + groupsize;
 
 
 	// std::vector<int>::iterator mainChainEnd = mainChainSart * ;
 	// std::vector<int>::iterator mainChainSart = mainChain.begin() + groupsize;
-	if (!bInsertionsNb)
-		return;
 	// int = 0;
+
+	while (bChainEnd <= bChain.end())
+	{
+		/* Pour apres quand on aura fait l'insertion*/
+		std::cout << "On supprime de : " << *bChainSart << " a " << *bChainEnd << std::endl; //surement invalid read ici (check avec vg) mais juste sur l'affichage ecran
+		bChain.erase(bChainSart, bChainEnd);
+		std::cout << _ORANGE << "New bChain : " _END;
+		displayVector(bChain);
+		// //MAJ les iterateurs
+	}
+	
+
 	if (leftoversInsertionsNb)
 	{
 		mainChain.insert(mainChain.end() - 1, bChain.begin(), bChain.end());
 		bChain.erase(bChain.begin(), bChain.end()); //maybe je peux utiliser clear, maisa a voir ce que fait la fonction
 	}
-
+	
 
 	(void) mainChain;
 	(void) bChain;
