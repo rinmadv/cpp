@@ -75,45 +75,75 @@ void	swapPairs(std::vector<int> & vec, const size_t & step, const size_t & nextS
 	}
 }
 
-void	removeB(std::vector<int> &vec, std::vector<int> &bChain, size_t groupsize)
+bool	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
 {
-	std::cout << "b chain :" << std::endl;
-	displayVector(bChain);
+	// std::cout << "b chain avant remove b:" << std::endl;
+	// displayVector(bChain);
 	for (size_t i = 0; i >= 0; i += groupsize)
 	{
 		size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
-		std::vector<int>::iterator start = vec.begin() + offset + i;
-		if (start + groupsize + 1 > vec.end())//pas sure du +1 
+		std::vector<int>::iterator start = mainChain.begin() + offset + i;
+		if (start + groupsize + 1 > mainChain.end())//pas sure du +1 
 		{
-			std::cout << "b chain :" << std::endl;
+			std::cout << "b chain apres remove b:" << std::endl;
 			displayVector(bChain);
-			return;
-		}	
+			return (false);
+		}
 		std::vector<int>::iterator end = start + groupsize;
-		std::cout << "Cycle " << i/groupsize << std::endl;
-		std::cout << "	premiere val a remove = " << *start << std::endl;
-		std::cout << "	derniere val a remove = " << *end << std::endl;
+		// std::cout << "Cycle " << i/groupsize << std::endl;
+		// std::cout << "	premiere val a remove = " << *start << std::endl;
+		// std::cout << "	derniere val a remove = " << *end << std::endl;
 		bChain.insert(bChain.begin() + bChain.size() , start, end);
-		vec.erase(start, end);
+		mainChain.erase(start, end);
 	}
+	return (true); //sinon jutilise les exceptions
 }
-void	removeLeftovers(std::vector<int> &vec, std::vector<int> &bChain, size_t groupsize)
+
+void	removeLeftovers(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
 {
-	std::cout << "b chain : avant rest" << std::endl;
-	displayVector(bChain);
-	size_t offset = vec.size() % groupsize;
+	// std::cout << "b chain : avant rest" << std::endl;
+	// displayVector(bChain);
+	size_t offset = mainChain.size() % groupsize;
 	if (!offset)
 		return;
-	std::cout << "Offset : " << offset << std::endl;
-	std::vector<int>::iterator start = vec.end() - offset;
-	std::vector<int>::iterator end = vec.end();
+	// std::cout << "Offset : " << offset << std::endl;
+	std::vector<int>::iterator start = mainChain.end() - offset;
+	std::vector<int>::iterator end = mainChain.end();
 
-		std::cout << "	premiere val a remove = " << *start << std::endl;
+		// std::cout << "	premiere val a remove = " << *start << std::endl;
 		bChain.insert(bChain.begin() + bChain.size() , start, end);
-		vec.erase(start, end);
+		mainChain.erase(start, end);
 	std::cout << "b chain : apres rest" << std::endl;
 	displayVector(bChain);
 }
+
+void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
+{
+	size_t bInsertionsNb = bChain.size() / groupsize;
+	size_t leftoversInsertionsNb = bChain.size() % groupsize;
+	
+	std::cout << _FOREST_GREEN <<  "Il y a " << bInsertionsNb << " groupes de " << groupsize << " elements a inserer et " << leftoversInsertionsNb << " elements restant a inserer a la fin" << std::endl << _END;
+	// std::vector<int>::iterator bChainSart = bChain.begin();
+	// std::vector<int>::iterator bChainEnd = bChainSart + groupsize;
+
+
+	// std::vector<int>::iterator mainChainEnd = mainChainSart * ;
+	// std::vector<int>::iterator mainChainSart = mainChain.begin() + groupsize;
+	if (!bInsertionsNb)
+		return;
+	// int = 0;
+	if (leftoversInsertionsNb)
+	{
+		mainChain.insert(mainChain.end() - 1, bChain.begin(), bChain.end());
+		bChain.erase(bChain.begin(), bChain.end()); //maybe je peux utiliser clear, maisa a voir ce que fait la fonction
+	}
+
+
+	(void) mainChain;
+	(void) bChain;
+	(void) groupsize;
+}
+
 
 void	ford_johnson(std::vector<int> &vec, int exp)
 {
@@ -132,11 +162,29 @@ void	ford_johnson(std::vector<int> &vec, int exp)
 	ford_johnson(vec, exp + 1);
 	std::vector<int> bChain;
 	std::cout << _BOLD _CYAN "Back to recursion level " << exp << std::endl << _END;
+	std::cout << "vec avant remove : ";
 	displayVector(vec);
-	removeB(vec, bChain, step);
-	removeLeftovers(vec, bChain, step);
-	//removeLeftovers
+	std::cout << "bchain avant remove : ";
+	displayVector(bChain);
+	
+	if (removeB(vec, bChain, step))
+	{
+		std::cout << _FOREST_GREEN << "on bouge les left overs" << _END << std::endl;
+		removeLeftovers(vec, bChain, step);
+	}
+	else
+		std::cout << _END << "on bouge PAS les left overs" << _END << std::endl;
+	std::cout << "vec apres remove : ";
+	displayVector(vec);
+	std::cout << "bchain apres remove : ";
+	displayVector(bChain);
 
+	if (!bChain.empty()) //maybe check avec taille
+		insertBChain(vec, bChain, step);
+	std::cout << "vec apres insertion : ";
+	displayVector(vec);
+	std::cout << "bchain apres insertion : ";
+	displayVector(bChain);
 }
 
 int main(int argc, char **argv)
