@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #define DEBUG true
-#define FIRST_GROUP_TO_BE_INSERTED 3
+#define FIRST_GROUP_TO_BE_INSERTED 2
 int comp_merge = 0;
 int comp_insert = 0;
 
@@ -75,21 +75,44 @@ void	swapPairs(std::vector<int> & vec, const size_t & step, const size_t & nextS
 	}
 }
 
-void	removeB(std::vector<int> &vec, std::vector<int> &bChain, size_t size, size_t groupsize)
+void	removeB(std::vector<int> &vec, std::vector<int> &bChain, size_t groupsize)
 {
-	(void) vec;
-	(void) bChain;
-	(void) size;
-	size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
-	// if (offset > size - 1)
-	// 	return;
-	std::vector<int>::iterator start = vec.begin() + offset;
-	if (start + groupsize + 1 > vec.end())
+	std::cout << "b chain :" << std::endl;
+	displayVector(bChain);
+	for (size_t i = 0; i >= 0; i += groupsize)
+	{
+		size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
+		std::vector<int>::iterator start = vec.begin() + offset + i;
+		if (start + groupsize + 1 > vec.end())//pas sure du +1 
+		{
+			std::cout << "b chain :" << std::endl;
+			displayVector(bChain);
+			return;
+		}	
+		std::vector<int>::iterator end = start + groupsize;
+		std::cout << "Cycle " << i/groupsize << std::endl;
+		std::cout << "	premiere val a remove = " << *start << std::endl;
+		std::cout << "	derniere val a remove = " << *end << std::endl;
+		bChain.insert(bChain.begin() + bChain.size() , start, end);
+		vec.erase(start, end);
+	}
+}
+void	removeLeftovers(std::vector<int> &vec, std::vector<int> &bChain, size_t groupsize)
+{
+	std::cout << "b chain : avant rest" << std::endl;
+	displayVector(bChain);
+	size_t offset = vec.size() % groupsize;
+	if (!offset)
 		return;
-	std::cout << "premiere val a remove = " << *start << std::endl;
-	// std::cout << *start << std::endl;
-	(void) start;
-	//verif
+	std::cout << "Offset : " << offset << std::endl;
+	std::vector<int>::iterator start = vec.end() - offset;
+	std::vector<int>::iterator end = vec.end();
+
+		std::cout << "	premiere val a remove = " << *start << std::endl;
+		bChain.insert(bChain.begin() + bChain.size() , start, end);
+		vec.erase(start, end);
+	std::cout << "b chain : apres rest" << std::endl;
+	displayVector(bChain);
 }
 
 void	ford_johnson(std::vector<int> &vec, int exp)
@@ -110,7 +133,8 @@ void	ford_johnson(std::vector<int> &vec, int exp)
 	std::vector<int> bChain;
 	std::cout << _BOLD _CYAN "Back to recursion level " << exp << std::endl << _END;
 	displayVector(vec);
-	removeB(vec, bChain, size, step);
+	removeB(vec, bChain, step);
+	removeLeftovers(vec, bChain, step);
 	//removeLeftovers
 
 }
