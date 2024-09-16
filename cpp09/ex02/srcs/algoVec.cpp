@@ -3,13 +3,7 @@
 
 /************************************************ UTILS MATHS ************************************************/
 
-size_t	powerTwo(const unsigned int & exponent)
-{
-	size_t result = 1;
-	for (unsigned int i = 0; i < exponent; ++i)
-		result *= 2;
-	return result;
-}
+size_t	powerTwo(const unsigned int & exponent);
 
 /*************************************************** ALGO ****************************************************/
 
@@ -31,7 +25,6 @@ void	swapPairs(std::vector<unsigned int> & vec, const size_t & step, const size_
 				left--;
 				right--;
 			}
-			comp_merge++;
 		}
 		left = tempLeft  + nextStep;
 		right = tempRight  + nextStep;
@@ -75,7 +68,6 @@ int	binarySearch(std::vector<unsigned int> & vec, const unsigned int & toFind)
 			left = milieu + 1;
 		else
 			right = milieu;
-		comp_insert++;
 	}
 	return left;
 }
@@ -114,7 +106,7 @@ void	insertBChain(std::vector<unsigned int> &mainChain, std::vector<unsigned int
 	}
 }
 
-void	ford_johnson(std::vector<unsigned int> &vec, const unsigned int & exp)
+void	ford_johnsonVec(std::vector<unsigned int> &vec, const unsigned int & exp)
 {
 	const size_t step = powerTwo(exp);
 	const size_t nextStep = step * 2;
@@ -123,7 +115,7 @@ void	ford_johnson(std::vector<unsigned int> &vec, const unsigned int & exp)
 	if (nextStep > size)
 		return;
 	swapPairs(vec, step, nextStep);
-	ford_johnson(vec, exp + 1);
+	ford_johnsonVec(vec, exp + 1);
 
 	std::vector<unsigned int> bChain;
 	removeB(vec, bChain, step);

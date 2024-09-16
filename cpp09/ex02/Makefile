@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./srcs/main.cpp ./srcs/algo.cpp ./srcs/parsing.cpp
+SRC	= ./srcs/main.cpp ./srcs/algoVec.cpp ./srcs/algoDeque.cpp ./srcs/parsing.cpp
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

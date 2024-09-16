@@ -9,11 +9,20 @@
 //error
 //time
 
-int comp_merge = 0;
-int comp_insert = 0;
 
-void	parsing(std::vector<unsigned int> & vec, int argc, char **argv);
-void	ford_johnson(std::vector<unsigned int> &vec, const unsigned int & exp);
+void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv);
+void	ford_johnsonVec(std::vector<unsigned int> &vec, const unsigned int & exp);
+void	ford_johnsonDeque(std::deque<unsigned int> &deque, const unsigned int & exp);
+
+/************************************************ UTILS MATHS ************************************************/
+
+size_t	powerTwo(const unsigned int & exponent)
+{
+	size_t result = 1;
+	for (unsigned int i = 0; i < exponent; ++i)
+		result *= 2;
+	return result;
+}
 
 /************************************************  DISPLAY ************************************************/
 
@@ -29,6 +38,13 @@ void	displayVector(const std::vector<unsigned int> & vec)
 	std::cout << std::endl;
 }
 
+void	displayDeque(const std::deque<unsigned int> & deque)
+{
+	for (size_t i = 0; i < deque.size(); i++)
+		std::cout << deque[i] << " ";
+	std::cout << std::endl;
+}
+
 /*************************************************** MAIN ****************************************************/
 
 int	main(int argc, char **argv)
@@ -37,17 +53,19 @@ int	main(int argc, char **argv)
 		return (displayMessage("No number"), EXIT_FAILURE);
 
 	std::vector<unsigned int> vec;
+	std::deque<unsigned int> deque;
+
 	try
 	{
-		parsing(vec, argc, argv);
+		parsing(vec, deque, argc, argv);
 	}
 	catch(const std::exception& e)
 	{
 		return (std::cerr << e.what() << '\n', EXIT_FAILURE);
 	}
-	ford_johnson(vec, 0);
-	displayVector(vec);
-	if (DEBUG)
-		std::cout << _CYAN << "NB comp merge: " << comp_merge << " NB comp insert: " << comp_insert  << _END << std::endl;
+	// ford_johnsonVec(vec, 0);
+	// displayVector(vec);
+	ford_johnsonDeque(deque, 0);
+	displayDeque(deque);
 	return (EXIT_SUCCESS);
 }

@@ -19,7 +19,4 @@
 #define FIRST_GROUP_TO_BE_INSERTED 2
 #define DEBUG false
 
-extern int comp_merge;
-extern int comp_insert;
-
 #endif

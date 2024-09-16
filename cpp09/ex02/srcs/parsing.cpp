@@ -20,7 +20,7 @@ bool	hasDuplicates(const std::vector<unsigned int> &vec)
 	return (uniqueElements.size() != vec.size());
 }
 
-void	parsing(std::vector<unsigned int> & vec, int argc, char **argv)
+void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv)
 {
 	for (int i = 1; i < argc; i++)
 	{
@@ -37,5 +37,11 @@ void	parsing(std::vector<unsigned int> & vec, int argc, char **argv)
 	if (hasDuplicates(vec))
 	{
 		throw (std::runtime_error("Error: Wrong argument (duplicate in input)"));
+	}
+
+	const size_t sizeVec = vec.size();
+	for (size_t i = 0; i < sizeVec; i++)
+	{
+		deque.push_back(vec[i]);
 	}
 }
