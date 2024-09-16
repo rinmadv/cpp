@@ -81,14 +81,9 @@ void	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t group
 	{
 		size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
 		std::vector<int>::iterator start = mainChain.begin() + offset + i;
-		if (start + groupsize + 1 > mainChain.end())//pas sure du +1 
-		{
+		if (start + groupsize> mainChain.end())//pas sure du +1 
 			return;
-		}
 		std::vector<int>::iterator end = start + groupsize;
-		// std::cout << "Cycle " << i/groupsize << std::endl;
-		// std::cout << "	premiere val a remove = " << *start << std::endl;
-		// std::cout << "	derniere val a remove = " << *end << std::endl;
 		bChain.insert(bChain.begin() + bChain.size() , start, end);
 		mainChain.erase(start, end);
 	}
@@ -96,23 +91,13 @@ void	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t group
 
 void	removeLeftovers(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
 {
-	// std::cout << "b chain : avant rest" << std::endl;
-	// displayVector(bChain);
 	size_t offset = mainChain.size() % groupsize;
 	if (!offset)
-	{
-		std::cout << "ya pas de left overs" << std::endl;
 		return;
-	}
-	// std::cout << "Offset : " << offset << std::endl;
 	std::vector<int>::iterator start = mainChain.end() - offset;
 	std::vector<int>::iterator end = mainChain.end();
-
-		// std::cout << "	premiere val a remove = " << *start << std::endl;
-		bChain.insert(bChain.begin() + bChain.size() , start, end);
-		mainChain.erase(start, end);
-	std::cout << "b chain : apres rest" << std::endl;
-	displayVector(bChain);
+	bChain.insert(bChain.begin() + bChain.size() , start, end);
+	mainChain.erase(start, end);
 }
 
 int	binarySearch(std::vector<int> & vec, int toFind)
@@ -123,12 +108,10 @@ int	binarySearch(std::vector<int> & vec, int toFind)
     while (gauche < droite) {
         int milieu = gauche + (droite - gauche) / 2;
 
-        if (vec[milieu] < toFind) {
+        if (vec[milieu] < toFind)
             gauche = milieu + 1;
-        }
-		else {
+		else
             droite = milieu;
-        }
 		comp_insert++;
     }
     return gauche;
@@ -136,68 +119,36 @@ int	binarySearch(std::vector<int> & vec, int toFind)
 
 void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
 {
-	size_t bInsertionsNb = bChain.size() / groupsize;
 	size_t leftoversInsertionsNb = bChain.size() % groupsize;
 	
-	std::cout << _FOREST_GREEN <<  "Il y a " << bInsertionsNb << " groupes de " << groupsize << " elements a inserer et " << leftoversInsertionsNb << " elements restant a inserer a la fin" << std::endl << _END;
 	std::vector<int>::iterator bChainSart = bChain.begin();
-	//maybe faut checker quelque chose entre les deux 
 	std::vector<int>::iterator bChainEnd = bChainSart + groupsize;
+	
 	size_t insertionCount = 2;
 	size_t nbGroupInMain = 2;
 	std::vector<int>::iterator mainChainStart = mainChain.begin() + groupsize - 1;
 	std::vector<int>::iterator mainChainEnd;
 
-	// std::vector<int>::iterator mainChainEnd = mainChainSart * ;
-	// std::vector<int>::iterator mainChainSart = mainChain.begin() + groupsize;
-	// int = 0;
-	// std::lower_bound(mainChainStart, )
 	while (bChainEnd <= bChain.end())
 	{
-		std::cout << _SALMON "On insrere b" << insertionCount  << "(" << *(bChainEnd-1) << ") dans " << nbGroupInMain << " groupes de taille " << groupsize << std::endl;
-		//  *bChainSart << " a " << *bChainEnd << std::endl; //surement invalid read ici (check avec vg) mais juste sur l'affichage ecran
-		
-
-		/* Pour apres quand on aura fait l'insertion*/
-		// std::cout << "On add (later supprime) de : " << *bChainSart << " a " << *(bChainEnd - 1) << std::endl << _END; //surement invalid read ici (check avec vg) mais juste sur l'affichage ecran
-		mainChainEnd = mainChainStart + (groupsize * nbGroupInMain);
-		// std::cout << _MAGENTA << "Premier chiffre compare: " << *mainChainStart << " vs dernier chiffre comparé " << *mainChainEnd << std::endl << _END;
-		// std::cout << _RED << "on insere " <<  *(bChainEnd-1) << " après " << *custom_lower_bound(mainChainStart, mainChainEnd, *(bChainEnd-1), nbGroupInMain, groupsize) << _END << std::endl;
-		// *custom_lower_bound(mainChainStart, mainChainEnd - groupsize, *(bChainEnd - 1), nbGroupInMain, groupsize);
-		
+		mainChainEnd = mainChainStart + (groupsize * nbGroupInMain);		
 		std::vector<int> compared;
 		for (std::vector<int>::iterator it = mainChainStart ; *it != *mainChainEnd; it += groupsize)
-		{
 			compared.push_back(*it);
-		}
-		std::cout << _RED "tableau comparés : ";
-		displayVector(compared);
-		std::cout << std::endl << _END;
 		int insertAt = binarySearch(compared, *(bChainEnd-1));
-		// std::cout << _PURPLE << "insert at indice " << insertAt << " (" << compared[insertAt] << ")" << _END << std::endl;
 		std::vector<int>::iterator placeToInsert = mainChain.begin() + insertAt * groupsize;
-		std::cout << _PURPLE << "donc " << insertAt * groupsize << " (" << *placeToInsert << ")" << _END << std::endl;
-		
 
 		mainChain.insert(placeToInsert, bChainSart, bChainEnd);
 		bChain.erase(bChainSart, bChainEnd);
-		std::cout << _ORANGE << "New bChain : " _END;
-		displayVector(bChain);
-		// //MAJ les iterateurs
 		insertionCount += 1;
 		nbGroupInMain += 2;
 	}
 	
 	if (leftoversInsertionsNb)//attention si cest level 0 (mais normalement en level 0 yaura plus de reste)
 	{
-		mainChain.insert(mainChain.end() - 1, bChain.begin(), bChain.end());
+		mainChain.insert(mainChain.end(), bChain.begin(), bChain.end());
 		bChain.erase(bChain.begin(), bChain.end()); //maybe je peux utiliser clear, maisa a voir ce que fait la fonction
 	}
-	
-
-	(void) mainChain;
-	(void) bChain;
-	(void) groupsize;
 }
 
 
@@ -217,32 +168,12 @@ void	ford_johnson(std::vector<int> &vec, int exp)
 	// displayVector(vec);
 	ford_johnson(vec, exp + 1);
 	std::vector<int> bChain;
-	std::cout << _BOLD _CYAN "Back to recursion level " << exp << std::endl << _END;
-	// std::cout << "vec avant remove : ";
-	// displayVector(vec);
-	// std::cout << "bchain avant remove : ";
-	// displayVector(bChain);
 	
 	removeB(vec, bChain, step);
 	if (!bChain.empty())
-	{
-		std::cout << _FOREST_GREEN << "on bouge les left overs" << _END << std::endl;
 		removeLeftovers(vec, bChain, step);
-	}
-	else
-		std::cout << _END << "on bouge PAS les left overs" << _END << std::endl;
-	std::cout << "vec apres remove : ";
-	displayVector(vec);
-	std::cout << "bchain apres remove : ";
-	displayVector(bChain);
-
-	if (!bChain.empty()) //maybe check avec taille
+	if (!bChain.empty())
 		insertBChain(vec, bChain, step);
-	std::cout << "vec apres insertion : ";
-	displayVector(vec);
-	std::cout << "bchain apres insertion : ";
-	displayVector(bChain);
-	std::cout << std::endl << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -256,15 +187,8 @@ int main(int argc, char **argv)
 	{
 		vec.push_back(atoi(argv[i]));
 	}
-
-	// std::cout << _BOLD _CYAN "Before sorting" << _END << std::endl;
-	// displayVector(vec);
-
 	ford_johnson(vec, 0);
-
-	// std::cout << _BOLD _CYAN "After sorting" << _END << std::endl;
 	displayVector(vec);
-
 	if (DEBUG)
 		std::cout << _CYAN << "NB comp merge: " << comp_merge << " NB comp insert: " << comp_insert  << _END << std::endl;
 	return (0);
