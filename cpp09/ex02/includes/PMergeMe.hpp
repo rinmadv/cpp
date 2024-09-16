@@ -8,7 +8,7 @@
 #include <iterator>
 #include "../includes/Format.hpp"
 
-#define DEBUG true
+#define DEBUG false
 
 template<typename T>
 

@@ -3,11 +3,11 @@
 
 #include <vector>
 #include <deque>
+#include <set>
 #include <limits.h>
 #include <iostream>
 #include <stdlib.h>
 
-#define DEBUG true
 #define FIRST_GROUP_TO_BE_INSERTED 2
 int comp_merge = 0;
 int comp_insert = 0;
@@ -21,6 +21,8 @@ int comp_insert = 0;
 //time
 // https://github.com/PunkChameleon/ford-johnson-merge-insertion-sort
 
+
+/************************************************  DISPLAY ************************************************/
 
 void    displayMessage(const std::string & message)
 {
@@ -36,16 +38,51 @@ void	displayVector(const std::vector<int> & vec)
 	std::cout << std::endl;
 }
 
+/************************************************  PARSING ************************************************/
+
+bool	isNumber(const std::string &arg)
+{
+	size_t size = arg.size();
+	for (size_t i = 0; i < size; i++)
+	{
+		if (arg[i] < '0' || arg[i] > '9')
+			return (false);
+	}
+	return (true);
+}
+
+bool hasDuplicates(const std::vector<int> &vec)
+{
+    std::set<int> uniqueElements(vec.begin(), vec.end());
+    return (uniqueElements.size() != vec.size());
+}
+
+void	parsing(std::vector<int> & vec, int argc, char **argv)
+{
+	for (int i = 1; i < argc; i++)
+	{
+		if (!isNumber(argv[i]))
+		{
+			throw (std::runtime_error("Error: Wrong argument (non numerical caractere in input)"));
+		}
+		if (atol(argv[i]) > INT_MAX || atol(argv[i]) < INT_MIN)
+		{
+			throw (std::runtime_error("Error: Wrong argument (number > to INTMAX or < to INTMIN in input)"));
+		}
+		vec.push_back(atoi(argv[i]));
+	}
+	if (hasDuplicates(vec))
+	{
+		throw (std::runtime_error("Error: Wrong argument (duplicate in input)"));
+	}
+}
 /************************************************ UTILS MATHS ************************************************/
 
 size_t powerTwo(int exponent)
 {
-	//careful overflow
     size_t result = 1;
     for (int i = 0; i < exponent; ++i)
-	{
         result *= 2;
-    }
     return result;
 }
 
@@ -81,7 +118,7 @@ void	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t group
 	{
 		size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
 		std::vector<int>::iterator start = mainChain.begin() + offset + i;
-		if (start + groupsize> mainChain.end())//pas sure du +1 
+		if (start + groupsize > mainChain.end())
 			return;
 		std::vector<int>::iterator end = start + groupsize;
 		bChain.insert(bChain.begin() + bChain.size() , start, end);
@@ -143,32 +180,26 @@ void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t 
 		insertionCount += 1;
 		nbGroupInMain += 2;
 	}
-	
-	if (leftoversInsertionsNb)//attention si cest level 0 (mais normalement en level 0 yaura plus de reste)
+
+	if (leftoversInsertionsNb)
 	{
 		mainChain.insert(mainChain.end(), bChain.begin(), bChain.end());
-		bChain.erase(bChain.begin(), bChain.end()); //maybe je peux utiliser clear, maisa a voir ce que fait la fonction
+		bChain.erase(bChain.begin(), bChain.end());
 	}
 }
 
-
 void	ford_johnson(std::vector<int> &vec, int exp)
 {
-	//check si pas deja trie : en gros si dans le niveau 0 de la recursion on na fait aucun swap; on quite la fonction
-
 	const size_t step = powerTwo(exp);
 	const size_t nextStep = step * 2;
 	const size_t size = vec.size();
 		
-	/*If we only have one element, comparisirion is not possible and thus, this element is considered as sorted and recursion stops*/
 	if (nextStep > size)
 		return;
-	// std::cout << _BOLD _CYAN "Recursion level " << exp << std::endl << _END;
 	swapPairs(vec, step, nextStep);
-	// displayVector(vec);
 	ford_johnson(vec, exp + 1);
+
 	std::vector<int> bChain;
-	
 	removeB(vec, bChain, step);
 	if (!bChain.empty())
 		removeLeftovers(vec, bChain, step);
@@ -176,20 +207,25 @@ void	ford_johnson(std::vector<int> &vec, int exp)
 		insertBChain(vec, bChain, step);
 }
 
+/*************************************************** MAIN ****************************************************/
+
 int main(int argc, char **argv)
 {
 	if (argc == 1)
 		return (displayMessage("No number"), EXIT_FAILURE);
 
-	//Parsing, mettre les arg dans un vecteur (a mettre dans une fonction + faire les verif doublons)
 	std::vector<int> vec;
-	for (int i = 1; i < argc; i++)
+	try
 	{
-		vec.push_back(atoi(argv[i]));
+		parsing(vec, argc, argv);
+	}
+	catch(const std::exception& e)
+	{
+		return (std::cerr << e.what() << '\n', EXIT_FAILURE);
 	}
 	ford_johnson(vec, 0);
 	displayVector(vec);
 	if (DEBUG)
 		std::cout << _CYAN << "NB comp merge: " << comp_merge << " NB comp insert: " << comp_insert  << _END << std::endl;
-	return (0);
+	return (EXIT_SUCCESS);
 }
