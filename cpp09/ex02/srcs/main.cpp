@@ -75,19 +75,15 @@ void	swapPairs(std::vector<int> & vec, const size_t & step, const size_t & nextS
 	}
 }
 
-bool	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
+void	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
 {
-	// std::cout << "b chain avant remove b:" << std::endl;
-	// displayVector(bChain);
 	for (size_t i = 0; i >= 0; i += groupsize)
 	{
 		size_t offset = FIRST_GROUP_TO_BE_INSERTED * groupsize;
 		std::vector<int>::iterator start = mainChain.begin() + offset + i;
 		if (start + groupsize + 1 > mainChain.end())//pas sure du +1 
 		{
-			// std::cout << "b chain apres remove b:" << std::endl;
-			// displayVector(bChain);
-			return (false);
+			return;
 		}
 		std::vector<int>::iterator end = start + groupsize;
 		// std::cout << "Cycle " << i/groupsize << std::endl;
@@ -96,7 +92,6 @@ bool	removeB(std::vector<int> &mainChain, std::vector<int> &bChain, size_t group
 		bChain.insert(bChain.begin() + bChain.size() , start, end);
 		mainChain.erase(start, end);
 	}
-	return (true); //sinon jutilise les exceptions
 }
 
 void	removeLeftovers(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
@@ -105,7 +100,10 @@ void	removeLeftovers(std::vector<int> &mainChain, std::vector<int> &bChain, size
 	// displayVector(bChain);
 	size_t offset = mainChain.size() % groupsize;
 	if (!offset)
+	{
+		std::cout << "ya pas de left overs" << std::endl;
 		return;
+	}
 	// std::cout << "Offset : " << offset << std::endl;
 	std::vector<int>::iterator start = mainChain.end() - offset;
 	std::vector<int>::iterator end = mainChain.end();
@@ -117,29 +115,23 @@ void	removeLeftovers(std::vector<int> &mainChain, std::vector<int> &bChain, size
 	displayVector(bChain);
 }
 
-// std::vector<int>::iterator custom_lower_bound(std::vector<int>::iterator first, std::vector<int>::iterator last, int value, size_t nbGroups, size_t groupeSize)
-// {
-// 	std::cout << _PINK << "Premiere comp " << *first << ", seconde comp " << *last << " reference :" << value << std::endl << _END;
-// 	// size_t groupNBmid;
-// 	while (nbGroups != 2 && nbGroups != 0)
-// 	{
-// 		std::cout << _LAGOON << "On a " << nbGroups;
-// 		nbGroups /= 2; 
-// 		std::vector<int>::iterator mid = first + nbGroups * groupeSize;
-// 		std::cout  << " et le milieu c'est " << *mid << _END << std::endl;
-// 	}
-	
-	
-// 	(void) nbGroups;
-// 	(void) groupeSize;
-// 	return (first); //a changer
-// }
-
-std::vector<int>::iterator	binarySearch(std::vector<int> vec, int toFind)
+int	binarySearch(std::vector<int> & vec, int toFind)
 {
-	size_t sizeVec = vec.size();
+    int gauche = 0;
+    int droite = vec.size();
 
-	
+    while (gauche < droite) {
+        int milieu = gauche + (droite - gauche) / 2;
+
+        if (vec[milieu] < toFind) {
+            gauche = milieu + 1;
+        }
+		else {
+            droite = milieu;
+        }
+		comp_insert++;
+    }
+    return gauche;
 }
 
 void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t groupsize)
@@ -181,9 +173,13 @@ void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t 
 		std::cout << _RED "tableau comparés : ";
 		displayVector(compared);
 		std::cout << std::endl << _END;
-		std::vector<int>::iterator insertAt = binarySearch(compared, toFind);
-		std::cout << _PURPLE << *place << _END << std::endl;
+		int insertAt = binarySearch(compared, *(bChainEnd-1));
+		// std::cout << _PURPLE << "insert at indice " << insertAt << " (" << compared[insertAt] << ")" << _END << std::endl;
+		std::vector<int>::iterator placeToInsert = mainChain.begin() + insertAt * groupsize;
+		std::cout << _PURPLE << "donc " << insertAt * groupsize << " (" << *placeToInsert << ")" << _END << std::endl;
 		
+
+		mainChain.insert(placeToInsert, bChainSart, bChainEnd);
 		bChain.erase(bChainSart, bChainEnd);
 		std::cout << _ORANGE << "New bChain : " _END;
 		displayVector(bChain);
@@ -192,7 +188,6 @@ void	insertBChain(std::vector<int> &mainChain, std::vector<int> &bChain, size_t 
 		nbGroupInMain += 2;
 	}
 	
-
 	if (leftoversInsertionsNb)//attention si cest level 0 (mais normalement en level 0 yaura plus de reste)
 	{
 		mainChain.insert(mainChain.end() - 1, bChain.begin(), bChain.end());
@@ -228,7 +223,8 @@ void	ford_johnson(std::vector<int> &vec, int exp)
 	// std::cout << "bchain avant remove : ";
 	// displayVector(bChain);
 	
-	if (removeB(vec, bChain, step))
+	removeB(vec, bChain, step);
+	if (!bChain.empty())
 	{
 		std::cout << _FOREST_GREEN << "on bouge les left overs" << _END << std::endl;
 		removeLeftovers(vec, bChain, step);
