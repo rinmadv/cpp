@@ -3,22 +3,23 @@
 
 #include <iostream>
 #include <stdexcept>
+
 #include <algorithm>
-#include <stack>
 #include <iterator>
+
+#include <vector>
+#include <deque>
+#include <set>
+
+#include <limits.h>
+#include <stdlib.h>
+
 #include "../includes/Format.hpp"
 
+#define FIRST_GROUP_TO_BE_INSERTED 2
 #define DEBUG false
 
-template<typename T>
-
-class PMergeMe
-{
-public:
-  
-
-};
-
-
+extern int comp_merge;
+extern int comp_insert;
 
 #endif
