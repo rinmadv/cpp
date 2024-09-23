@@ -86,7 +86,7 @@ void	insertBChain(std::deque<unsigned int> &mainChain, std::deque<unsigned int> 
 	{
 		mainChainEnd = mainChainStart + (groupsize * nbGroupInMain);		
 		std::deque<unsigned int> compared;
-		for (std::deque<unsigned int>::iterator it = mainChainStart ; *it != *mainChainEnd; it += groupsize)
+		for (std::deque<unsigned int>::iterator it = mainChainStart ; it != mainChainEnd; it += groupsize)
 			compared.push_back(*it);
 		int insertAt = binarySearch(compared, *(bChainEnd-1));
 		std::deque<unsigned int>::iterator placeToInsert = mainChain.begin() + insertAt * groupsize;
@@ -97,6 +97,7 @@ void	insertBChain(std::deque<unsigned int> &mainChain, std::deque<unsigned int> 
 		bChainEnd = bChainSart + groupsize;
 		insertionCount += 1;
 		nbGroupInMain += 2;
+		mainChainStart = mainChain.begin() + groupsize - 1;
 	}
 
 	if (leftoversInsertionsNb)

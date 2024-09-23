@@ -63,8 +63,8 @@ int	main(int argc, char **argv)
 	{
 		return (std::cerr << e.what() << '\n', EXIT_FAILURE);
 	}
-	// ford_johnsonVec(vec, 0);
-	// displayVector(vec);
+	ford_johnsonVec(vec, 0);
+	displayVector(vec);
 	ford_johnsonDeque(deque, 0);
 	displayDeque(deque);
 	return (EXIT_SUCCESS);
