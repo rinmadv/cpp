@@ -22,4 +22,9 @@
 #define FIRST_GROUP_TO_BE_INSERTED 2
 #define DEBUG false
 
+void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv, size_t &nbVal);
+void	ford_johnsonVec(std::vector<unsigned int> &vec, const unsigned int & exp);
+void	ford_johnsonDeque(std::deque<unsigned int> &deque, const unsigned int & exp);
+size_t	powerTwo(const unsigned int & exponent);
+
 #endif

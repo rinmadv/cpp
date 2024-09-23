@@ -1,10 +1,6 @@
 #include "../includes/Format.hpp"
 #include "../includes/PMergeMe.hpp"
 
-/************************************************ UTILS MATHS ************************************************/
-
-size_t	powerTwo(const unsigned int & exponent);
-
 /*************************************************** ALGO ****************************************************/
 
 void	swapPairs(std::vector<unsigned int> & vec, const size_t & step, const size_t & nextStep)

@@ -1,10 +1,6 @@
 #include "../includes/Format.hpp"
 #include "../includes/PMergeMe.hpp"
 
-size_t	powerTwo(const unsigned int & exponent);
-
-/*************************************************** ALGO ****************************************************/
-
 void	swapPairs(std::deque<unsigned int> & deque, const size_t & step, const size_t & nextStep)
 {
 	std::deque<unsigned int>::iterator left = deque.begin() + step - 1;
