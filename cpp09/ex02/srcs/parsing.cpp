@@ -1,6 +1,8 @@
 #include "../includes/Format.hpp"
 #include "../includes/PMergeMe.hpp"
 
+#define LIMIT 5000
+
 /************************************************  PARSING ************************************************/
 
 bool	isNumber(const std::string &arg)
@@ -14,13 +16,14 @@ bool	isNumber(const std::string &arg)
 	return (true);
 }
 
-bool	hasDuplicates(const std::vector<unsigned int> &vec)
+void	hasDuplicates(const std::vector<unsigned int> &vec, size_t &nbVal)
 {
 	std::set<unsigned int> uniqueElements(vec.begin(), vec.end());
-	return (uniqueElements.size() != vec.size());
+	if (uniqueElements.size() != nbVal)
+		throw(std::runtime_error("Error: Wrong argument (duplicate in input)"));
 }
 
-void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv)
+void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv, size_t & nbVal)
 {
 	for (int i = 1; i < argc; i++)
 	{
@@ -32,16 +35,43 @@ void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, 
 		{
 			throw (std::runtime_error("Error: Wrong argument (number > to UINTMAX)"));
 		}
-		vec.push_back(atoi(argv[i]));
+		try
+		{
+			vec.push_back(atoi(argv[i]));
+		}
+		catch(const std::exception& e)
+		{
+			throw (std::runtime_error("Error: memory allocation failed"));
+		}
+		
 	}
-	if (hasDuplicates(vec))
+	nbVal = vec.size();
+	if (nbVal > LIMIT)
 	{
-		throw (std::runtime_error("Error: Wrong argument (duplicate in input)"));
+		std::ostringstream errorMessage;
+		errorMessage << "Error: max input number is limited to " << LIMIT << " numbers";
+		throw (std::runtime_error(errorMessage.str()));
+	}
+	try
+	{
+		hasDuplicates(vec, nbVal);
+	}
+	catch(const std::exception& e)
+	{
+		throw (std::runtime_error(e.what()));
 	}
 
 	const size_t sizeVec = vec.size();
-	for (size_t i = 0; i < sizeVec; i++)
+	try
 	{
-		deque.push_back(vec[i]);
+		for (size_t i = 0; i < sizeVec; i++)
+		{
+			deque.push_back(vec[i]);
+		}
 	}
+	catch(const std::exception& e)
+	{
+		throw (std::runtime_error("Error: memory allocation failed"));
+	}
+	
 }

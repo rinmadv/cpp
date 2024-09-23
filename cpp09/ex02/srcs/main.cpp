@@ -1,7 +1,7 @@
 #include "../includes/Format.hpp"
 #include "../includes/PMergeMe.hpp"
 
-void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv);
+void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv, size_t &nbVal);
 void	ford_johnsonVec(std::vector<unsigned int> &vec, const unsigned int & exp);
 void	ford_johnsonDeque(std::deque<unsigned int> &deque, const unsigned int & exp);
 
@@ -36,6 +36,12 @@ void	displayDeque(const std::deque<unsigned int> & deque)
 	std::cout << std::endl;
 }
 
+
+void 	displayTime(size_t nbElements, std::string type, double time)
+{
+	std::cout << "Time to process a range of " << nbElements << " with std::" << type << " : " << time << " us" << std::endl;
+}
+
 /*************************************************** MAIN ****************************************************/
 
 int	main(int argc, char **argv)
@@ -45,10 +51,11 @@ int	main(int argc, char **argv)
 
 	std::vector<unsigned int> vec;
 	std::deque<unsigned int> deque;
+	size_t nbVal;
 
 	try
 	{
-		parsing(vec, deque, argc, argv);
+		parsing(vec, deque, argc, argv, nbVal);
 	}
 	catch(const std::exception& e)
 	{
@@ -59,12 +66,12 @@ int	main(int argc, char **argv)
 	timerStart = std::clock();
 	ford_johnsonVec(vec, 0);
 	timerEnd = std::clock();
-	std::cout << "Temps en ms pour vector " << (timerEnd - timerStart) * 1000 / CLOCKS_PER_SEC << std::endl;
 	// displayVector(vec);
+	displayTime(nbVal, "vector", (timerEnd - timerStart) * static_cast<double>(1000) / CLOCKS_PER_SEC);
 	timerStart = std::clock();
 	ford_johnsonDeque(deque, 0);
 	timerEnd = std::clock();
-	std::cout << "Temps en ms pour deque " << (timerEnd - timerStart) * 1000 / CLOCKS_PER_SEC << std::endl;
 	// displayDeque(deque);
+	displayTime(nbVal, "deque", (timerEnd - timerStart) * static_cast<double>(1000) / CLOCKS_PER_SEC);
 	return (EXIT_SUCCESS);
 }

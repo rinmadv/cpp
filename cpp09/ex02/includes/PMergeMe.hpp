@@ -2,6 +2,7 @@
 #define DEF_PMERGEME
 
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 #include <algorithm>
