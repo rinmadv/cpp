@@ -1,15 +1,6 @@
 #include "../includes/Format.hpp"
 #include "../includes/PMergeMe.hpp"
 
-//vector
-//deque
-
-//check arguments : pas encore faite : ex 800e (a faire plus tard) + only UI
-//check si sort ou pas
-//error
-//time
-
-
 void	parsing(std::vector<unsigned int> & vec, std::deque<unsigned int> & deque, int argc, char **argv);
 void	ford_johnsonVec(std::vector<unsigned int> &vec, const unsigned int & exp);
 void	ford_johnsonDeque(std::deque<unsigned int> &deque, const unsigned int & exp);
@@ -63,9 +54,17 @@ int	main(int argc, char **argv)
 	{
 		return (std::cerr << e.what() << '\n', EXIT_FAILURE);
 	}
+	std::clock_t timerStart;
+	std::clock_t timerEnd;
+	timerStart = std::clock();
 	ford_johnsonVec(vec, 0);
-	displayVector(vec);
+	timerEnd = std::clock();
+	std::cout << "Temps en ms pour vector " << (timerEnd - timerStart) * 1000 / CLOCKS_PER_SEC << std::endl;
+	// displayVector(vec);
+	timerStart = std::clock();
 	ford_johnsonDeque(deque, 0);
-	displayDeque(deque);
+	timerEnd = std::clock();
+	std::cout << "Temps en ms pour deque " << (timerEnd - timerStart) * 1000 / CLOCKS_PER_SEC << std::endl;
+	// displayDeque(deque);
 	return (EXIT_SUCCESS);
 }
